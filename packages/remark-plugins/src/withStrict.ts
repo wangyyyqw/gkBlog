@@ -5,11 +5,11 @@ const withStrict = () => (tree) => {
     const node = tree.children[nodeIndex];
 
     if (
-      (node.type === 'heading' && ![2, 3].includes(node.depth)) ||
-      (node.type === 'mdxJsxFlowElement' &&
-        ['h1', 'h4', 'h5', 'h6'].includes(node.name))
+      (node.type === "heading" && ![2, 3].includes(node.depth)) ||
+      (node.type === "mdxJsxFlowElement" &&
+        ["h1", "h4", "h5", "h6"].includes(node.name))
     ) {
-      throw new Error('Headings depths other than 2 or 3 are not allowed.');
+      throw new Error("Headings depths other than 2 or 3 are not allowed.");
     }
   }
 };

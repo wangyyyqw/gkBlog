@@ -1,0 +1,61 @@
+import TIL from "@/components/mdx/TIL";
+
+<TIL.Items date="2024-11-01">
+
+  <TIL.Item>
+    
+    ## Git Flow 和 Github Flow
+
+    <TIL.ItemTags>
+      <TIL.ItemTag>Github</TIL.ItemTag>
+      <TIL.ItemTag>编程</TIL.ItemTag>
+    </TIL.ItemTags>
+
+GitHub Flow 与 Git Flow 的对比
+
+| 特性           | GitHub Flow                  | Git Flow                       |
+| -------------- | ---------------------------- | ------------------------------ |
+| 分支模型       | 轻量，只有 main 和功能分支   | 复杂，多分支模型               |
+| 适合的项目类型 | 持续集成、频繁部署的小型项目 | 复杂项目，阶段性发布的大型项目 |
+| 发布流程       | 合并到 main 后自动部署       | 通过 release 分支发布          |
+| 审查流程       | 通过 PR 进行代码审查         | 依赖分支合并及手动审查         |
+
+    [阅读原文](https://www.qladgk.com/blog/github-flow)
+
+  </TIL.Item>
+
+</TIL.Items>
+
+<TIL.Items date="2024-10-21">
+
+  <TIL.Item>
+    
+    ## Git 日志提交规范
+
+    <TIL.ItemTags>
+      <TIL.ItemTag>Github</TIL.ItemTag>
+      <TIL.ItemTag>Git</TIL.ItemTag>
+    </TIL.ItemTags>
+
+    这种提交同时涉及多个功能或问题，回溯时很难判断哪个部分引入了问题。应该分开为多个小的提交：
+
+    <TIL.DnD>
+      <TIL.Dont>
+        ```md {copy:false} {footer:false}
+        fix: fix login issue, update readme, refactor header component
+
+        ```
+
+      </TIL.Dont>
+      <TIL.Do>
+        ```md {copy:false} {footer:false}
+        fix: fix login issue
+        docs: update readme for new login feature
+        refactor: refactor header component
+        ````
+      </TIL.Do>
+    </TIL.DnD>
+
+  </TIL.Item>
+
+</TIL.Items>

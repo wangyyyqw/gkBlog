@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  gkblog:
+    build:
+      context: .
+      dockerfile: apps/gkBlog/Dockerfile
+    image: crpi-6yr119s85pixypv9.cn-shanghai.personal.cr.aliyuncs.com/docker-qladgk/gkblog:latest
+    container_name: gkblog-red
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
