@@ -6,7 +6,7 @@ function Essay() {
     <Page
       frontMatter={{
         title: "回忆录",
-        description: "QQ 空间以及朋友圈的回忆录",
+        description: "朋友圈的回忆录，大多数都是非主流，当时年少轻狂时候发的",
         caption: "My",
       }}
     >
