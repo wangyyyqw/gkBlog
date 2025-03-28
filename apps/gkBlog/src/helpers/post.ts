@@ -3,13 +3,14 @@ import { getBaseUrl, getParams } from "@/helpers/url";
 
 import type { TPostFrontMatter, TPostOgImage } from "@/types";
 
-export const formatDate = (date: string) => {
-  if (dayjs(date).isValid()) {
-    return dayjs(date, "YYYY-MM-DD").format("MMMM D, YYYY");
-  }
+export function formatDate(date: string): string {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
 
-  return date;
-};
+  return `${year}年 ${month}月 ${day}日`;
+}
 
 export const formatDateRelative = (date: string) => {
   if (dayjs(date).isValid()) {
