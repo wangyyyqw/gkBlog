@@ -10,7 +10,7 @@
 
 A monorepo for my personal website and projects, built with Turborepo and pnpm.
 
-## 📘 [www.qladgk.com](https://www.enji.dev)
+## 📘 [www.qladgk.com](https://www.qladgk.com)
 
 A personal website with a blog, project showcase, and work information.
 
