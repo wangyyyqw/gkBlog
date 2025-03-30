@@ -1,13 +1,18 @@
 version: "3.8"
 
 services:
-  gkblog:
+  gkblog-green:
     build:
       context: .
       dockerfile: apps/gkBlog/Dockerfile
     image: gkblog:latest
-    container_name: gkblog-red
+    container_name: gkblog-green
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+      - DATABASE_URL=${DATABASE_URL}
+      - SALT_IP_ADDRESS=${SALT_IP_ADDRESS}
+      - NEXT_PUBLIC_BAIDU_TONGJI=${NEXT_PUBLIC_BAIDU_TONGJI}
+      - NEXT_PUBLIC_GOOGLE_ID=${NEXT_PUBLIC_GOOGLE_ID}
+    restart: unless-stopped
