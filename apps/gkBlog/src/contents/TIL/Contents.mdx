@@ -1,5 +1,33 @@
 import TIL from "@/components/mdx/TIL";
 
+<TIL.Items date="2025-03-31">
+
+  <TIL.Item>
+    
+    ## Docker 蓝绿部署
+
+    假设当前运行的是 Green:3000，此时需要更新 Blue:3001
+
+    ```bash
+    docker compose -f docker-compose-blue.yml pull #给 blue 容器拉取最新镜像
+    ```
+
+    ```bash
+    docker compose -f docker-compose-blue.yml up -d #运行 blue 容器
+    ```
+
+    检查 ip:30001 后无问题切换流量到 3001
+
+    ```bash
+    docker compose -f docker-compose-green.yml pause #先停止 green 容器
+    ```
+
+    过一段时间后发现 Blue 无问题就可停止或删除 Green，反之恢复 Green 后切换流量
+
+  </TIL.Item>
+
+</TIL.Items>
+
 <TIL.Items date="2025-03-01">
 
   <TIL.Item>
