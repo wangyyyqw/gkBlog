@@ -201,9 +201,9 @@ function Footer() {
                 <FooterGroup
                   title="导航"
                   links={[
-                    { title: "首页", href: "/" },
                     { title: "博客", href: "/blog" },
                     { title: "日记", href: "/today-i-learned" },
+                    { title: "统计", href: "/stats" },
                   ]}
                 />
                 <FooterGroup
