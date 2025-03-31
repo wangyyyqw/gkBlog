@@ -8,5 +8,6 @@
 @import "./mdx-components.css";
 @import "./twikoo.css";
 @import "./media.css";
+@import "./stats.css";
 
 @import "tailwindcss/utilities";
