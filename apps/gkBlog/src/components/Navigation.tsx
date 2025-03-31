@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useEffect, useMemo, useState } from "react";
 import useSound from "use-sound";
 
 import { TravellingIcon } from "@/components/Icons";
@@ -21,16 +22,40 @@ function Navbar() {
   const [playOpenSound] = useSound(openSound, { preload: true });
   const [playCloseSound] = useSound(closeSound, { preload: true });
 
-  const myLinks = [
-    { title: "回忆录", href: "/essay" },
-    { title: "相册集", href: "/album" },
-    { title: "书影音", href: "/media" },
-  ];
-  const moreLinks = [
-    { title: "宝藏项目", href: "/projects" },
-    { title: "友情链接", href: "/links" },
-    { title: "留言反馈", href: "/feedback" },
-  ];
+  const myLinks = useMemo(
+    () => [
+      { title: "回忆录", href: "/essay" },
+      { title: "相册集", href: "/album" },
+      { title: "书影音", href: "/media" },
+    ],
+    []
+  );
+  const moreLinks = useMemo(
+    () => [
+      { title: "宝藏项目", href: "/projects" },
+      { title: "友情链接", href: "/links" },
+      { title: "留言反馈", href: "/feedback" },
+    ],
+    []
+  );
+
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    setIsSmallScreen(window.innerWidth < 768);
+
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const combinedMoreLinks = useMemo(
+    () => (isSmallScreen ? [...myLinks, ...moreLinks] : moreLinks),
+    [myLinks, moreLinks, isSmallScreen]
+  );
 
   return (
     <header
@@ -85,22 +110,22 @@ function Navbar() {
                   onClick={() => playClickSound()}
                 />
               </li>
-              <li className={clsx("")} data-accent="blue">
+              <li className={clsx("hidden md:block")} data-accent="blue">
                 <NavLinkDropdown
                   title="我的"
                   items={myLinks}
-                  onOpenClick={() => playOpenSound()} // 用于打开菜单的声音
-                  onCloseClick={() => playCloseSound()} // 用于关闭菜单的声音
-                  onLinkClick={() => playClickSound()} // 用于点击菜单项的声音
+                  onOpenClick={() => playOpenSound()}
+                  onCloseClick={() => playCloseSound()}
+                  onLinkClick={() => playClickSound()}
                 />
               </li>
               <li className={clsx("")} data-accent="blue">
                 <NavLinkDropdown
                   title="更多"
-                  items={moreLinks}
-                  onOpenClick={() => playOpenSound()} // 用于打开菜单的声音
-                  onCloseClick={() => playCloseSound()} // 用于关闭菜单的声音
-                  onLinkClick={() => playClickSound()} // 用于点击菜单项的声音
+                  items={combinedMoreLinks}
+                  onOpenClick={() => playOpenSound()}
+                  onCloseClick={() => playCloseSound()}
+                  onLinkClick={() => playClickSound()}
                 />
               </li>
             </ul>
