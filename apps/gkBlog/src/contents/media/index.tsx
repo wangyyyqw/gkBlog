@@ -62,7 +62,7 @@ function MediaContents() {
       setFilteredData(mediaData);
     } else {
       const filtered = mediaData.filter(
-        (media) => media.item.category === category
+        (media) => media.item.category === category,
       );
       setFilteredData(filtered);
     }
@@ -120,13 +120,13 @@ function MediaContents() {
             className="card"
             onMouseEnter={(e) => {
               const info = e.currentTarget.querySelector(
-                ".movie_details"
+                ".movie_details",
               ) as HTMLElement;
               if (info) info.style.bottom = "0";
             }}
             onMouseLeave={(e) => {
               const info = e.currentTarget.querySelector(
-                ".movie_details"
+                ".movie_details",
               ) as HTMLElement;
               if (info) info.style.bottom = "-400px";
             }}

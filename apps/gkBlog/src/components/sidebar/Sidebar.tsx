@@ -53,7 +53,7 @@ function Sidebar({ show }: SidebarProps) {
   const imageUrl = "https://cdn.qladgk.com/images/gongzhonghao.png";
   const [recentArticles, setRecentArticles] = useState<RecentArticle[]>([]);
   const [tagsWithCount, setTagsWithCount] = useState<Record<string, number>>(
-    {}
+    {},
   );
   const [visibleTags, setVisibleTags] = useState<string[]>([]);
   const [showMore, setShowMore] = useState(false);
@@ -120,7 +120,7 @@ function Sidebar({ show }: SidebarProps) {
 
     // 对 tags 按数量排序
     const sortedTags = Object.entries(data).sort(
-      ([, countA], [, countB]) => Number(countB) - Number(countA)
+      ([, countA], [, countB]) => Number(countB) - Number(countA),
     );
 
     setTagsWithCount(data); // 保存完整标签数据
@@ -144,7 +144,7 @@ function Sidebar({ show }: SidebarProps) {
   const handleShowMore = () => {
     setShowMore(true);
     const sortedTags = Object.entries(tagsWithCount).sort(
-      ([, countA], [, countB]) => countB - countA
+      ([, countA], [, countB]) => countB - countA,
     );
     setVisibleTags(sortedTags.map(([tag]) => tag));
   };
@@ -170,7 +170,7 @@ function Sidebar({ show }: SidebarProps) {
                   "transform transition-transform hover:scale-105",
                   "hover:bg-blue-600 hover:bg-opacity-90", // 悬停时背景更加不透明
                   "dark:bg-blue-700 dark:bg-opacity-80 dark:hover:bg-blue-800 dark:hover:bg-opacity-90", // 暗黑模式下透明度
-                  "duration-300"
+                  "duration-300",
                 )}
                 onMouseEnter={() => play()} // 悬浮时播放音效
               >
@@ -208,7 +208,7 @@ function Sidebar({ show }: SidebarProps) {
                     className={clsx(
                       "z-10 w-full max-w-[90%] rounded-lg bg-slate-200 p-1.5 text-slate-800",
                       "hover:bg-slate-300 sm:ml-0",
-                      "dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
+                      "dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700",
                     )}
                   >
                     查看全部
@@ -238,7 +238,7 @@ function Sidebar({ show }: SidebarProps) {
                       "hover:underline",
                       "whitespace-normal", // 允许换行
                       "line-clamp-2", // 限制最多显示两行
-                      "text-sm" // 调整字体大小
+                      "text-sm", // 调整字体大小
                     )}
                     style={{
                       display: "-webkit-box",
