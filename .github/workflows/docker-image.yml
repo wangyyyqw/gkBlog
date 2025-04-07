@@ -1,0 +1,38 @@
+name: Docker Compose CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and Push Docker Image with Docker Compose
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SALT_IP_ADDRESS: ${{ secrets.SALT_IP_ADDRESS }}
+          NEXT_PUBLIC_BAIDU_TONGJI: ${{ secrets.NEXT_PUBLIC_BAIDU_TONGJI }}
+          NEXT_PUBLIC_GOOGLE_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ID }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          ALIYUN_REGISTRY: ${{ secrets.ALIYUN_REGISTRY }}
+        run: |
+          # 检查 Docker 版本
+          docker version
+
+          # 登录阿里云镜像仓库
+          docker login --username=${DOCKER_USERNAME} --password=${DOCKER_PASSWORD} ${ALIYUN_REGISTRY}
+
+          # 使用 Docker Compose 构建镜像
+          docker compose -f docker-compose.yml build
+
+          # 标记镜像
+          docker tag gkblog:latest ${ALIYUN_REGISTRY}/docker-qladgk/gkblog:latest
+
+          # 推送镜像到阿里云镜像仓库
+          docker push ${ALIYUN_REGISTRY}/docker-qladgk/gkblog:latest
