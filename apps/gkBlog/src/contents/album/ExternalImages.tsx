@@ -1,5 +1,98 @@
 const externalImages: { title: string; url: string }[] = [
   {
+    title: "中间那个就是我哈哈",
+    url: "https://cdn.qladgk.com/images/20250421214157227.jpg",
+  },
+  {
+    title: "D、Lesbian？",
+    url: "https://cdn.qladgk.com/images/20250421214157347.jpg",
+  },
+  {
+    title: "怎么感觉有点诡异",
+    url: "https://cdn.qladgk.com/images/20250421214157307.jpg",
+  },
+  {
+    title: "一考一个不吱声",
+    url: "https://cdn.qladgk.com/images/20250421214157265.jpg",
+  },
+  {
+    title: "我们这最古老的树",
+    url: "https://cdn.qladgk.com/images/20250421214157188.jpg",
+  },
+  {
+    title: "可爱的侄女",
+    url: "https://cdn.qladgk.com/images/20250421214157154.jpg",
+  },
+  {
+    title: "女生的小东西就是别致哈",
+    url: "https://cdn.qladgk.com/images/20250421214157119.jpg",
+  },
+  {
+    title: "这还能吃吗",
+    url: "https://cdn.qladgk.com/images/20250421214157083.jpg",
+  },
+  {
+    title: "经常去吃的牛肉面",
+    url: "https://cdn.qladgk.com/images/20250421214156515.jpg",
+  },
+  {
+    title: "完美的硅脂",
+    url: "https://cdn.qladgk.com/images/20250421214156548.jpg",
+  },
+  {
+    title: "豆豆",
+    url: "https://cdn.qladgk.com/images/20250421214156580.jpg",
+  },
+  {
+    title: "DeepSeek",
+    url: "https://cdn.qladgk.com/images/20250421214156609.jpg",
+  },
+  {
+    title: "买到真的了？",
+    url: "https://cdn.qladgk.com/images/20250421214156637.jpg",
+  },
+  {
+    title: "想回去上学了",
+    url: "https://cdn.qladgk.com/images/20250421214156672.jpg",
+  },
+  {
+    title: "碧莉",
+    url: "https://cdn.qladgk.com/images/20250421214156738.jpg",
+  },
+  {
+    title: "别人送的太空人",
+    url: "https://cdn.qladgk.com/images/20250421214156797.jpg",
+  },
+  {
+    title: "本体",
+    url: "https://cdn.qladgk.com/images/20250421214156827.jpg",
+  },
+  {
+    title: "把人送的生日礼物弄坏了",
+    url: "https://cdn.qladgk.com/images/20250421214156860.jpg",
+  },
+  {
+    title: "这是好朋友",
+    url: "https://cdn.qladgk.com/images/20250421214156908.jpg",
+  },
+  {
+    title: "看着好香",
+    url: "https://cdn.qladgk.com/images/20250421214156961.jpg",
+  },
+  {
+    title: "一颗心呐",
+    url: "https://cdn.qladgk.com/images/20250421214157012.jpg",
+  },
+
+  {
+    title: "蛋挞",
+    url: "https://cdn.qladgk.com/images/20250421214157048.jpg",
+  },
+  {
+    title: "胡萝卜园艺",
+    url: "https://cdn.qladgk.com/images/20250421210653984.jpg",
+  },
+  {
     title: "傍晚的街道",
     url: "https://cdn.qladgk.com/images/273785BBFEBAFFC8223CED6E2391F4E4.jpg",
   },
@@ -21,7 +114,7 @@ const externalImages: { title: string; url: string }[] = [
   },
   {
     title: "桌面上的 Linux 吉祥物",
-    url: "https://cdn.qladgk.com/images/thumbu_1438135042_2730452844&fm_253&app_138&f_JPEG.jpg",
+    url: "https://cdn.qladgk.com/images/thumbu_1438135042_2730452844.jpg",
   },
   {
     title: "Arch 手办",
