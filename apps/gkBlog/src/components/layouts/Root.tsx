@@ -1,8 +1,8 @@
+import clsx from "clsx";
 import {
   JetBrains_Mono as JetBrainsMono,
   Plus_Jakarta_Sans as PlusJakartaSans,
-} from "@next/font/google";
-import clsx from "clsx";
+} from "next/font/google";
 import { PropsWithChildren, useEffect } from "react";
 
 const jetbrainsMono = JetBrainsMono({
@@ -19,7 +19,7 @@ function Root({ children }: PropsWithChildren) {
   useEffect(() => {
     document.documentElement.classList.add(
       jetbrainsMono.variable,
-      plusJakartaSans.variable,
+      plusJakartaSans.variable
     );
   }, []);
 

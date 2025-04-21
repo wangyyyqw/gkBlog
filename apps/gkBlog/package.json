@@ -1,6 +1,6 @@
 {
-  "name": "gkBlog",
-  "version": "0.1.0",
+  "name": "gkblog",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -21,7 +21,6 @@
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@next/bundle-analyzer": "^13.5.11",
-    "@next/font": "^13.5.11",
     "@next/mdx": "^13.5.11",
     "@next/third-parties": "^14.2.26",
     "@prisma/client": "^5.22.0",
