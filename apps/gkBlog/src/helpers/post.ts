@@ -84,20 +84,19 @@ export const getPostStructuredData = ({
   images: Array<string>;
   datePublished: string;
   dateModified: string;
-}) =>
-  JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: title,
-    image: images,
-    datePublished: formatDateISO(datePublished),
-    dateModified: formatDateISO(dateModified),
-    author: [
-      {
-        "@type": "Person",
-        name: "qlAD",
-        // jobTitle: 'Front-End Developer',
-        url: "https://www.qladgk.com/about",
-      },
-    ],
-  });
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  image: images,
+  datePublished: formatDateISO(datePublished),
+  dateModified: formatDateISO(dateModified),
+  author: [
+    {
+      "@type": "Person",
+      name: "qlAD",
+      jobTitle: "计算机爱好者",
+      url: "https://www.qladgk.com/about-me",
+    },
+  ],
+});

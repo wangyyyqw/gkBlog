@@ -44,7 +44,12 @@ function Post({
         title={title}
         description={description}
         ogImage={postOgImages.default}
-        structuredData={structuredData}
+      />
+      {/* JSON-LD 结构化数据 */}
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <SkipNavigation />
       <PageHeader title={title} description={description} caption={caption} />
