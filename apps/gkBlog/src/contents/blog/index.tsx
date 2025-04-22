@@ -24,6 +24,7 @@ type TPostPreview = TPostFrontMatter & {
   slug: string;
   shares: number;
   views: number;
+  cover?: string;
 };
 
 function BlogContents({ posts }: BlogContentsProps) {
@@ -38,7 +39,12 @@ function BlogContents({ posts }: BlogContentsProps) {
     const { shares, views } = data[slug]
       ? data[slug].meta
       : { shares: 0, views: 0 };
-    const preview: TPostPreview = { slug, views, shares, ...frontMatter };
+    const preview: TPostPreview = {
+      slug,
+      views,
+      shares,
+      ...frontMatter,
+    };
 
     if (slug === PINNED_POST) {
       pinnedPost = preview;
@@ -55,7 +61,7 @@ function BlogContents({ posts }: BlogContentsProps) {
   useEffect(() => {
     const queryPage = router.query.page;
     if (queryPage) {
-      const page = parseInt(queryPage as string, 10);
+      const page = Number.parseInt(queryPage as string, 10);
       if (page >= 1 && page <= totalPages) {
         setCurrentPage(page);
       } else {
@@ -102,7 +108,7 @@ function BlogContents({ posts }: BlogContentsProps) {
             }}
           >
             {i}
-          </button>,
+          </button>
         );
       } else if (
         buttons[buttons.length - 1]?.key !== "..." &&
@@ -141,7 +147,7 @@ function BlogContents({ posts }: BlogContentsProps) {
             <div
               className={clsx(
                 "mb-8 flex items-start gap-4",
-                "md:mb-12 md:gap-6",
+                "md:mb-12 md:gap-6"
               )}
             >
               <div className={clsx("flex-1")}>
@@ -156,6 +162,7 @@ function BlogContents({ posts }: BlogContentsProps) {
                   tags={pinnedPost.tags}
                   views={pinnedPost.views}
                   shares={pinnedPost.shares}
+                  cover={pinnedPost.cover}
                 />
               </div>
             </div>
@@ -172,12 +179,13 @@ function BlogContents({ posts }: BlogContentsProps) {
               tags,
               views,
               shares,
+              cover,
             }) => (
               <div
                 key={slug}
                 className={clsx(
                   "mb-8 flex items-start gap-4",
-                  "md:mb-4 md:gap-6",
+                  "md:mb-4 md:gap-6"
                 )}
               >
                 <div className={clsx("flex-1")}>
@@ -191,10 +199,11 @@ function BlogContents({ posts }: BlogContentsProps) {
                     tags={tags}
                     views={views}
                     shares={shares}
+                    cover={cover}
                   />
                 </div>
               </div>
-            ),
+            )
           )}
         </div>
       </div>
@@ -226,9 +235,7 @@ function BlogContents({ posts }: BlogContentsProps) {
             下一页
           </button>
         </div>
-        <div className="mt-2 text-center text-sm">
-          {`第 ${currentPage} 页，共 ${totalPages} 页`}
-        </div>
+        <div className="mt-2 text-center text-sm">{`第 ${currentPage} 页，共 ${totalPages} 页`}</div>
       </div>
     </div>
   );
