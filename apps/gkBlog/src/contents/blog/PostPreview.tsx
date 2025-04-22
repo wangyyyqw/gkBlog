@@ -35,8 +35,8 @@ function PostPreview({
         key={slug}
         href={`/blog/${slug}`}
         className={clsx(
-          "group relative mb-6 block overflow-hidden bg-gradient-to-t",
-          "sm:mb-0 sm:rounded-2xl",
+          "group relative mb-6 block overflow-hidden bg-gradient-to-t rounded-r-2xl",
+          "sm:mb-0",
           pinned
             ? [
                 "border-divider-light",
@@ -69,7 +69,7 @@ function PostPreview({
 
         <div className="absolute inset-y-0 right-0 w-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:w-1/3">
           <div className="relative h-full w-full">
-            <div className="absolute inset-y-0 left-0 z-10 w-72 bg-gradient-to-r from-white to-transparent dark:from-slate-900 dark:to-transparent" />
+            <div className="absolute inset-y-0 left-0 z-10 w-full bg-gradient-to-r from-white to-transparent dark:from-slate-900 dark:to-transparent" />
             <Image
               src={cover || "/assets/images/coverImage.png"}
               alt={title}
