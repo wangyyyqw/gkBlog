@@ -2,7 +2,7 @@
 
 @layer components {
   .content-wrapper {
-    @apply mx-auto max-w-[75rem] px-4;
+    @apply mx-auto max-w-[86rem] px-4;
     @apply sm:px-12 md:px-10 lg:px-16 xl:px-6;
   }
 

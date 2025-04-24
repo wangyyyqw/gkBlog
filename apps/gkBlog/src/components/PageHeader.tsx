@@ -30,7 +30,7 @@ function PageHeader({
       className={clsx(
         "background-grid background-grid--fade-out border-divider-light z-[900] mb-10 border-b pt-32 pb-10",
         "md:mb-0 md:border-none md:pb-20 md:pt-40",
-        "dark:border-divider-dark",
+        "dark:border-divider-dark"
       )}
     >
       {headerImage && (
@@ -40,7 +40,7 @@ function PageHeader({
           <div
             className={clsx(
               "background-image background-image--fade-out pointer-events-none absolute inset-0 hidden select-none",
-              "lg:block",
+              "lg:block"
             )}
           >
             <div className={clsx("content-wrapper relative h-full")}>
@@ -62,7 +62,7 @@ function PageHeader({
               className={clsx(
                 "text-accent-600 mb-1 block text-lg font-extrabold capitalize leading-none",
                 "md:mb-0 md:text-2xl",
-                "dark:text-accent-400",
+                "dark:text-accent-400"
               )}
             >
               {caption}
@@ -76,9 +76,9 @@ function PageHeader({
         >
           <h1
             className={clsx(
-              "text-[2.5rem] font-extrabold leading-tight text-slate-700",
-              "md:text-7xl md:leading-snug",
-              "dark:text-slate-300",
+              "text-[2.0rem] font-extrabold leading-tight text-slate-700",
+              "md:text-6xl md:leading-snug",
+              "dark:text-slate-300"
             )}
           >
             {title}
@@ -92,8 +92,8 @@ function PageHeader({
           <p
             className={clsx(
               "mt-4 text-lg text-slate-600",
-              "md:mt-6 md:text-2xl lg:max-w-[500px] xl:max-w-[700px]",
-              "dark:text-slate-400",
+              "md:mt-6 md:text-2xl max-w-[700px]",
+              "dark:text-slate-400"
             )}
           >
             {description}
