@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <img src="apps/gkBlog/public/assets/images/og-image.png" height="375" alt="gkBlog Cover Image" />
+  <img src="apps/gkBlog/public/assets/images/og-image.png" alt="gkBlog Cover Image" />
 </p>
 
 <div align="center">
