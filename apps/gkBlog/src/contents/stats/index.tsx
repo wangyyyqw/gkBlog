@@ -148,40 +148,32 @@ function StatsContents({ initialStats }: StatsContentsProps) {
             {/* 状态徽章 */}
             <div className="badge status flex flex-wrap gap-2 mt-4">
               <img
-                alt="License"
-                src="https://img.shields.io/badge/License-MIT-green"
-                className="h-5"
+                alt="GitHub License"
+                src="https://img.shields.io/github/license/qlAD/gkBlog?label=%F0%9F%93%9C%20License"
               />
               <img
-                alt="WebSite"
-                src="https://img.shields.io/website?style=flat-square&url=https%3A%2F%2Fwww.qladgk.com"
-                className="h-5"
+                alt="Website"
+                src="https://img.shields.io/website?url=https%3A%2F%2Fwww.qladgk.com%2F&up_message=%E8%BF%90%E8%A1%8C%E4%B8%AD&down_message=%E5%A4%B1%E8%B4%A5&label=%E2%9C%85%20%E7%BD%91%E7%AB%99%E6%83%85%E5%86%B5"
               />
               <img
-                alt="Production"
-                src="https://img.shields.io/github/deployments/qlAD/gkBlog/production?label=production&style=flat-square"
-                className="h-5"
+                alt="GitHub deployments"
+                src="https://img.shields.io/github/deployments/qlAD/gkBlog/Production?label=%F0%9F%9A%80%20Production"
               />
               <img
-                alt="commit"
-                src="https://img.shields.io/github/commit-activity/m/qlAD/gkBlog?style=flat-square"
-                className="h-5"
+                alt="GitHub commit activity"
+                src="https://img.shields.io/github/commit-activity/m/qlAD/gkBlog?label=%F0%9F%93%9D%20%E6%8F%90%E4%BA%A4%E9%A2%91%E7%8E%87"
               />
               <img
-                alt="lase-commit"
-                className="h-5"
-                src="https://img.shields.io/github/last-commit/qlAD/gkBlog?style=flat-square"
-              />
-
-              <img
-                alt="tag"
-                src="https://img.shields.io/github/v/tag/qlad/gkBlog?style=flat-square"
-                className="h-5"
+                alt="GitHub last commit"
+                src="https://img.shields.io/github/last-commit/qlAD/gkBlog?label=%F0%9F%93%85%20%E6%9C%80%E8%BF%91%E6%8F%90%E4%BA%A4"
               />
               <img
-                alt="repo-size"
-                src="https://img.shields.io/github/repo-size/qlad/gkBlog?style=flat-square"
-                className="h-5"
+                alt="GitHub Tag"
+                src="https://img.shields.io/github/v/tag/qlAD/gkBlog?label=%F0%9F%94%96%20Tag"
+              />
+              <img
+                alt="GitHub repo size"
+                src="https://img.shields.io/github/repo-size/qlAD/gkBlog?label=%F0%9F%93%A6%20%E4%BB%93%E5%BA%93%E5%A4%A7%E5%B0%8F"
               />
             </div>
           </div>
