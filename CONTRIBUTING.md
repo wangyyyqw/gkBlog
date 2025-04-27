@@ -1,13 +1,13 @@
-## Setup the Project
+## 设置项目
 
-The following steps will get you up and running to contribute to this repository:
+以下步骤将帮助您启动并运行此代码库并做出贡献：
 
-1. Fork the repo (click the Fork button at the top right of this page)
-2. Clone your fork locally
+1. 复制代码库（点击此页面右上角的“Fork”按钮）
+2. 克隆您的代码库到本地
 
    ```bash
-   git clone https://github.com/<your_github_username>/enji.dev.git
-   cd enji.dev
+   git clone https://github.com/<your_github_username>/gkBlog.git
+   cd gkBlog
    ```
 
-3. Setup all the dependencies and packages by running `pnpm install`
+3. 运行 `pnpm install` 安装所有依赖项和软件包
