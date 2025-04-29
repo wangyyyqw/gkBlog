@@ -1,6 +1,12 @@
 name: Docker Compose CI
 
 on:
+  push:
+    paths:
+      - "apps/gkBlog/src/pages/blog/**/index.mdx"
+    branches:
+      - main
+
   workflow_dispatch:
 
 jobs:
