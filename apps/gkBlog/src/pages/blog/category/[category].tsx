@@ -33,14 +33,14 @@ export default function CategoryPage({ category, posts }: CategoryPageProps) {
         const { views = 0, shares = 0 } = data[slug]?.meta || {};
         return { slug, views, shares, frontMatter };
       }),
-    [posts, data],
+    [posts, data]
   );
 
   const totalPages = Math.ceil(enhancedPosts.length / POSTS_PER_PAGE);
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
   const currentPosts = enhancedPosts.slice(
     startIndex,
-    startIndex + POSTS_PER_PAGE,
+    startIndex + POSTS_PER_PAGE
   );
 
   useEffect(() => {
@@ -64,8 +64,7 @@ export default function CategoryPage({ category, posts }: CategoryPageProps) {
 
   const renderPageButtons = () => {
     const buttons = [];
-    // eslint-disable-next-line no-plusplus
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 1; i <= totalPages; i += 1) {
       if (
         i === 1 ||
         i === totalPages ||
@@ -94,7 +93,7 @@ export default function CategoryPage({ category, posts }: CategoryPageProps) {
             }}
           >
             {i}
-          </button>,
+          </button>
         );
       } else if (
         buttons[buttons.length - 1]?.key !== "..." &&
@@ -121,7 +120,7 @@ export default function CategoryPage({ category, posts }: CategoryPageProps) {
         <div
           className={clsx(
             "flex flex-col gap-8",
-            "md:flex-row md:gap-8 lg:gap-24",
+            "md:flex-row md:gap-8 lg:gap-24"
           )}
         >
           <div className={clsx("flex-1")}>
@@ -130,14 +129,14 @@ export default function CategoryPage({ category, posts }: CategoryPageProps) {
                 key={slug}
                 className={clsx(
                   "mb-8 flex items-start gap-4",
-                  "md:mb-4 md:gap-6",
+                  "md:mb-4 md:gap-6"
                 )}
               >
                 <div
                   className={clsx(
                     "border-divider-light mt-14 hidden w-8 -translate-y-1 border-b",
                     "md:mt-16 md:w-20 lg:block",
-                    "dark:border-divider-dark",
+                    "dark:border-divider-dark"
                   )}
                 />
                 <div className={clsx("flex-1")}>
@@ -196,7 +195,7 @@ export default function CategoryPage({ category, posts }: CategoryPageProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = getSortedPosts();
   const categoriesArray = Array.from(
-    new Set(posts.map((p) => p.frontMatter.category)),
+    new Set(posts.map((p) => p.frontMatter.category))
   );
   const paths = categoriesArray.map((category) => ({ params: { category } }));
 
