@@ -1,4 +1,4 @@
-name: Submit URLs to Baidu
+name: Submit URLs to Search Engines
 
 on:
   workflow_dispatch: # 手动触发
@@ -16,7 +16,8 @@ jobs:
       - name: Make script executable
         run: chmod +x ./apps/gkBlog/scripts/submit_urls.sh
 
-      - name: Submit URLs to Baidu
+      - name: Submit URLs to Search Engines
         env:
           BAIDU_API_URL: ${{ secrets.BAIDU_API_URL }}
+          BING_API_KEY: ${{ secrets.BING_API_KEY }}
         run: ./apps/gkBlog/scripts/submit_urls.sh
