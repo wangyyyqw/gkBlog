@@ -1,6 +1,5 @@
-// import { GoogleAnalytics } from '@next/third-parties/google';
-
 import BaiDuAnalytics from "@/components/analytics/BaiduAnalytics";
+import ClarityAnalytics from "@/components/analytics/ClarityAnalytics";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import RootLayout from "@/components/layouts/Root";
 import WithNavigationFooter from "@/components/layouts/WithNavigationFooter";
@@ -42,6 +41,7 @@ function App({ Component, pageProps, router }: AppPropsWithLayout) {
         {getLayout(<Component {...pageProps} />)}
         <GoogleAnalytics />
         <BaiDuAnalytics />
+        <ClarityAnalytics />
       </RootLayout>
     </Provider>
   );
