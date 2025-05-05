@@ -18,7 +18,7 @@ fi
 # 下载 RSS
 echo "正在从 $RSS_PATH 下载 RSS..."
 if ! curl -s "$RSS_PATH" -o rss_temp.xml; then
-    echo "错误: 下载 RSS 失败"
+    echo "错误: 下载 RSS 失败，可能是网络问题或链接无效。请检查链接的合法性，并适当重试。"
     exit 1
 fi
 
@@ -49,14 +49,16 @@ response_baidu=$(curl -s -H 'Content-Type:text/plain' --data-binary @urls_baidu.
 echo "百度返回: $response_baidu"
 
 # 提交 URL 到 Bing
-echo "正在提交 URL 到 Bing..."
-response_bing=$(curl -s -X POST -H 'Content-Type: application/json; charset=utf-8' -d "{
-  "host": "www.qladgk.com",
-  "key": "$BING_API_KEY",
-  "keyLocation": "https://www.qladgk.com/$BING_API_KEY.txt",
-  "urlList": [$(cat urls_bing.txt | jq -R . | jq -s .)]
-}" https://api.indexnow.org/IndexNow)
+urls=$(cat urls_bing.txt | jq -R . | jq -s .)
+json_payload=$(jq -n \
+    --arg host "www.qladgk.com" \
+    --arg key "$BING_API_KEY" \
+    --arg keyLocation "https://www.qladgk.com/$BING_API_KEY.txt" \
+    --argjson urlList "$urls" \
+    '{host: $host, key: $key, keyLocation: $keyLocation, urlList: $urlList}')
 
+echo "正在提交 URL 到 Bing..."
+response_bing=$(curl -s -X POST -H 'Content-Type: application/json; charset=utf-8' -d "$json_payload" https://api.indexnow.org/IndexNow)
 echo "Bing 返回: $response_bing"
 
 # 清理临时文件
