@@ -223,7 +223,8 @@ flowchart TB
 
 | 变量名称                 | 描述                     | 获取地址                                                                                                                   |
 | ------------------------ | ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| BAIDU_API_URL            | 百度站长平台 API 链接    | [https://ziyuan.baidu.com/](https://ziyuan.baidu.com/)                                                                     |
+| BAIDU_API_URL            | 百度资源搜索 API 链接    | [https://ziyuan.baidu.com/](https://ziyuan.baidu.com/)                                                                     |
+| BING_API_KEY             | 必应 IndexNow 密钥       | [https://www.bing.com/indexnow/getstarted/](https://www.bing.com/indexnow/getstarted/)                                     |
 | NEXT_PUBLIC_BAIDU_TONGJI | 百度统计代码             | [https://tongji.baidu.com/](https://tongji.baidu.com/)                                                                     |
 | NEXT_PUBLIC_GOOGLE_ID    | 谷歌分析代码             | [https://analytics.google.com/analytics/web/](https://analytics.google.com/analytics/web/)                                 |
 | ALIYUN_REGISTRY          | 阿里云容器镜像仓库地址   | [https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors) |
