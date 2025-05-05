@@ -58,7 +58,7 @@ function ProjectCard({
         // light styles
         "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
         // dark styles
-        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
+        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
       )}
     >
       <div className="flex flex-row items-center gap-2">
@@ -81,9 +81,9 @@ function ProjectCard({
   );
 }
 
-export default function MarqueeDemo() {
+function MarqueeDemo() {
   return (
-    <div className="bg-background relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden">
+    <div className="mt-4 mx-auto max-w-7xl bg-background relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden">
       <Marquee pauseOnHover className="[--duration:20s]">
         {firstRow.map((project) => (
           <ProjectCard
@@ -122,3 +122,5 @@ export default function MarqueeDemo() {
     </div>
   );
 }
+
+export default MarqueeDemo;

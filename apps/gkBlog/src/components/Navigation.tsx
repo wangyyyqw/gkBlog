@@ -32,7 +32,7 @@ function Navbar() {
   );
   const moreLinks = useMemo(
     () => [
-      { title: "宝藏项目", href: "/projects" },
+      { title: "组件示例", href: "/example" },
       { title: "友情链接", href: "/links" },
       { title: "留言反馈", href: "/feedback" },
     ],

@@ -37,7 +37,7 @@ module.exports = {
       return defaultValue(0.6);
     }
 
-    if (path === "/projects") {
+    if (path === "/example") {
       return defaultValue(0.6);
     }
 
