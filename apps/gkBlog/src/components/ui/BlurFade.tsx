@@ -1,6 +1,13 @@
 import { AnimatePresence, m, useInView, Variants } from "framer-motion";
 import { useRef } from "react";
 
+type MarginValue = `${number}${"px" | "%"}`;
+type MarginType =
+  | MarginValue
+  | `${MarginValue} ${MarginValue}`
+  | `${MarginValue} ${MarginValue} ${MarginValue}`
+  | `${MarginValue} ${MarginValue} ${MarginValue} ${MarginValue}`;
+
 interface BlurFadeProps {
   children: React.ReactNode;
   className?: string;
@@ -12,7 +19,7 @@ interface BlurFadeProps {
   delay?: number;
   yOffset?: number;
   inView?: boolean;
-  inViewMargin?: string; // 使用 string 类型代替 MarginType
+  inViewMargin?: MarginType;
   blur?: string;
 }
 

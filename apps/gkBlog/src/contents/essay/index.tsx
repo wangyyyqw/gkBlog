@@ -27,9 +27,9 @@ function EssayContents() {
         if (!response.ok) throw new Error("网络错误");
         const data: Essay[] = await response.json();
 
-        const sortedEssays = [...data].sort((a, b) => {
-          return new Date(b.time).getTime() - new Date(a.time).getTime();
-        });
+        const sortedEssays = [...data].sort(
+          (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime()
+        );
 
         setEssays(sortedEssays);
       } catch (err) {

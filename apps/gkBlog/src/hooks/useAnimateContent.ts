@@ -7,8 +7,8 @@ export const useAnimateContent = (content: Array<Content>) => {
   const [isUserClick, setIsUserClick] = useState(false);
 
   useEffect(() => {
-    let animateState: NodeJS.Timer;
-    let timeOutState: NodeJS.Timeout;
+    let animateState: NodeJS.Timeout | null = null;
+    let timeOutState: NodeJS.Timeout | null = null;
 
     if (isUserClick) {
       timeOutState = setTimeout(() => {
@@ -19,7 +19,7 @@ export const useAnimateContent = (content: Array<Content>) => {
                 content.indexOf(prev) < content.length - 1
                   ? content.indexOf(prev) + 1
                   : 0
-              ],
+              ]
           );
         }, 1000);
 
@@ -33,14 +33,18 @@ export const useAnimateContent = (content: Array<Content>) => {
               content.indexOf(prev) < content.length - 1
                 ? content.indexOf(prev) + 1
                 : 0
-            ],
+            ]
         );
       }, 1500);
     }
 
     return () => {
-      clearInterval(animateState);
-      clearTimeout(timeOutState);
+      if (animateState) {
+        clearInterval(animateState);
+      }
+      if (timeOutState) {
+        clearTimeout(timeOutState);
+      }
     };
   }, [content, isUserClick, currentState]);
   return { setIsUserClick, currentState, setCurrentState };

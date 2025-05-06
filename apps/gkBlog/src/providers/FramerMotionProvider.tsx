@@ -3,6 +3,7 @@ import {
   LazyMotion,
   MotionConfig as MotionProvider,
 } from "framer-motion";
+import { JSX } from "react";
 
 interface FramerMotionProviderProps {
   children: JSX.Element;
