@@ -13,4 +13,8 @@ const plugins: PluggableList = [
   withCodeAttributes,
 ];
 
-export default plugins;
+const rehypePlugins = {
+  plugins: plugins,
+};
+
+export default rehypePlugins;

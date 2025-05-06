@@ -17,4 +17,8 @@ const plugins: PluggableList = [
   withLayout,
 ];
 
-export default plugins;
+const remarkPlugins = {
+  plugins: plugins,
+};
+
+export default remarkPlugins;
