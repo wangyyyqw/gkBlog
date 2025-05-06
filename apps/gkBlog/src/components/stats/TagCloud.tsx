@@ -37,12 +37,12 @@ function TagCloud({ tags }: { tags: string[] }) {
           href={`/blog/tag/${encodeURIComponent(name.toLowerCase())}`}
           className="inline-block transition-transform hover:scale-105"
         >
-          <div className="tags-shields flex text-sm">
-            <div className="tags-shields-before px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-l-md">
+          <div className="tags-shields flex text-sm overflow-hidden rounded-md">
+            <div className="tags-shields-before px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
               {name}
             </div>
             <div
-              className={`tags-shields-after px-2 py-1 text-white rounded-r-md ${getTagColor(count)}`}
+              className={`tags-shields-after px-2 py-1 text-white ${getTagColor(count)}`}
             >
               {count}
             </div>
