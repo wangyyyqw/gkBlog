@@ -57,14 +57,14 @@ function ActionCenterButton({
       className={clsx(
         "relative flex flex-1 flex-col justify-between overflow-hidden rounded-xl p-4 transition-colors",
         "dark:bg-[#1d263a]",
-        [active ? ["bg-white", "dark:bg-slate-700"] : "bg-white/50"],
+        [active ? ["bg-white", "dark:bg-slate-700"] : "bg-white/50"]
       )}
     >
       <div className={clsx("")}>{icon}</div>
       <div
         className={clsx(
           "text-left text-[13px] font-medium",
-          "dark:font-normal",
+          "dark:font-normal"
         )}
       >
         {title}

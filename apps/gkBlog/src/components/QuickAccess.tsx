@@ -76,27 +76,28 @@ function QuickAccess() {
         animate="show"
         className={clsx(
           "fixed inset-0 bg-slate-200/[.8]",
-          "dark:bg-slate-900/[.9]",
+          "dark:bg-slate-900/[.9]"
         )}
         aria-hidden={!isQuickAccessOpen}
       />
 
       {/* 居中弹出窗口 */}
-      <div className="fixed inset-0 flex items-center justify-center p-4">
+      <div className="fixed inset-0 flex items-center justify-center p-0 sm:p-4">
         <Dialog.Panel
           className={clsx(
-            "relative h-full max-h-[80vh] w-full max-w-7xl overflow-y-auto rounded-lg bg-white p-6 shadow-2xl",
-            "flex flex-col dark:bg-slate-800",
+            "relative h-full w-full overflow-y-auto bg-slate-100 p-4 sm:p-6 pt-10 sm:pt-6 rounded-lg shadow-2xl",
+            "sm:max-h-[80vh] sm:max-w-4xl md:max-w-7xl md:rounded-xl",
+            "flex flex-col dark:bg-slate-800"
           )}
         >
           {/* 关闭按钮 */}
-          <div className="absolute right-4 top-4">
+          <div className="absolute right-4 top-5 md:top-4 md:right-4">
             <button
               ref={closeButtonRef}
               type="button"
               className={clsx(
                 "flex h-9 w-9 items-center justify-center rounded-full bg-slate-300/50 text-slate-800",
-                "hover:bg-slate-300/70 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600",
+                "hover:bg-slate-300/70 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600"
               )}
               aria-label="关闭快速访问"
               onClick={() => setQuickAccessOpen(false)}
@@ -117,7 +118,7 @@ function QuickAccess() {
                 </m.div>
                 <ul
                   className={clsx(
-                    "scrollbar-hide mt-4 flex-grow overflow-y-auto pr-2",
+                    "scrollbar-hide mt-4 flex-grow overflow-y-auto pr-2"
                   )}
                 >
                   {recentComments.map((comment, index) => (
@@ -138,22 +139,19 @@ function QuickAccess() {
                         />
                         <div className="flex w-full flex-col">
                           <div className="flex items-center justify-between">
-                            {/* 昵称 */}
                             <p className="font-medium text-gray-700 dark:text-gray-300">
                               {comment.nick}
                             </p>
-                            {/* 评论时间靠右，显示月日格式 */}
                             <p className="text-xs text-gray-500 dark:text-gray-400">
                               {new Date(comment.created).toLocaleDateString(
                                 "zh-CN",
                                 {
                                   month: "2-digit",
                                   day: "2-digit",
-                                },
+                                }
                               )}
                             </p>
                           </div>
-                          {/* 评论内容 */}
                           <p className="text-sm text-gray-500 dark:text-gray-400">
                             {comment.commentText.length > 50
                               ? `${comment.commentText.slice(0, 50)}...`
@@ -161,7 +159,6 @@ function QuickAccess() {
                           </p>
                         </div>
                       </a>
-                      {/* 仅在不是最后一条评论时显示分隔线 */}
                       {index !== recentComments.length - 1 && (
                         <hr className="my-2 border-t border-dashed border-gray-200 dark:border-gray-600" />
                       )}
@@ -170,7 +167,6 @@ function QuickAccess() {
                 </ul>
               </div>
 
-              {/* 快捷方式固定在底部 */}
               <div className="mt-6">
                 <TipShortcuts />
               </div>
