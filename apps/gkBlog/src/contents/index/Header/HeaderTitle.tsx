@@ -19,7 +19,7 @@ function HeaderTitle() {
         className={clsx(
           "mb-1 flex items-center gap-1 text-2xl text-slate-600",
           "md:mb-0 md:gap-2 md:text-4xl",
-          "dark:text-slate-400",
+          "dark:text-slate-400"
         )}
         initial={animation.hide}
         animate={animation.show}
@@ -47,7 +47,7 @@ function HeaderTitle() {
             src="/assets/emojis/love-you-gesture.png"
             width={48}
             height={48}
-            onLoadingComplete={() => {
+            onLoad={() => {
               controls.start({
                 opacity: 1,
                 y: 0,
@@ -62,7 +62,7 @@ function HeaderTitle() {
         <m.span
           className={clsx(
             "mb-4 block text-[2.5rem] font-[1000] leading-none",
-            "md:mb-6 md:text-7xl",
+            "md:mb-6 md:text-7xl"
           )}
           initial={animation.hide}
           animate={animation.show}
@@ -78,7 +78,7 @@ function HeaderTitle() {
           className={clsx(
             "block text-base text-slate-600",
             "md:text-xl",
-            "dark:text-slate-400",
+            "dark:text-slate-400"
           )}
           initial={animation.hide}
           animate={animation.show}
@@ -88,7 +88,7 @@ function HeaderTitle() {
           <strong
             className={clsx(
               "font-bold text-lg text-slate-700",
-              "dark:text-slate-300",
+              "dark:text-slate-300"
             )}
           >
             技术的黑客心态
@@ -97,7 +97,7 @@ function HeaderTitle() {
           <strong
             className={clsx(
               "font-bold text-lg text-slate-700",
-              "dark:text-slate-300",
+              "dark:text-slate-300"
             )}
           >
             开放共进的态度

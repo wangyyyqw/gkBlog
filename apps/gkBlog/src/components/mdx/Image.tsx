@@ -1,11 +1,8 @@
-import { Fancybox } from "@fancyapps/ui";
 import clsx from "clsx";
 import NextImage from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import type { ImageProps as NextImageProps } from "next/image";
-
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 export type ImageProps = NextImageProps & {
   immersive?: boolean;
@@ -23,42 +20,6 @@ export default function Image({
   style,
 }: ImageProps) {
   const [image, setImage] = useState<string>("");
-  const [images, setImages] = useState<{ src: string; alt: string }[]>([]);
-
-  const handleClick = (index: number) => {
-    Fancybox.show(
-      images.map(({ src: imageSrc, alt: imageAlt }) => ({
-        src: imageSrc,
-        alt: imageAlt,
-      })),
-      {
-        startIndex: index,
-        Toolbar: {
-          display: {
-            left: ["infobar"],
-            middle: ["zoomIn", "zoomOut"],
-            right: ["download", "close"],
-          },
-        },
-      },
-    );
-  };
-
-  useEffect(() => {
-    if (isArticleImage) {
-      const allImages = document.querySelectorAll(
-        'img[data-article-image="true"]',
-      );
-      const imageArray = Array.from(allImages).map((img) => {
-        const imageElement = img as HTMLImageElement;
-        return {
-          src: imageElement.src,
-          alt: imageElement.alt || "Image",
-        };
-      });
-      setImages(imageArray);
-    }
-  }, [isArticleImage]);
 
   return (
     <div className={clsx("mdx-image relative mx-auto")}>
@@ -68,7 +29,7 @@ export default function Image({
           className={clsx(
             "absolute -inset-8 z-[-1] rounded-[20%] bg-[length:180%_180%] bg-center opacity-25 blur-2xl",
             "hidden",
-            "dark:block",
+            "dark:block"
           )}
         />
       ) : null}
@@ -78,16 +39,13 @@ export default function Image({
         className={clsx(
           "border-divider-light cursor-pointer rounded-lg border",
           "dark:border-divider-dark",
-          className,
+          className
         )}
         width={width}
         height={height}
-        onClick={() => {
-          const index = images.findIndex((img) => img.src === src);
-          handleClick(index);
-        }}
-        onLoadingComplete={(img) => {
-          setImage(img.currentSrc);
+        onLoad={(img) => {
+          const currentSrc = (img.currentTarget as HTMLImageElement)?.src || "";
+          setImage(currentSrc);
         }}
         data-article-image={isArticleImage ? "true" : "false"}
         style={style}

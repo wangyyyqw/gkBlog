@@ -1,10 +1,6 @@
-/* eslint-disable react/no-unknown-property */
-import clsx from "clsx";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Zoom from "react-medium-image-zoom";
-
-import "react-medium-image-zoom/dist/styles.css";
 
 interface Essay {
   id: string;
@@ -46,40 +42,49 @@ function EssayContents() {
   if (error) return <p>出错了: {error}</p>;
 
   return (
-    <div className={clsx("content-wrapper mdx-contents")}>
-      <div className="essays-container">
+    <div className="content-wrapper p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3">
         {essays.map((essay) => (
-          <div key={essay.id} className="essay">
-            <div className="essays-header">
-              <div className="avatar-wrapper">
+          <div
+            key={essay.id}
+            className="flex flex-col overflow-hidden rounded-xl bg-gray-100 transition-transform hover:-translate-y-1 dark:bg-gray-800"
+          >
+            <div className="flex items-center gap-4 py-3 px-4">
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 bg-gray-200 dark:border-gray-900">
                 <Image
                   src={essay.avatar_url}
                   alt={`${essay.username} 的头像`}
                   width={50}
                   height={50}
-                  className="avatar"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div>
-                <h2 className="username">{essay.username}</h2>
-                <p className="time">{essay.time}</p>
+                <h2 className="font-bold text-gray-800 dark:text-white">
+                  {essay.username}
+                </h2>
+                <p className="text-gray-500 text-sm dark:text-gray-400">
+                  {essay.time}
+                </p>
               </div>
             </div>
-            <p className="content">{essay.content}</p>
+            <p className="text-gray-600 py-1 px-6 leading-relaxed dark:text-gray-400">
+              {essay.content}
+            </p>
             {essay.images && (
-              <div className="images-container">
+              <div className="py-1 px-6 flex flex-wrap gap-4">
                 {(Array.isArray(essay.images)
                   ? essay.images
                   : [essay.images]
                 ).map((img, imgIndex) => (
                   <Zoom key={img}>
-                    <div className="image-wrapper">
+                    <div className="w-32 h-32 relative rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105">
                       <Image
                         src={img}
                         alt={`图片 ${imgIndex + 1}`}
                         layout="fill"
                         objectFit="cover"
-                        className="zoomable-image"
+                        className="object-cover"
                       />
                     </div>
                   </Zoom>
@@ -89,81 +94,6 @@ function EssayContents() {
           </div>
         ))}
       </div>
-      <style jsx>{`
-        .content-wrapper {
-          padding: 20px;
-        }
-
-        .essays-container {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-          gap: 20px;
-        }
-        .essay {
-          background-color: #fff;
-          border-radius: 12px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-          padding: 20px;
-          transition: transform 0.2s ease;
-        }
-        .essay:hover {
-          transform: translateY(-5px);
-        }
-        .essays-header {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-          margin-bottom: 10px;
-        }
-        .avatar-wrapper {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          overflow: hidden;
-          position: relative;
-          border: 1px solid #ddd;
-        }
-        .username {
-          font-weight: bold;
-          color: #333;
-        }
-        .time {
-          color: #999;
-          font-size: 0.9em;
-        }
-        .content {
-          margin: 10px 0;
-          line-height: 1.6;
-          color: #555;
-        }
-
-        .images-container {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-          margin-top: 10px;
-        }
-
-        .image-wrapper {
-          width: 120px;
-          height: 120px;
-          position: relative;
-          overflow: hidden;
-          border-radius: 8px;
-          transition: transform 0.3s ease;
-        }
-
-        .image-wrapper:hover {
-          transform: scale(1.05);
-        }
-
-        .zoomable-image {
-          position: absolute;
-          top: 0;
-          left: 0;
-          object-fit: cover;
-        }
-      `}</style>
     </div>
   );
 }

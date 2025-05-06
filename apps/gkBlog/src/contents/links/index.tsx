@@ -26,7 +26,7 @@ function GridList({
   items: typeof Websites;
 }) {
   const [showPreviews, setShowPreviews] = useState<{ [key: number]: boolean }>(
-    {},
+    {}
   );
 
   const handleMouseEnter = (index: number) => {
@@ -52,7 +52,7 @@ function GridList({
               href={site.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg dark:bg-gray-800"
+              className="flex flex-col overflow-hidden rounded-lg  bg-gray-100  dark:bg-gray-800"
             >
               {category === "推荐" && (
                 <Image

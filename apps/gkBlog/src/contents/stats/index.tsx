@@ -87,7 +87,7 @@ function StatsContents({ initialStats }: StatsContentsProps) {
           {/* 右侧基础统计数据 */}
           <div className="flex flex-col gap-2">
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-2">
+              <div className="rounded-lg border dark:border-gray-700 bg-card text-card-foreground shadow-sm p-2">
                 <div className="flex justify-between items-center">
                   <h3 className="text-base font-medium">文章数</h3>
                   <p className="text-xl font-bold ml-8">
@@ -95,7 +95,7 @@ function StatsContents({ initialStats }: StatsContentsProps) {
                   </p>
                 </div>
               </div>
-              <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-2">
+              <div className="rounded-lg border  dark:border-gray-700 bg-card text-card-foreground shadow-sm p-2">
                 <div className="flex justify-between items-center">
                   <h3 className="text-base font-medium">分类数</h3>
                   <p className="text-xl font-bold ml-8">
@@ -106,7 +106,7 @@ function StatsContents({ initialStats }: StatsContentsProps) {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-2">
+              <div className="rounded-lg border dark:border-gray-700 bg-card text-card-foreground shadow-sm p-2">
                 <div className="flex justify-between items-center">
                   <h3 className="text-base font-medium">标签数</h3>
                   <p className="text-xl font-bold ml-8">
@@ -114,7 +114,7 @@ function StatsContents({ initialStats }: StatsContentsProps) {
                   </p>
                 </div>
               </div>
-              <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-2">
+              <div className="rounded-lg border dark:border-gray-700 bg-card text-card-foreground shadow-sm p-2">
                 <div className="flex justify-between items-center">
                   <h3 className="text-base font-medium">总字数</h3>
                   <p className="text-xl font-bold ml-8">
