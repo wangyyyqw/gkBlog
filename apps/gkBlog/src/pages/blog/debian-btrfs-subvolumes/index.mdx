@@ -8,7 +8,18 @@ tags:
   - 环境配置
   - Btrfs
 category: 技术
+cover: https://cdn.qladgk.com/images/20250508161434413.png
 ---
+
+import Image from "@/components/mdx/Image";
+
+<Image
+  src="https://cdn.qladgk.com/images/20250508161434413.png"
+  alt="cover"
+  width={999}
+  height={527}
+  isArticleImage={true}
+/>
 
 ## 为什么是 Btrfs 子卷？
 
@@ -48,8 +59,6 @@ Btrfs（B-Tree File System）相比传统 ext4 具备以下核心特性：
 1. 启动安装程序并完成基本设置如语言、时区、键盘
 2. 进入‌分区向导‌步骤时选择 btrfs 文件系统，并且分好 efi、根目录、交互空间等分区
 3. 在进行到安装基本系统时停止操作
-
-import Image from "@/components/mdx/Image";
 
 你的鼠标应该停在 install base system 选项上：
 

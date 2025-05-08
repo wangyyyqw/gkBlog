@@ -261,7 +261,7 @@ cover: images/20250422153424876.png
 - **Mermaid 流程图**：使用在线 Mermaid 生成工具：[https://mermaid.live/edit](https://mermaid.live/edit)
 - **封面/缩略图**：在线图片生成器：[https://picprose.pixpark.net/zh](https://picprose.pixpark.net/zh) ，设计布局如下：
 
-  ![封面设计](https://cdn.qladgk.com/images/20250427220010923.png)
+  ![封面设计](https://cdn.qladgk.com/images/20250508171326001.png)
 
 - **手绘风格图**：使用在线 excalidraw 绘图工具：[https://excalidraw.com/](https://excalidraw.com/)
 
