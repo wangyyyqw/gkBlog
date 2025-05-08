@@ -285,13 +285,7 @@ cover: images/20250422153424876.png
 
 ## 🌟 Star 历史
 
-<a href="https://www.star-history.com/#qlAD/gkBlog&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=qlAD/gkBlog&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=qlAD/gkBlog&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=qlAD/gkBlog&type=Date" />
- </picture>
-</a>
+[![Star History Chart](https://api.star-history.com/svg?repos=qlAD/gkBlog&type=Date)](https://www.star-history.com/#qlAD/gkBlog&Date)
 
 ---
 
