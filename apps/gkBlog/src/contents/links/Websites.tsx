@@ -158,7 +158,7 @@ const Websites = [
     preview: "https://cdn.qladgk.com/images/202411070958847.png",
     avatar: "https://cdn.qladgk.com/images/202411070958479.png",
     description: "记录所学知识，缩短和大神的差距！",
-    category: "技术",
+    category: "推荐",
   },
   {
     name: "RE",
