@@ -14,7 +14,7 @@ const plugins: PluggableList = [
 ];
 
 const rehypePlugins = {
-  plugins: plugins,
+  plugins,
 };
 
 export default rehypePlugins;

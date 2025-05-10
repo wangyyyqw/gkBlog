@@ -18,7 +18,7 @@ const plugins: PluggableList = [
 ];
 
 const remarkPlugins = {
-  plugins: plugins,
+  plugins,
 };
 
 export default remarkPlugins;
