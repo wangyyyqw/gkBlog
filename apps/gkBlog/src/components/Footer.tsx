@@ -217,7 +217,7 @@ function Footer() {
                 <FooterGroup
                   title="更多"
                   links={[
-                    { title: "组件示例", href: "/example" },
+                    { title: "组件示例", href: "/shortcodes" },
                     { title: "友情链接", href: "/links" },
                     { title: "留言反馈", href: "/feedback" },
                   ]}

@@ -37,7 +37,7 @@ module.exports = {
       return defaultValue(0.6);
     }
 
-    if (path === "/example") {
+    if (path === "/shortcodes") {
       return defaultValue(0.6);
     }
 

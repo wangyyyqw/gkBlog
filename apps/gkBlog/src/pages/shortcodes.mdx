@@ -1,0 +1,345 @@
+---
+title: 组件示例
+description: 博客内容是 MDX 形式，所以可以插入不同的 JSX 代码，以下组件库用于作为我的备忘录，提供的代码并不保证其可用性
+caption: "More"
+layout: PageWithMDX
+---
+
+import MDXExample from "@/components/mdx/MDXExample";
+
+## 通用 MDX 组件
+
+### 标题
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`## 一级标题
+  ### 二级标题
+  `}
+>
+  ## 一级标题 
+  ### 二级标题
+</MDXExample>
+
+### 段落
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`做技术的黑客心态加上开放共进的态度是成长和越过高山幽谷的秘籍！`}
+>
+  做技术的黑客心态加上开放共进的态度是成长和越过高山幽谷的秘籍！
+</MDXExample>
+
+### 列表
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`1. 列表
+2. 列表
+    1. 列表
+        - 列表
+    2. 列表
+        
+        列表间文字
+    3. 列表`}
+>
+1. 列表
+2. 列表
+    1. 列表
+        - 列表
+    2. 列表
+        
+        列表间文字
+    3. 列表
+</MDXExample>
+
+### 图片
+
+import Image from "@/components/mdx/Image";
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`<Image
+  src="https://cdn.qladgk.com/"
+  alt="cover"
+  width={666}
+  height={1}
+/>`}
+>
+  <Image
+    src="https://cdn.qladgk.com/images/20250509235454284.png"
+    alt="cover"
+    width={666}
+    height={1}
+  />
+</MDXExample>
+
+import ImageSensitive from "@/components/mdx/ImageSensitive";
+
+### 敏感图片
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`<ImageSensitive
+  message="图片中有蛇、请注意"
+  src="https://cdn.qladgk.com/images/4660d8c38e3c2a3e20f9e4eaa9d434994e4d7c5b.jpg"
+  alt="图片中有蛇、请注意"
+  width={666}
+  height={1}
+  />
+  `}
+>
+  <ImageSensitive
+  message="图片中有蛇、请注意"
+  src="https://cdn.qladgk.com/images/4660d8c38e3c2a3e20f9e4eaa9d434994e4d7c5b.jpg"
+  alt="图片中有蛇、请注意"
+  width={666}
+  height={1}
+  />
+</MDXExample>
+
+### 表格
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`| 名称      | 解释                       | 举例                     |
+  | --------- | -------------------------- | ------------------------ |
+  | 集合…集合 | 子集的概念是集合与集合之间 | 元素不能是一个集合的子集 |
+`}
+>
+| 名称      | 解释                       | 举例                     |
+| --------- | -------------------------- | ------------------------ |
+| 集合…集合 | 子集的概念是集合与集合之间 | 元素不能是一个集合的子集 |
+</MDXExample>
+
+### 文章引用
+
+import { QuickView } from "@/components/mdx/Link";
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`有关 Markdown 的语法，你可以参考我之前写的文章：<QuickView href="/blog/markdown-introduction">Markdown 语法指南</QuickView>`}
+>
+  有关Markdown的语法，你可以参考我之前写的文章：<QuickView href="/blog/markdown-introduction">Markdown 语法指南</QuickView>
+</MDXExample>
+
+### 视频嵌入
+
+import VideoEmbed from "@/components/mdx/VideoEmbed";
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`<VideoEmbed type="bilibili" id="BV1C64y1z7V5" />`}
+>
+  <VideoEmbed type="bilibili" id="BV1C64y1z7V5" />
+</MDXExample>
+
+### 代码块
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`#include <stdio.h>
+  // 我的第一个 C 语言程序
+  int main(int argc, char *argv[])
+  {
+      printf("Hello, World! \n");
+      return 0;
+  }
+`}
+>
+  ```c
+  #include <stdio.h>
+  // 我的第一个 C 语言程序
+  int main(int argc, char *argv[])
+  {
+      printf("Hello, World! \n");
+      return 0;
+  }
+  ```
+</MDXExample>
+
+### 代码组
+
+import CodeGroup from "@/components/mdx/CodeGroup";
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`<CodeGroup variant="file">
+
+html {copy:true} {footer:true} {title:index.html}
+
+<div id="tcomment"></div>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.all.min.js"></script>
+<script>
+  twikoo.init({
+    envId: "您的环境id", // 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
+    el: "#tcomment", // 容器元素
+    // region: 'ap-guangzhou', // 环境地域，默认为 ap-shanghai，腾讯云环境填 ap-shanghai 或 ap-guangzhou；Vercel 环境不填
+    // path: location.pathname, // 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
+    // lang: 'zh-CN', // 用于手动设定评论区语言，支持的语言列表 https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js
+  });
+</script>
+
+tsx {copy:true} {footer:true} {title:index.tsx}
+import { useEffect } from "react";
+
+interface TwikooConfig {
+envId: string;
+el: string;
+}
+
+interface Twikoo {
+init: (config: TwikooConfig) => void;
+}
+
+function TwikooComments() {
+useEffect(() => {
+const script = document.createElement("script");
+script.src =
+"https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.min.js";
+script.async = true;
+
+    script.onload = () => {
+      const { twikoo } = window as unknown as { twikoo: Twikoo };
+      twikoo.init({
+        envId: "您的环境id",
+        el: "#tcomment",
+      });
+    };
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+
+}, []);
+
+return <div id="tcomment" />;
+}
+
+export default TwikooComments;
+
+</CodeGroup>
+`}
+>
+<CodeGroup variant="file">
+
+```html {copy:true} {footer:true} {title:index.html}
+<div id="tcomment"></div>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.all.min.js"></script>
+<script>
+  twikoo.init({
+    envId: "您的环境id", // 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
+    el: "#tcomment", // 容器元素
+    // region: 'ap-guangzhou', // 环境地域，默认为 ap-shanghai，腾讯云环境填 ap-shanghai 或 ap-guangzhou；Vercel 环境不填
+    // path: location.pathname, // 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
+    // lang: 'zh-CN', // 用于手动设定评论区语言，支持的语言列表 https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js
+  });
+</script>
+```
+
+```tsx {copy:true} {footer:true} {title:index.tsx}
+<div id="tcomment"></div>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.all.min.js"></script>
+<script>
+  twikoo.init({
+    envId: "您的环境id", // 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
+    el: "#tcomment", // 容器元素
+    // region: 'ap-guangzhou', // 环境地域，默认为 ap-shanghai，腾讯云环境填 ap-shanghai 或 ap-guangzhou；Vercel 环境不填
+    // path: location.pathname, // 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
+    // lang: 'zh-CN', // 用于手动设定评论区语言，支持的语言列表 https://github.com/twikoojs/twikoo/blob/main/src/client/utils/i18n/index.js
+  });
+</script>
+```
+
+</CodeGroup>
+
+</MDXExample>
+
+### Diff
+
+import Diff from "@/components/mdx/Diff";
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`<Diff>
+-source "drivers/oneplus/Kconfig"
++source "drivers/kernelsu/Kconfig"
+</Diff>
+`}
+>
+<Diff>
+  {`
+-source "drivers/oneplus/Kconfig"
++source "drivers/kernelsu/Kconfig"
+`}
+
+</Diff>
+</MDXExample>
+
+### TIL
+
+import TIL from "@/components/mdx/TIL";
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`<TIL.DnD>
+  <TIL.Dont>
+    md {copy:false} {footer:false}
+    fix: fix login issue, update readme, refactor header component
+  </TIL.Dont>
+  <TIL.Do>
+    md {copy:false} {footer:false}
+    fix: fix login issue
+    docs: update readme for new login feature
+    refactor: refactor header 
+  </TIL.Do>
+</TIL.DnD>
+`}
+>
+<TIL.DnD>
+  <TIL.Dont>
+    ```md {copy:false} {footer:false}
+    fix: fix login issue update readme refactor header
+
+    ```
+
+  </TIL.Dont>
+  <TIL.Do>
+    ```md {copy:false} {footer:false}
+    fix: fix login issue
+    docs: update readme for new login feature
+    refactor: refactor header component
+    ````
+  </TIL.Do>
+</TIL.DnD>
+</MDXExample>
+
+## 文章专属组件
+
+### 字重测试
+
+来源于文章：<QuickView href="/blog/pixelexperience-optimize">安卓类原生系统补全计划 —— PixelExperience（一加 OnePlus）</QuickView>
+
+import VariableFontTester from "./blog/pixelexperience-optimize/VariableFontTester";
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`<VariableFontTester />`}
+>
+<VariableFontTester />
+</MDXExample>
+
+### 基因型杂交计算器
+
+来源于文章：<QuickView href="/blog/link-genetic-and-meiosis">解释 3:1 和 9:3:3:1 的详细来源 —— 建立减数分裂与孟德尔遗传学定律之间的联系</QuickView>
+
+import HybridCalculator from "./blog/link-genetic-and-meiosis/hybrid-calculator.tsx";
+
+{/* prettier-ignore */}
+<MDXExample
+  sources={`<HybridCalculator />`}
+>
+<HybridCalculator />
+</MDXExample>
