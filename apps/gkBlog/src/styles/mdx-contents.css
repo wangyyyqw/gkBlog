@@ -2,6 +2,7 @@
   @apply w-full text-slate-600;
   @apply dark:text-slate-400;
 
+  /* 基本文本样式 */
   p {
     @apply leading-relaxed;
 
@@ -33,17 +34,18 @@
     }
   }
 
+  /* 列表样式 */
   ul,
   ol {
-    @apply ml-7 mt-6 mb-6;
-    @apply md:ml-9;
+    @apply ml-6 mt-5 mb-5;
+    @apply md:ml-7;
 
     li {
       @apply relative leading-relaxed;
       padding-left: 0.4rem;
 
       & + li {
-        @apply mt-2;
+        @apply mt-5;
       }
     }
   }
@@ -52,8 +54,8 @@
     @apply list-none;
 
     > li::before {
-      @apply absolute -left-7 top-[0.5em] h-[10px] w-[10px] rounded-full bg-slate-500 content-[''];
-      @apply md:-left-5;
+      @apply absolute -left-6 top-[0.5em] h-[9px] w-[9px] rounded-full bg-slate-500 content-[''];
+      @apply md:-left-4;
       @apply dark:bg-slate-400;
       transition:
         transform 0.2s ease-in-out,
@@ -66,7 +68,7 @@
 
     ul,
     ol {
-      @apply mt-2 ml-4;
+      @apply mt-5 ml-5;
     }
 
     ol > li::before {
@@ -76,6 +78,13 @@
 
   ol {
     @apply list-decimal;
+    @apply ml-7;
+    @apply md:ml-8;
+
+    ul,
+    ol {
+      @apply ml-6;
+    }
 
     li::marker {
       @apply text-slate-500 font-medium;
@@ -87,16 +96,18 @@
     }
   }
 
+  /* 代码块样式 */
   :not(pre, .mdx-inline-highlight) {
     > code {
       @apply font-medium text-slate-700;
       @apply dark:text-slate-300;
-      @apply bg-slate-200 dark:bg-slate-800; /* 添加背景色，区分代码 */
-      @apply rounded-md px-1; /* 增加内边距和圆角，使其更加突出 */
-      @apply shadow-sm dark:shadow-md; /* 为暗色模式添加阴影，使其更立体 */
+      @apply bg-slate-200 dark:bg-slate-800;
+      @apply rounded-md px-1;
+      @apply shadow-sm dark:shadow-md;
     }
   }
 
+  /* 引用块样式 */
   blockquote {
     @apply relative my-6 py-1 pl-6 text-slate-600;
     @apply dark:text-slate-400;

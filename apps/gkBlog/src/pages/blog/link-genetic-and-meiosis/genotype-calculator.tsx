@@ -111,7 +111,7 @@ export function PunnettSquareCalculator() {
             value={genotype}
             onChange={(e) => setGenotype(e.target.value)}
             placeholder="输入基因型，如 AaBb"
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border dark:border-gray-700 rounded-md"
             aria-labelledby="genotype-label"
           />
           <p className="text-sm text-muted-foreground">
@@ -127,7 +127,10 @@ export function PunnettSquareCalculator() {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
             {result.gametes.map((gamete) => (
-              <div key={gamete} className="border rounded p-2 text-center">
+              <div
+                key={gamete}
+                className="border dark:border-gray-700 rounded p-2 text-center"
+              >
                 {gamete}
               </div>
             ))}
@@ -139,13 +142,13 @@ export function PunnettSquareCalculator() {
             <table className="min-w-full border-collapse">
               <thead>
                 <tr>
-                  <th className="border p-2" scope="col">
+                  <th className="border dark:border-gray-700 p-2" scope="col">
                     <span className="sr-only">配子</span>
                   </th>
                   {result.gametes.map((gamete) => (
                     <th
                       key={gamete}
-                      className="border p-2 bg-muted font-medium"
+                      className="border dark:border-gray-700 p-2 bg-muted font-medium"
                     >
                       {gamete}
                     </th>
@@ -155,11 +158,14 @@ export function PunnettSquareCalculator() {
               <tbody>
                 {result.punnettSquare.map((row, rowIndex) => (
                   <tr key={result.gametes[rowIndex]} className="border">
-                    <th className="border p-2 bg-muted font-medium">
+                    <th className="border dark:border-gray-700 p-2 bg-muted font-medium">
                       {result.gametes[rowIndex]}
                     </th>
                     {row.map((cell) => (
-                      <td key={cell} className="border p-2 text-center">
+                      <td
+                        key={cell}
+                        className="border dark:border-gray-700 p-2 text-center"
+                      >
                         {cell}
                       </td>
                     ))}

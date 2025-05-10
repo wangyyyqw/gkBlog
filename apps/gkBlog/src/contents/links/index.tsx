@@ -151,8 +151,7 @@ function LinksContents() {
         </Code>
 
         <p className="mt-4">
-          发送申请至:{" "}
-          <a href="mailto:your-email@example.com">qlad_adgk@163.com</a>{" "}
+          发送申请至: <a href="mailto:qlad_adgk@163.com">qlad_adgk@163.com</a>{" "}
           或者在下方留言。
         </p>
       </div>

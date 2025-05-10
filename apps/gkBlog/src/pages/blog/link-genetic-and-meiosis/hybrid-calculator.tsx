@@ -99,7 +99,7 @@ function HybridCalculator() {
             value={parent1}
             onChange={(e) => setParent1(e.target.value)}
             placeholder="输入基因型，如 AaBbCCdd"
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border dark:border-gray-700 rounded-md"
           />
         </div>
 
@@ -111,7 +111,7 @@ function HybridCalculator() {
             value={parent2}
             onChange={(e) => setParent2(e.target.value)}
             placeholder="输入基因型，如 AabbCcDd"
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border dark:border-gray-700 rounded-md"
           />
         </div>
       </form>
@@ -123,7 +123,7 @@ function HybridCalculator() {
             {result.gametes1.map((gamete) => (
               <div
                 key={`p1-${gamete}`}
-                className="border rounded p-2 text-center"
+                className="border dark:border-gray-700 rounded p-2 text-center"
               >
                 {gamete}
               </div>
@@ -135,7 +135,7 @@ function HybridCalculator() {
             {result.gametes2.map((gamete) => (
               <div
                 key={`p2-${gamete}`}
-                className="border rounded p-2 text-center"
+                className="border dark:border-gray-700 rounded p-2 text-center"
               >
                 {gamete}
               </div>
@@ -144,16 +144,16 @@ function HybridCalculator() {
 
           <p>旁氏表（Punnett Square）：</p>
           <div className="overflow-auto">
-            <table className="min-w-full border-collapse">
+            <table className="min-w-full  border-collapse">
               <thead>
                 <tr>
-                  <th className="border p-2" scope="col">
+                  <th className="border dark:border-gray-700 p-2" scope="col">
                     <span className="sr-only">配子</span>
                   </th>
                   {result.gametes2.map((gamete) => (
                     <th
                       key={`header-p2-${gamete}`}
-                      className="border p-2 bg-muted font-medium"
+                      className="border dark:border-gray-700 p-2 bg-muted font-medium"
                     >
                       {gamete}
                     </th>
@@ -162,12 +162,18 @@ function HybridCalculator() {
               </thead>
               <tbody>
                 {result.punnettSquare.map((row, rowIndex) => (
-                  <tr key={result.gametes1[rowIndex]} className="border">
-                    <th className="border p-2 bg-muted font-medium">
+                  <tr
+                    key={result.gametes1[rowIndex]}
+                    className="dark:border-gray-700 border"
+                  >
+                    <th className="border dark:border-gray-700 p-2 bg-muted font-medium">
                       {result.gametes1[rowIndex]}
                     </th>
                     {row.map((cell) => (
-                      <td key={cell} className="border p-2 text-center">
+                      <td
+                        key={cell}
+                        className="border dark:border-gray-700 p-2 text-center"
+                      >
                         {cell}
                       </td>
                     ))}
