@@ -11,11 +11,5 @@
     "**/.next": true,
     "**/.turbo": true,
     "**/node_modules": true
-  },
-  "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
-  "[dotenv]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
   }
 }
