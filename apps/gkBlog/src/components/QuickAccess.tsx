@@ -2,7 +2,7 @@ import { Dialog } from "@headlessui/react";
 import clsx from "clsx";
 import { m } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import ActionCenter from "@/components/ActionCenter";
 import Activity from "@/components/Activity";
@@ -11,6 +11,7 @@ import NewPosts from "@/components/NewPosts";
 import TipShortcuts from "@/components/TipShortcuts";
 
 import useGlobal from "@/hooks/useGlobal";
+import useTwikoo from "@/hooks/useTwikoo";
 
 const animation = {
   hide: { opacity: 0 },
@@ -21,45 +22,13 @@ function QuickAccess() {
   const closeButtonRef = useRef(null);
   const { isQuickAccessOpen, setQuickAccessOpen } = useGlobal();
 
-  // State for recent comments
-  const [recentComments, setRecentComments] = useState([]);
-
-  // Fetch recent comments using Twikoo API
-  const fetchRecentComments = async () => {
-    try {
-      const fetchedComments = await window.twikoo.getRecentComments({
-        envId: "https://twikoo.qladgk.com/",
-        pageSize: 10,
-        includeReply: false,
-        el: "",
-      });
-      setRecentComments(fetchedComments);
-    } catch (error) {
-      // console.warn("Error fetching recent comments:", error);
-    }
-  };
+  const { recentComments, fetchRecentComments, twikooLoaded } = useTwikoo();
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src =
-      "https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.min.js";
-    script.async = true;
-
-    script.onload = () => {
-      window.twikoo.init({
-        envId: "https://twikoo.qladgk.com/",
-        el: "#tcomment",
-      });
-
-      fetchRecentComments();
-    };
-
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+    if (twikooLoaded) {
+      fetchRecentComments(10);
+    }
+  }, [fetchRecentComments, twikooLoaded]);
 
   return isQuickAccessOpen ? (
     <Dialog

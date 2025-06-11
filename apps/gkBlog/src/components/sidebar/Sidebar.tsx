@@ -2,7 +2,9 @@ import clsx from "clsx";
 import { m } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import useSound from "use-sound"; // 导入 use-sound
+import useSound from "use-sound";
+
+import useTwikoo from "@/hooks/useTwikoo";
 
 import Card from "./Card";
 
@@ -58,43 +60,14 @@ function Sidebar({ show }: SidebarProps) {
   const [visibleTags, setVisibleTags] = useState<string[]>([]);
   const [showMore, setShowMore] = useState(false);
   const [visibleCategories, setVisibleCategories] = useState<string[]>([]);
-  const [recentCommentsState, setRecentCommentsState] = useState<Comment[]>([]);
 
-  const fetchRecentComments = async () => {
-    try {
-      const fetchedComments = await window.twikoo.getRecentComments({
-        envId: "https://twikoo.qladgk.com/",
-        pageSize: 3,
-        includeReply: false,
-        el: "",
-      });
-      setRecentCommentsState(fetchedComments);
-    } catch (error) {
-      // console.warn('Error fetching recent comments:', error);
-    }
-  };
+  const { recentComments, fetchRecentComments, twikooLoaded } = useTwikoo();
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src =
-      "https://cdn.jsdelivr.net/npm/twikoo@1.6.39/dist/twikoo.min.js";
-    script.async = true;
-
-    script.onload = () => {
-      window.twikoo.init({
-        envId: "https://twikoo.qladgk.com/",
-        el: "#tcomment",
-      });
-
-      fetchRecentComments();
-    };
-
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+    if (twikooLoaded) {
+      fetchRecentComments(3);
+    }
+  }, [fetchRecentComments, twikooLoaded]);
 
   const fetchArticles = async () => {
     try {
@@ -277,7 +250,7 @@ function Sidebar({ show }: SidebarProps) {
       {show.includes("recentComments") && (
         <Card title="最近评论" className="hidden md:block">
           <ul className="space-y-2">
-            {recentCommentsState.map((comment, index) => (
+            {recentComments.map((comment, index) => (
               <li key={comment.id}>
                 <a href={comment.url} className="group flex items-center">
                   <Image
@@ -309,7 +282,7 @@ function Sidebar({ show }: SidebarProps) {
                 </a>
 
                 {/* 仅在不是最后一条评论时显示分隔线 */}
-                {index !== recentCommentsState.length - 1 && (
+                {index !== recentComments.length - 1 && (
                   <hr className="my-2 border-t border-dashed border-gray-200 dark:border-gray-600" />
                 )}
               </li>
