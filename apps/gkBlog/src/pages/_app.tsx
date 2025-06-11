@@ -1,6 +1,5 @@
 import BaiDuAnalytics from "@/components/analytics/BaiduAnalytics";
 import ClarityAnalytics from "@/components/analytics/ClarityAnalytics";
-import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import RootLayout from "@/components/layouts/Root";
 import WithNavigationFooter from "@/components/layouts/WithNavigationFooter";
 import Provider from "@/providers";
@@ -39,7 +38,6 @@ function App({ Component, pageProps, router }: AppPropsWithLayout) {
       <RootLayout>
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         {getLayout(<Component {...pageProps} />)}
-        <GoogleAnalytics />
         <BaiDuAnalytics />
         <ClarityAnalytics />
       </RootLayout>
