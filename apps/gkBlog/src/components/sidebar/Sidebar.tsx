@@ -67,7 +67,8 @@ function Sidebar({ show }: SidebarProps) {
     if (twikooLoaded) {
       fetchRecentComments(3);
     }
-  }, [fetchRecentComments, twikooLoaded]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [twikooLoaded]);
 
   const fetchArticles = async () => {
     try {

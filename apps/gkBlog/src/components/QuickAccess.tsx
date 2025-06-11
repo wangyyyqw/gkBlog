@@ -28,7 +28,8 @@ function QuickAccess() {
     if (twikooLoaded) {
       fetchRecentComments(10);
     }
-  }, [fetchRecentComments, twikooLoaded]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [twikooLoaded]);
 
   return isQuickAccessOpen ? (
     <Dialog
