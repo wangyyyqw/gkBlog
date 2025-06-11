@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import Image from "next/image";
-import { useState } from "react";
 
 import Code from "@/components/mdx/Code";
 import TwikooComments from "@/components/TwikooComments";
@@ -25,29 +24,12 @@ function GridList({
   category: string;
   items: typeof Websites;
 }) {
-  const [showPreviews, setShowPreviews] = useState<{ [key: number]: boolean }>(
-    {}
-  );
-
-  const handleMouseEnter = (index: number) => {
-    setShowPreviews((prev) => ({ ...prev, [index]: true }));
-  };
-
-  const handleMouseLeave = (index: number) => {
-    setShowPreviews((prev) => ({ ...prev, [index]: false }));
-  };
-
   return (
     <div className="mt-8">
       <h2 className="mb-4 text-xl font-bold">{`${category} (${items.length})`}</h2>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {items.map((site, index) => (
-          <div
-            key={site.name}
-            className="relative"
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={() => handleMouseLeave(index)}
-          >
+        {items.map((site) => (
+          <div key={site.name} className="relative">
             <a
               href={site.url}
               target="_blank"
@@ -89,21 +71,6 @@ function GridList({
                 </div>
               </div>
             </a>
-
-            {showPreviews[index] && category !== "推荐" && (
-              <div
-                className="absolute left-0 z-10 w-full transition-opacity duration-300"
-                style={{ top: "100%" }}
-              >
-                <Image
-                  src={site.preview}
-                  alt={`${site.name} preview`}
-                  width={300}
-                  height={150}
-                  className="h-32 w-full rounded-lg border object-cover shadow-md"
-                />
-              </div>
-            )}
           </div>
         ))}
       </div>
