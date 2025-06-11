@@ -232,6 +232,7 @@ flowchart TB
 | DOCKER_PASSWORD          | 阿里云容器镜像仓库密码   | [https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors) |
 | NEODB_ACCESS_TOKEN       | NeoDB 访问令牌           | [https://neodb.social/developer/](https://neodb.social/developer/)                                                         |
 | SALT_IP_ADDRESS          | 数据库盐值               | 随意填写一些你的密码                                                                                                       |
+| NEXT_PUBLIC_TWIKOO_ENVID | Twikoo 评论系统环境 ID   | [https://twikoo.js.org/](https://twikoo.js.org/)                                                                           |
 
 ### ✏️ 内容创作
 
