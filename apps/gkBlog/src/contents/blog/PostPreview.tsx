@@ -35,7 +35,7 @@ function PostPreview({
         key={slug}
         href={`/blog/${slug}`}
         className={clsx(
-          "group relative mb-6 block overflow-hidden bg-gradient-to-t rounded-r-2xl",
+          "group relative block overflow-hidden bg-gradient-to-t sm:rounded-2xl",
           "sm:mb-0",
           pinned
             ? [
@@ -46,28 +46,8 @@ function PostPreview({
             : ["sm:p-4 md:p-6"]
         )}
       >
-        {/* shine effect */}
-        {pinned && (
-          <m.div
-            initial={{ x: 0, opacity: 0 }}
-            animate={{ x: "100%", opacity: [0, 1, 0, 0] }}
-            transition={{
-              delay: 1.4,
-              duration: 1.84,
-              ease: [0.85, 0, 0.15, 1],
-            }}
-            className="absolute -inset-x-64 inset-y-0 z-[-1]"
-          >
-            <div
-              className={clsx(
-                "absolute inset-y-0 w-10 -rotate-45 scale-[4] bg-black opacity-[0.08]",
-                "dark:bg-white dark:opacity-[0.14]"
-              )}
-            />
-          </m.div>
-        )}
-
-        <div className="absolute inset-y-0 right-0 w-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:w-1/3">
+        {/* 大屏幕下 hover 显示封面图 */}
+        <div className="absolute inset-y-0 right-0 w-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:w-1/3 hidden sm:block">
           <div className="relative h-full w-full">
             <div className="absolute inset-y-0 left-0 z-10 w-full bg-gradient-to-r from-white to-transparent dark:from-slate-900 dark:to-transparent" />
             <Image
@@ -106,14 +86,27 @@ function PostPreview({
             <span>{formatLang(lang)}</span>
           </div>
         </div>
-        <div className={clsx("mb-2")}>
+
+        {/* 小屏幕下始终显示封面图 */}
+        <div className="relative mb-3 block aspect-[21/9] w-full sm:hidden">
+          <Image
+            src={cover || "/assets/images/coverImage.png"}
+            alt={title}
+            className="object-cover rounded-lg"
+            fill
+            priority
+          />
+        </div>
+
+        <div className={clsx("mb-2 sm:block hidden")}>
           <h2
             className={clsx(
               "block leading-relaxed",
               "text-xl font-extrabold text-slate-700",
               "md:text-2xl",
               "dark:text-slate-300",
-              "transition-all duration-500 ease-in-out w-full group-hover:w-2/3 group-hover:pr-4",
+              "transition-all duration-500 ease-in-out w-full",
+              "sm:group-hover:w-2/3 sm:group-hover:pr-4",
               "line-clamp-1"
             )}
             style={{
@@ -130,8 +123,9 @@ function PostPreview({
             className={clsx(
               "block leading-relaxed text-slate-600",
               "dark:text-slate-400",
-              "group-hover:text-slate-700 dark:group-hover:text-slate-300",
-              "transition-all duration-500 ease-in-out w-full group-hover:w-2/3 group-hover:pr-4",
+              "sm:group-hover:text-slate-700 dark:sm:group-hover:text-slate-300",
+              "transition-all duration-500 ease-in-out w-full",
+              "sm:group-hover:w-2/3 sm:group-hover:pr-4",
               "line-clamp-2"
             )}
             style={{
@@ -168,17 +162,19 @@ function PostPreview({
             </span>
           </span>
         </div>
-        <div
-          className={clsx(
-            "text-accent-600 items-center gap-1 text-sm font-semibold",
-            "dark:text-accent-400",
-            "transition-all duration-500 ease-in-out group-hover:w-2/3",
-            pinned ? ["flex", "sm:hidden"] : "flex"
-          )}
-        >
-          阅读更多{" "}
-          <ChevronRightIcon className="group-hover:animate-bounce-x mt-1 h-3 w-3 transition" />
-        </div>
+        {!pinned && (
+          <div
+            className={clsx(
+              "text-accent-600 items-center gap-1 text-sm font-semibold",
+              "dark:text-accent-400",
+              "transition-all duration-500 ease-in-out group-hover:w-2/3",
+              "sm:flex hidden"
+            )}
+          >
+            阅读更多
+            <ChevronRightIcon className="group-hover:animate-bounce-x mt-1 h-3 w-3 transition" />
+          </div>
+        )}
       </Link>
     </article>
   );

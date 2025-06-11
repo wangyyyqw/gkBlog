@@ -53,7 +53,7 @@ function Sidebar({ show }: SidebarProps) {
   const imageUrl = "https://cdn.qladgk.com/images/gongzhonghao.png";
   const [recentArticles, setRecentArticles] = useState<RecentArticle[]>([]);
   const [tagsWithCount, setTagsWithCount] = useState<Record<string, number>>(
-    {},
+    {}
   );
   const [visibleTags, setVisibleTags] = useState<string[]>([]);
   const [showMore, setShowMore] = useState(false);
@@ -120,7 +120,7 @@ function Sidebar({ show }: SidebarProps) {
 
     // 对 tags 按数量排序
     const sortedTags = Object.entries(data).sort(
-      ([, countA], [, countB]) => Number(countB) - Number(countA),
+      ([, countA], [, countB]) => Number(countB) - Number(countA)
     );
 
     setTagsWithCount(data); // 保存完整标签数据
@@ -144,7 +144,7 @@ function Sidebar({ show }: SidebarProps) {
   const handleShowMore = () => {
     setShowMore(true);
     const sortedTags = Object.entries(tagsWithCount).sort(
-      ([, countA], [, countB]) => countB - countA,
+      ([, countA], [, countB]) => countB - countA
     );
     setVisibleTags(sortedTags.map(([tag]) => tag));
   };
@@ -154,31 +154,51 @@ function Sidebar({ show }: SidebarProps) {
   return (
     <aside
       aria-label="Sidebar with multiple sections"
-      className={clsx("space-y-6")}
+      className={clsx("md:space-y-6", "space-y-2")}
     >
       {/* Render sections conditionally based on `show` prop */}
       {show.includes("categories") && (
-        <Card title="文章分类">
-          <div className="flex flex-wrap gap-4">
-            {visibleCategories.map((category) => (
-              <a
-                key={category}
-                href={`/blog/category/${category}`}
-                className={clsx(
-                  "rounded-full px-3 py-1",
-                  "bg-blue-500 bg-opacity-80 text-white", // 使背景颜色更透明
-                  "transform transition-transform hover:scale-105",
-                  "hover:bg-blue-600 hover:bg-opacity-90", // 悬停时背景更加不透明
-                  "dark:bg-blue-700 dark:bg-opacity-80 dark:hover:bg-blue-800 dark:hover:bg-opacity-90", // 暗黑模式下透明度
-                  "duration-300",
-                )}
-                onMouseEnter={() => play()} // 悬浮时播放音效
-              >
-                {category}
-              </a>
-            ))}
+        <>
+          {/* 大屏幕：分类卡片 */}
+          <Card title="文章分类" className="hidden md:block">
+            <div className="flex flex-wrap gap-4">
+              {visibleCategories.map((category) => (
+                <a
+                  key={category}
+                  href={`/blog/category/${category}`}
+                  className={clsx(
+                    "rounded-full px-3 py-1",
+                    "bg-blue-500 bg-opacity-80 text-white",
+                    "transform transition-transform hover:scale-105",
+                    "hover:bg-blue-600 hover:bg-opacity-90",
+                    "dark:bg-blue-700 dark:bg-opacity-80 dark:hover:bg-blue-800 dark:hover:bg-opacity-90",
+                    "duration-300"
+                  )}
+                  onMouseEnter={() => play()}
+                >
+                  {category}
+                </a>
+              ))}
+            </div>
+          </Card>
+          {/* 小屏幕：横向滚动分类条 */}
+          <div className="md:hidden scrollbar-hide w-full overflow-x-auto px-1">
+            <div className="flex gap-3">
+              {visibleCategories.map((category) => (
+                <a
+                  key={category}
+                  href={`/blog/category/${category}`}
+                  className={clsx(
+                    "whitespace-nowrap rounded-full border border-blue-200 bg-blue-100 px-4 py-1 text-lg font-medium text-blue-700 transition hover:bg-blue-200 hover:text-blue-900",
+                    "dark:border-blue-700 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800 dark:hover:text-blue-100"
+                  )}
+                >
+                  {category}
+                </a>
+              ))}
+            </div>
           </div>
-        </Card>
+        </>
       )}
 
       {show.includes("tags") && (
@@ -208,7 +228,7 @@ function Sidebar({ show }: SidebarProps) {
                     className={clsx(
                       "z-10 w-full max-w-[90%] rounded-lg bg-slate-200 p-1.5 text-slate-800",
                       "hover:bg-slate-300 sm:ml-0",
-                      "dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700",
+                      "dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700"
                     )}
                   >
                     查看全部
@@ -238,7 +258,7 @@ function Sidebar({ show }: SidebarProps) {
                       "hover:underline",
                       "whitespace-normal", // 允许换行
                       "line-clamp-2", // 限制最多显示两行
-                      "text-sm", // 调整字体大小
+                      "text-sm" // 调整字体大小
                     )}
                     style={{
                       display: "-webkit-box",
