@@ -15,7 +15,7 @@ function Error500Contents() {
       >
         <h1 className={clsx("py-12 text-center")}>
           <div className={clsx("mb-3 text-8xl font-extrabold")}>500</div>
-          <div className={clsx("text-2xl")}> 服务器错误 </div>
+          <div className={clsx("text-2xl")}> 错了！错了！！全错了！！！ </div>
         </h1>
       </div>
     </div>

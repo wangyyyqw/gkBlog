@@ -16,7 +16,7 @@ function Error404Contents() {
       >
         <h1 className={clsx("py-12 text-center")}>
           <div className={clsx("mb-3 text-8xl font-extrabold")}>404</div>
-          <div className={clsx("text-2xl")}> 页面未找到 </div>
+          <div className={clsx("text-2xl")}> 该页面暂未装修 </div>
         </h1>
         <Link
           href="/"

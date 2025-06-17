@@ -8,7 +8,7 @@ function Error500() {
   return (
     <>
       <Head>
-        <title>服务器错误</title>
+        <title>错了，错了，全错了！！！</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="robots" content="noindex" />
       </Head>

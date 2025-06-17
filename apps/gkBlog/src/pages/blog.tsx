@@ -15,7 +15,7 @@ function Blog({ posts }: BlogProps) {
     <Page
       frontMatter={{
         title: "个人博客",
-        description: "学习、笔记、生活",
+        description: "读书、笔记、生活",
       }}
     >
       <BlogContents posts={posts} />

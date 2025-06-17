@@ -8,7 +8,7 @@ function Error404() {
   return (
     <>
       <Head>
-        <title>页面未找到</title>
+        <title>该页面还没装修好，去别处转转吧</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="robots" content="noindex" />
       </Head>
