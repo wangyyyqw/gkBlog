@@ -1,0 +1,286 @@
+---
+title: C++ 程序的内存布局 —— 代码区、全局/静态区、栈区和堆区
+description: 在 C++ 程序执行时，是如何管理内存的？本文将介绍 C++ 程序的内存布局，包括代码区、全局/静态区、栈区和堆区，并通过示例代码帮助理解这些概念。
+date: "2025-08-25"
+lang: zh
+tags:
+  - C++
+  - 编程
+category: 笔记
+cover: https://cdn.qladgk.com/images/20250829231643669.png
+---
+
+import Image from "@/components/mdx/Image";
+
+<Image
+  src="https://cdn.qladgk.com/images/20250829231643669.png"
+  alt="cover"
+  width={999}
+  height={527}
+  isArticleImage={true}
+/>
+
+所有程序都存储在内存中。当一个程序开始运行时，操作系统会为其创建一个进程。进程是系统进行资源分配和调度的基本单位，它拥有独立的虚拟地址空间。
+
+拿一个 4GB 内存的电脑来说，在 32 位进程的虚拟地址空间中，可寻址范围从 0x00000000 到 0xFFFFFFFF。通常低地址存放代码段与数据段，高地址附近为栈，堆则用于满足程序运行时动态分配内存的需求。
+
+每个区域在运行时都有自己的用途，了解内存布局有助于有效管理内存并避免泄漏和堆栈溢出等问题。
+
+## 内存四区
+
+C++ 程序的内存布局主要分为四个区域：代码区、全局/静态区、栈区和堆区。
+
+<Image
+  src="https://cdn.qladgk.com/images/20250828211809469.png"
+  alt="内存四区"
+  width={666}
+  height={527}
+  isArticleImage={true}
+/>
+
+### 1. 代码区（Code Segment）
+
+代码区存储程序编译的二进制代码，由操作系统进行管理，通常为只读以提高安全性，防止程序意外修改自身代码。
+
+比如你学习 C++ 时写的所有代码，包括英文字母、数字、符号、中文注释等等，这些代码在编译后会被转换为二进制机器码（010101），存储在代码区中。
+
+程序的可执行机器指令越多，代码区占用的空间就越大；而注释、模板元编程产生的未实例化代码并不会进入最终的可执行文件，因此不会增加代码区体积。
+
+### 2. 全局/静态区（Data Segment）
+
+全局/静态区存储程序员定义的全局变量和静态变量。此段位于代码区的正上方，分为两部分：
+
+A. 已初始化数据段（.data）
+
+存储在声明时分配值的全局变量和静态变量。
+
+```cpp
+// Global variable
+int a = 50;
+
+// Static variable
+static int b = 100;
+```
+
+a 和 b 都 存储在初始化的数据段中
+
+B. 未初始化数据段（.bss）
+
+保存尚未显式初始化的全局变量和静态变量。系统在运行时自动将这些值设置为零。
+
+```cpp
+// Global variable
+int c;
+​
+// Static variable
+static int d;
+```
+
+c 和 d 放置在 BSS 段中。
+
+### 3. 堆区（Heap Segment）
+
+堆是用于运行时动态分配的内存区域。堆中的内存使用 new/delete 等运算符或 malloc()/free() 等函数手动管理。
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    // Dynamically allocate array on heap
+    int* arr = new int[10];
+    delete[] arr;
+    return 0;
+}
+```
+
+使用 new[] 分配的数组，必须对应使用 delete[] 释放。arr 指向的内存驻留在堆中。
+
+### 4. 栈区（Stack Segment）
+
+栈区用于：局部变量、函数参数、返回地址
+
+```cpp
+void func()
+{
+    int a = 10; // a 是一个在函数中声明的变量
+    cout << a << endl;
+}
+```
+
+每个函数调用都会创建一个栈帧（Stack Frame），该帧被推送到栈。当函数完成时，他会自动释放
+
+## 存储持续性
+
+了解了内存四区后，你可能对于不同类型的数据有了更深入地理解，C++ 使用三种存储持续性（不讨论并行编程）
+
+1. 自动存储持续性（Automatic Storage Duration）
+2. 静态存储持续性（Static Storage Duration）
+3. 动态存储持续性（Dynamic Storage Duration）
+
+这些方案的区别顾名思义就在于数据存储的持续时间，再来回顾下内存四区，从下到上依次为代码区、全局/静态区、堆区和栈区
+
+其中对应的存储持续性为
+
+| 内存区域    | 存储持续性     |
+| ----------- | -------------- |
+| 栈区        | 自动存储持续性 |
+| 全局/静态区 | 静态存储持续性 |
+| 堆区        | 动态存储持续性 |
+
+### 1. 自动存储持续性（栈区）
+
+栈区存放的是在函数中声明的变量（包括函数参数）。这些变量在函数调用时创建，并在函数返回时销毁，存储持续性为自动的。
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void func()
+{
+    int a = 10; // a 是一个自动变量
+    cout << a << endl;
+}
+
+int main()
+{
+    func(); // 函数调用时，a 被创建，函数返回时，a 被销毁
+    cout << a << endl; // 错误：'a' 未在此作用域内声明 (其生命周期也在 func 函数结束时终结)
+    return 0;
+}
+```
+
+### 2. 静态存储持续性（全局/静态区）
+
+在全局/静态区中存放的是在函数定义外定义的变量和使用 static 关键字声明的变量。他们在程序运行期间一直存在，存储持续性为静态的。
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int a = 10;
+static int b = 20;
+
+void func()
+{
+    cout << a << endl; // 正确，a 在这里可访问
+    cout << b << endl; // 正确，b 在这里可访问
+}
+
+int main()
+{
+    func();
+    cout << a << endl; // 正确，a 在这里可访问
+    cout << b << endl; // 正确，b 在这里可访问
+    return 0;
+}
+```
+
+代码区（Code Segment）通常被视为具有静态存储持续性，因为它的内容在程序的整个生命周期中都存在且不变。
+
+### 3. 动态存储持续性（堆区）
+
+堆区存放的是使用 new 运算符创建的变量，分配的内存将会一直存在，直到使用 delete 运算符删除该变量将其释放或者程序结束为止。这种存储持续性为动态的。
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int * func()
+{
+    int* p = new int(10); // p 指向一个动态分配的整数
+    return p;
+}
+
+int main()
+{
+    int* p = func();
+    cout << *p << endl; // 输出 10
+    delete p;
+    cout << *p << endl; // 出错
+
+    return 0;
+}
+```
+
+### 程序验证四区分布
+
+```cpp
+#include <iostream>
+#include <iomanip>
+#include <cstdint>
+
+/* ================= 全局/静态区 ================= */
+int                 global_a = 1;
+const int           const_global_a = 2;
+static int          static_global_a = 3;
+static const int    static_const_global_a = 4;
+
+/* ================= 代码区示例函数 ================= */
+void code_sample() {}
+
+int main()
+{
+    /* ================= 栈区 ================= */
+    int              local_a = 10;
+    const int        const_local_a = 11;
+
+    /* ================= 全局/静态区 ================= */
+    static int       static_local_a = 12;
+    static const int static_const_local_a = 13;
+
+    /* ================= 堆区 ================= */
+    int* heap_p = new int(20);
+
+    /* ================= 统一打印 ================= */
+    auto print = [](const char* region, const char* name, const void* addr) {
+        std::cout << std::left << std::setw(10) << region
+            << std::setw(30) << name
+            << reinterpret_cast<uintptr_t>(addr) << '\n';
+        };
+
+    std::cout << "区域      变量名                        十进制地址\n";
+    std::cout << "---------------------------------------------\n";
+
+    /* 栈区 */
+    print("栈区", "local_a", &local_a);
+    print("栈区", "const_local_a", &const_local_a);
+
+    /* 堆区 */
+    print("堆区", "heap_p", heap_p);
+
+    /* 全局/静态区 */
+    print("数据段", "global_a", &global_a);
+    print("数据段", "const_global_a", &const_global_a);
+    print("数据段", "static_global_a", &static_global_a);
+    print("数据段", "static_const_global_a", &static_const_global_a);
+    print("数据段", "static_local_a", &static_local_a);
+    print("数据段", "static_const_local_a", &static_const_local_a);
+
+    /* 代码区 */
+    print("代码段", "code_sample 函数入口",
+        reinterpret_cast<void*>(&code_sample));
+
+    delete heap_p;
+    return 0;
+}
+```
+
+<Image
+  src="https://cdn.qladgk.com/images/20250829224612504.png"
+  alt="运行结果"
+  width={666}
+  height={527}
+  isArticleImage={true}
+/>
+
+可以看出，同一区域的地址挨着很近，但是前文说过，代码区是低地址，栈区是高地址，但是这里的地址按照 10 进制来看，代码区的地址比栈区的还大，这是什么原因呢？
+
+这是因为现代操作系统使用了虚拟内存技术，程序看到的地址是虚拟地址，并不是真实的物理地址。操作系统会将虚拟地址映射到物理地址上，这个映射关系是动态变化的。
+
+所以我们看到的地址并不一定反映内存的实际布局。
+
+## 结语
+
+了解了不同的存储类别后，相信你对 C++ 程序的内存布局有了更深入的理解。合理使用不同的存储类别，可以帮助你编写出更高效、更安全的代码。
