@@ -249,7 +249,7 @@ lang: zh
 tags:
   - nextjs
   - 环境配置
-category: 技术
+category: 技术笔记
 cover: images/20250422153424876.png
 ---
 ```
