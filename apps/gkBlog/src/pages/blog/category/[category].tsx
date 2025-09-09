@@ -142,6 +142,7 @@ export default function CategoryPage({ category, posts }: CategoryPageProps) {
                 <div className={clsx("flex-1")}>
                   <PostPreview
                     slug={slug}
+                    cover={frontMatter.cover}
                     category={frontMatter.category}
                     title={frontMatter.title}
                     description={frontMatter.description}

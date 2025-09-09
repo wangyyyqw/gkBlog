@@ -143,6 +143,7 @@ export default function TagPage({ tag, posts }: TagPageProps) {
                 <div className={clsx("flex-1")}>
                   <PostPreview
                     slug={slug}
+                    cover={frontMatter.cover}
                     category={frontMatter.category}
                     title={frontMatter.title}
                     description={frontMatter.description}

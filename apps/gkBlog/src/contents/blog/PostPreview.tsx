@@ -14,7 +14,7 @@ type PostPreviewProps = TPostFrontMatter & {
   views: number;
   shares: number;
   pinned?: boolean;
-  cover?: string;
+  cover: string;
 };
 
 function PostPreview({
@@ -26,7 +26,7 @@ function PostPreview({
   views,
   shares,
   pinned = false,
-  cover = "",
+  cover,
 }: PostPreviewProps) {
   return (
     <article lang={lang}>
@@ -50,7 +50,7 @@ function PostPreview({
           <div className="relative h-full w-full">
             <div className="absolute inset-y-0 left-0 z-10 w-full bg-gradient-to-r from-white to-transparent dark:from-slate-900 dark:to-transparent" />
             <Image
-              src={cover || "/assets/images/coverImage.png"}
+              src={cover}
               alt={title}
               className="object-cover"
               fill
@@ -89,7 +89,7 @@ function PostPreview({
         {/* 小屏幕下始终显示封面图 */}
         <div className="relative mb-3 block aspect-[21/9] w-full sm:hidden">
           <Image
-            src={cover || "/assets/images/coverImage.png"}
+            src={cover}
             alt={title}
             className="object-cover rounded-lg"
             fill

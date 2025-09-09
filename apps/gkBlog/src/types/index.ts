@@ -31,7 +31,7 @@ export type TPostFrontMatter = TBaseFrontMatter & {
   tags: Array<string>;
   category: string;
   wordCount?: number;
-  cover?: string;
+  cover: string;
 };
 
 export type TPostOgImage = Partial<
