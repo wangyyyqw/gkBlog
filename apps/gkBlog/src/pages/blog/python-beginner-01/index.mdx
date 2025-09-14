@@ -1,0 +1,349 @@
+---
+title: Python 初级 01 -- 初识编程、理解计算机语言及程序运行方式
+description: 本文是 Python 系列的第一篇，将带你打破对编程的神秘感，理解编程的本质，并亲手运行你的第一个 Python 程序。
+date: "2025-09-14"
+lang: zh
+tags:
+  - Python
+  - 编程
+category: 技术笔记
+cover: https://cdn.qladgk.com/images/20250914175828656.png
+---
+
+import Image from "@/components/mdx/Image";
+
+<Image
+  src="https://cdn.qladgk.com/images/20250914175828656.png"
+  alt="cover"
+  width={999}
+  height={527}
+  isArticleImage={true}
+/>
+
+## 一、初识 Python
+
+Python 是一种计算机的程序设计语言，常常被用作新手入门的第一个编程语言
+
+### 1、什么是编程语言
+
+> 编程（动词），即编写程序，其实就是用代码告诉计算机去完成一系列任务。
+>
+> 语言（名词），就是进行沟通交流的表达方式
+
+那么顾名思义，编程语言，就是一种程序代码的语言，有固定的语法规则，用于和计算机进行交流，
+
+打个比方，这就像你在教一个新手如何做一道菜。你会详细地用中文告诉他每一步该怎么做：先洗菜，再切菜，然后热锅，最后烹饪。
+
+同样地，编程也是把复杂的任务分解成简单的步骤，然后通过编程语言所对应的语法和规则，告诉计算机如何执行这些步骤。
+
+```python
+Procedure MultiplyUsingLoop
+Input: a, b
+result = 0
+abs_b = abs(b)
+for i in range(abs_b):
+    result += a
+if b < 0:
+    result = -result
+return result
+```
+
+既然编程是把人类的思维转换成计算机能够理解的语言，那么为什么还会有 Python、C、C++、Java 等多种多样的语言呢？
+
+那是因为计算机能够识别和执行的命令被称为指令，指令的格式是二进制码（只有 0 和 1 组成），但是程序员只用 0 和 1 来编程难度很大，这就让人类无法与计算机顺畅沟通。
+
+因此，为了方便程序员编写程序，编程语言承担了二者的中间人，我们写的代码最终都会变成 CPU 能执行的机器指令（0和1），而翻译工具（编译器/解释器）就是完成这个转换的。
+
+> 这个工具可以理解为翻译工具，即解释器、编译器等
+
+### 2、Python 和 Pycharm
+
+Python 只是一种计算机程序设计语言，它具有简单易学、可读性、可扩展的特点，使得 Python 成为最流行的编程语言
+
+以下是不同编程语言来计算 1 + 2 的结果：
+
+```python
+# Python
+
+print(1 + 2)
+```
+
+```java
+/* Java */
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(1 + 2);
+    }
+}
+```
+
+```cpp
+/* C++ */
+
+#include <iostream>
+using namespace std;
+int main() {
+    cout << 1 + 2 << endl;
+    return 0;
+}
+```
+
+可以看出来同样的功能，python 代码量是最少的。但是计算机还是不能直接运行这段代码，我们知道了 Python 语言所对应的语法和规则，但是计算机没有学习过这门语言啊，所以需要下载 Python 解释器到计算机上，然后才能运行这段代码。就相当于人类和计算机要学习同一门外语才能进行交流
+
+而 Pycharm 是一个用于 Python 的集成开发环境（IDE），它提供了丰富的功能，如代码自动完成、错误检查、代码格式化、调试等等，使得 Python 的开发更加高效。
+
+当然你也可以不用 Pycharm，用记事本也是可以的。就好比，拍照不管是用原相机还是用美颜相机，都会调用摄像头来进行拍照一个道理
+
+大多数操作系统（如 Windows）默认不自带 Python，需要手动安装；而部分 Linux 和 macOS 系统可能预装了 Python，但版本不一定是最新的，建议根据开发需要安装官方版本。
+
+<Image
+  src="https://cdn.qladgk.com/images/20250914122843635.png"
+  alt="Python 下载"
+  width={999}
+  height={527}
+  isArticleImage={true}
+/>
+
+> 总结一下：
+>
+> 1、程序员通过 Python 对应的语法和规则来编写程序（.py 文件）。
+>
+> 2、但是计算机并不认识你写的程序，需要下载 Python 这个解释器软件才能让 .py 文件成功运行（被翻译成指令）。
+>
+> 3、最后为了高效地编写程序，一般会用到 Pycharm 这个工具
+
+## 二、如何编写和运行 Python 程序
+
+这里就不涉及语法和规则了，体验下编程的感觉就行，在你安装好了 python 和 pycharm 的基础上执行以下步骤
+
+### 1、记事本 + 命令行运行
+
+1、新建一个 .py 文件，比如 test.py
+
+2、右键打开方式选择记事本，在 test.py 文件中粘贴如下代码：
+
+```python
+import math
+import time
+import sys
+
+def main():
+    A = 0.0
+    B = 0.0
+    # 清屏的ANSI转义码
+    print("\x1b[2J", end="")
+
+    while True:
+        # 初始化数组
+        z = [0.0] * 1760
+        b = [' '] * 1760
+
+        j = 0.0
+        while j < 6.28:
+            i = 0.0
+            while i < 6.28:
+                c = math.sin(i)
+                d = math.cos(j)
+                e = math.sin(A)
+                f = math.sin(j)
+                g = math.cos(A)
+                h = d + 2
+                D = 1.0 / (c * h * e + f * g + 5.0)
+                l = math.cos(i)
+                m = math.cos(B)
+                n = math.sin(B)
+                t = c * h * g - f * e
+
+                x = int(40 + 30 * D * (l * h * m - t * n))
+                y = int(12 + 15 * D * (l * h * n + t * m))
+                o = x + 80 * y
+                N = 8 * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n)
+
+                if 22 > y > 0 and 0 < x < 80 and D > z[o]:
+                    z[o] = D
+                    # 确保N在有效范围内
+                    idx = int(N) if N > 0 else 0
+                    if idx >= len(".,-~:;=!*#$@"):
+                        idx = len(".,-~:;=!*#$@") - 1
+                    b[o] = ".,-~:;=!*#$@"[idx]
+
+                i += 0.02
+            j += 0.07
+
+        # 移动光标到屏幕顶部
+        print("\x1b[H", end="")
+
+        # 输出字符
+        for k in range(1761):
+            if k % 80 == 0:
+                print()
+            else:
+                print(b[k], end="")
+            A += 0.00004
+            B += 0.00002
+
+        # 控制帧率，避免输出过快
+        time.sleep(0.05)
+        # 刷新输出缓冲区
+        sys.stdout.flush()
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        # 捕获Ctrl+C，恢复终端设置
+        print("\x1b[0m")
+        sys.exit(0)
+```
+
+3、先在命令行中进入 test.py 文件所在的目录，然后在命令行中运行 test.py 文件：
+
+```shell
+# 首先切换到文件所在的目录，例如桌面
+cd C:\Users\你的用户名\Desktop
+
+# 然后运行程序
+python test.py
+```
+
+除了命令行，你还可以右键文件直接选择 python 运行
+
+4、运行结果
+
+<Image
+  src="https://cdn.qladgk.com/images/20250914134201370.gif"
+  alt="运行结果"
+  width={666}
+  height={527}
+  isArticleImage={true}
+/>
+
+### 2、Pycharm 运行
+
+1、新建项目
+
+<Image
+  src="https://cdn.qladgk.com/images/20250914133057853.png"
+  alt="新建 python 项目"
+  width={666}
+  height={527}
+  isArticleImage={true}
+/>
+
+2、添加 .py 文件
+
+<Image
+  src="https://cdn.qladgk.com/images/20250914133343632.png"
+  alt="添加 .py 文件"
+  width={666}
+  height={527}
+  isArticleImage={true}
+/>
+
+3、粘贴代码并运行
+
+<Image
+  src="https://cdn.qladgk.com/images/20250914133541278.png"
+  alt="粘贴代码并运行"
+  width={666}
+  height={527}
+  isArticleImage={true}
+/>
+
+## 三、一个程序从诞生到执行的过程
+
+整个过程可以大体分为三步：
+
+1. 源代码转换为二进制指令
+2. 操作系统加载指令到内存
+3. CPU 逐行执行指令
+
+### 1、从源代码到二进制指令
+
+不管什么编程语言，对于计算机和人类来讲都是外语，计算机直接读是读不懂的，需要经历代码到二进制指令的转换过程。这个转换过程所用到的工具主要分为两种，编译和解释
+
+编译：将源代码编译成二进制指令，然后保存成二进制文件，比如 C++ 的 .exe 文件
+
+解释：将源代码解释成二进制指令，然后运行。比如 Python 的 .py 文件
+
+以下是 C 语言对应的机器码的一个例子：
+
+<Image
+  src="https://cdn.qladgk.com/images/20250914211403758.png"
+  alt="C 语言对应的机器码"
+  width={777}
+  height={527}
+  isArticleImage={true}
+/>
+
+其中的第一行 `d10043ff` 就是一句机器码指令，只不过为了缩短长度，将 2 进制用了 16 进制表示。
+
+<Image
+  src="https://cdn.qladgk.com/images/20250914212248984.png"
+  alt="解析第一条指令"
+  width={777}
+  height={527}
+  isArticleImage={true}
+/>
+
+### 2、程序载入内存
+
+电脑为什么需要内存条？
+
+为了运行速度更快，电脑中一共有两种存储硬件，分别是硬盘和内存条。内存条拥有更快的速度，所以被用来运行程序。这也是为什么运行的应用越多，内存占用就越高的原因
+
+那既然内存条更快，为什么还需要硬盘呢？
+
+那是因为硬盘存储的数据是永久的，并且便宜，而内存条存储的数据是临时的。你后台关闭一个应用，内存中的占用就会减少，一些数据就会丢失。
+
+<Image
+  src="https://cdn.qladgk.com/images/20250914213519398.png"
+  alt="运行速度对比"
+  width={666}
+  height={527}
+  isArticleImage={true}
+/>
+
+CPU 运行速度最快，为什么不直接把指令载入到 CPU 中运行呢？
+
+CPU 贵啊，为了合理调用资源，内存起到了缓冲的作用
+
+硬盘是“仓库”，程序不用时就放在里面；内存是“工作台”，程序要运行时才搬过来；CPU 是“工人”，只在工作台上干活。
+
+更详细的内存介绍可以看看这篇文章：https://www.qladgk.com/blog/memory-layout-cpp
+
+### 3、CPU 执行指令
+
+CPU 如何执行指令涉及到计算机体系结构的核心知识（如寄存器、ALU、控制单元等），内容较为复杂，我们将在后续的文章中专门探讨。
+
+## 四、一些其他问题
+
+### 1、中文为什么不能编程
+
+编程就是两个步骤：1、编写代码 2、翻译成二进制。那为什么不能直接用中文、英语、法语等表示代码然后翻译成二进制呢？专门去学习一种编程语言的语法规则不是多次一举吗？
+
+那是因为像中文、英文等自然语言太复杂了。比如你想让程序输出“你好帅”，有多种的表示方法：
+
+| 类型   | 表示方法             |
+| ------ | -------------------- |
+| 傲娇版 | 夸我帅               |
+| 礼貌版 | 请在屏幕上输出你好帅 |
+
+自然语言的复杂程度不能让翻译官精准地翻译，相反，代码地表示方法往往比自然语言更简单、更清晰，翻译起来也更容易
+
+编程语言的关键字（如 if, for）是设计好的、无歧义的符号系统，而自然语言的复杂性（一词多义、语法灵活）不利于这种精确的逻辑表达。
+
+其实也有中文的编程语言，叫做易语言（写出来跟文言文一样）
+
+### 2、单靠 0 和 1 真能存储信息吗
+
+虽然只是两个简单地数字，但是通过不同地组合，0 和 1 就能存储任意信息
+
+你们可以看下面的用二进制转中文看看下面的 0 和 1 表示什么信息
+
+```markdown
+111001101000100010010001111001011001011010011100111001101010110010100010111001001011110110100000
+```
+
+二进制转中文在线工具：https://onetools.online/zh/binary-translator
