@@ -1,0 +1,479 @@
+---
+title: 蓝桥杯备赛第一期 —— 枚举与模拟
+description: 蓝桥杯备赛系列第一期，系统梳理枚举与模拟的核心思想、适用场景及实战技巧，包含C/C++、Java、Python三种语言代码示例，面向蓝桥杯备赛及算法入门学习者
+date: "2025-11-15"
+lang: zh
+tags:
+  - 蓝桥杯
+  - 枚举算法
+  - 模拟算法
+  - C/C++
+category: 技术笔记
+cover: https://cdn.qladgk.com/images/20251123175040228.png
+---
+
+import Image from "@/components/mdx/Image";
+
+<Image
+  src="https://cdn.qladgk.com/images/20251123175040228.png"
+  alt="cover"
+  width={999}
+  height={527}
+  isArticleImage={true}
+/>
+
+在算法竞赛中，枚举与模拟是最基础也最常用的解题思想。无论是入门级的题目还是复杂的综合题，都能看到它们的身影。蓝桥杯作为国内颇具影响力的编程赛事，对枚举与模拟的考察更是贯穿各个难度层级。今天我们就来系统梳理这两种思想的核心要点，并通过实例掌握其在实战中的应用。
+
+## 一、枚举：暴力美学的艺术
+
+枚举（Enumeration），又称穷举，核心思想是**逐个列举所有可能的情况**，并判断是否符合条件。虽然听起来"暴力"，但在数据范围允许的情况下，枚举往往是最简单直接的解题方案。
+
+### 枚举的适用场景：
+
+- 问题的解空间有限且规模较小
+- 无法找到更高效的数学规律或算法
+- 需要验证某个结论的正确性
+
+### 经典例题：水仙花数
+
+**问题描述**：打印出所有的"水仙花数"。水仙花数是指一个三位数，其各位数字立方和等于该数本身（例如：153 = 1³ + 5³ + 3³）。
+
+C++实现：
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+
+    for (int num = 100; num < 1000; num++) {
+        int a = num / 100;         // 百位
+        int b = num / 10 % 10;     // 十位
+        int c = num % 10;          // 个位
+        if (a*a*a + b*b*b + c*c*c == num) {
+            cout << num << endl;
+        }
+    }
+    return 0;
+}
+```
+
+Java实现：
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        for (int num = 100; num < 1000; num++) {
+            int a = num / 100;         // 百位
+            int b = num / 10 % 10;     // 十位
+            int c = num % 10;          // 个位
+            if (a*a*a + b*b*b + c*c*c == num) {
+                System.out.println(num);
+            }
+        }
+    }
+}
+```
+
+Python实现：
+
+```python
+for num in range(100, 1000):
+    a = num // 100          # 百位
+    b = num // 10 % 10      # 十位
+    c = num % 10            # 个位
+    if a**3 + b**3 + c**3 == num:
+        print(num)
+```
+
+## 二、模拟：让计算机复现过程
+
+模拟（Simulation）是指**按照题目描述的逻辑，一步步复现事件的发生过程**。这类题目通常不涉及复杂算法，但需要精准理解题意，将文字描述转化为代码逻辑。
+
+### 模拟的关键要点：
+
+- 理清题目中的流程和规则
+- 设计合适的数据结构存储中间状态
+- 处理边界条件和特殊情况
+
+### 经典例题：模拟日期
+
+**问题描述**：给定一个日期（年、月、日），模拟推进 n 天后的新日期。
+
+C++实现：
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isLeapYear(int year) {
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
+int daysInMonth(int month, int year) {
+    int days[] = {-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (month == 2 && isLeapYear(year)) return 29;
+    return days[month];
+}
+
+void nextDate(int &year, int &month, int &day, int n) {
+    for (int i = 0; i < n; i++) {
+        day++;
+        if (day > daysInMonth(month, year)) {
+            day = 1;
+            month++;
+            if (month > 12) {
+                month = 1;
+                year++;
+            }
+        }
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+
+    int year, month, day, n;
+    cin >> year >> month >> day >> n;
+    nextDate(year, month, day, n);
+    cout << year << " " << month << " " << day << endl;
+
+    return 0;
+}
+```
+
+Java实现：
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    static boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
+
+    static int daysInMonth(int month, int year) {
+        int[] days = {-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        if (month == 2 && isLeapYear(year)) return 29;
+        return days[month];
+    }
+
+    static void nextDate(int[] date, int n) {
+        for (int i = 0; i < n; i++) {
+            date[2]++;
+            if (date[2] > daysInMonth(date[1], date[0])) {
+                date[2] = 1;
+                date[1]++;
+                if (date[1] > 12) {
+                    date[1] = 1;
+                    date[0]++;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int year = sc.nextInt();
+        int month = sc.nextInt();
+        int day = sc.nextInt();
+        int n = sc.nextInt();
+        nextDate(date, n);
+        System.out.println(year + " " + month + " " + day);
+    }
+}
+```
+
+Python实现：
+
+```python
+def is_leap_year(year):
+    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+
+def days_in_month(month, year):
+    days = [-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    if month == 2 and is_leap_year(year):
+        return 29
+    return days[month]
+
+def next_date(year, month, day, n):
+    for _ in range(n):
+        day += 1
+        if day > days_in_month(month, year):
+            day = 1
+            month += 1
+            if month > 12:
+                month = 1
+                year += 1
+    return year, month, day
+
+year, month, day = map(int, input().split())
+n = int(input())
+year, month, day = next_date(year, month, day, n)
+print(year, month, day)
+```
+
+## 三、实战技巧与注意事项
+
+1. **枚举的优化**：
+
+   - 减少枚举维度（例如用数学关系排除无效解）
+   - 缩小枚举范围（通过题目约束条件剪枝）
+   - 避免重复计算（缓存中间结果）
+
+2. **模拟的细节处理**：
+
+   - 仔细阅读题目，确保理解所有规则
+   - 先用纸笔模拟小案例，验证逻辑正确性
+   - 注意循环边界和索引计算（尤其是涉及取模的场景）
+
+3. **蓝桥杯常见坑点**：
+   - 数据范围：枚举前务必确认是否会超时
+   - 输入输出格式：严格按照题目要求处理（例如多组测试数据）
+   - 整数溢出：C++/Java中需注意数据类型选择（如用long long）
+
+## 四、总结
+
+枚举与模拟是算法入门的基石，也是蓝桥杯初赛的重点考察内容。掌握这两种思想，不仅能解决直接考察它们的题目，更为学习复杂算法打下基础。
+
+建议通过以下方式巩固练习：
+
+1. 完成蓝桥杯真题中标记为"枚举"或"模拟"的题目
+2. 尝试用不同语言实现同一道题，熟悉语法差异
+3. 对枚举题思考是否有优化空间，提升代码效率
+
+## 五、蓝桥杯真题
+
+### 1、卡片（2021 年省赛）
+
+> 小蓝有很多数字卡片，每张卡片上都是数字 0 到 9。
+>
+> 小蓝准备用这些卡片来拼一些数，他想从 1 开始拼出正整数，每拼一个，就保存起来，卡片就不能用来拼其它数了。
+>
+> 小蓝想知道自己能从 1 拼到多少。
+>
+> 例如，当小蓝有 30 张卡片，其中 0 到 9 各 3 张，则小蓝可以拼出 1 到 10，但是拼 11 时卡片 1 已经只有一张了，不够拼出 11。
+>
+> 现在小蓝手里有 0 到 9 的卡片各 2021 张，共 20210 张，请问小蓝可以从 1 拼到多少？
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int cnt[10];
+
+bool check(int x) {
+    while (x != 0) {
+        int digit = x % 10;
+        if (cnt[digit] == 0) return false;
+        cnt[digit]--;
+        x /= 10;
+    }
+    return true;
+}
+
+int main() {
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+
+    for (int i = 0; i < 10; i++) {
+        cnt[i] = 2021;    // 0 ~ 9 各 2021 张
+    }
+
+    for (int i = 1; ; i++) {
+        if (!check(i)) {
+            cout << i - 1 << endl;
+            break;
+        }
+    }
+
+    return 0;
+}
+```
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    static int[] cnt = new int[10];
+
+    public static boolean check(int num) {
+        while (num != 0) {
+            int digit = num % 10;
+            if (cnt[digit] == 0) return false;
+            cnt[digit]--;
+            num /= 10;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            cnt[i] = 2021;    // 0 ~ 9 各 2021 张
+        }
+
+        for (int i = 1; ; i++) {
+            if (!check(i)) {
+                System.out.println(i - 1);
+                break;
+            }
+        }
+    }
+}
+```
+
+```python
+cnt = [2021] * 10  # 0 ~ 9 各 2021 张
+def check(x):
+    while x != 0:
+        digit = x % 10
+        if cnt[digit] == 0:
+            return False
+        cnt[digit] -= 1
+        x //= 10
+    return True
+
+for i in range(1, 10**9):
+    if not check(i):
+        print(i - 1)
+        break
+```
+
+### 2、回文日期（2020 年省赛）
+
+> 2020年春节期间，有一个特殊的日期引起了大家的注意:2020年2月2日。因为如果将这个日期按“yyyymmdd”的格式写成一个 8位数是 20200202,恰好是一个回文数。我们称这样的日期是回文日期。
+>
+> 有人表示 20200202 是“千年一遇”的特殊日子。对此小明很不认同，因为不到2年之后就是下今个回文日期:20211202即2021年12月2日。
+>
+> 也有人表示 20200202并不仅仅是一个回文日期，还是一个 ABABBABA型的回文日期。对此小明也不认同，因为大约100年后就能遇到下一个ABABBABA 型的回文日期:21211212即212年12月12日。算不上“千年一遇”，顶多算“千年两遇”。
+>
+> 给定一个8位数的日期，请你计算该日期之后下一个回文日期和下一个ABABBABA 型的回文日期各是哪一夫。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int date, month[13] = {-1,31,28,31,30,31,30,31,31,30,31,30,31};
+
+string check(int date) {
+    string s = to_string(date), t = to_string(date);
+    reverse(t.begin(), t.end());
+    s+=t;
+    int y = stoi(s.substr(0,4)), m = stoi(s.substr(4,2)), d = stoi(s.substr(6,2));
+    if (y % 4 == 0 && (y % 100 != 0 || y % 400 == 0)) month[2] = 29;
+    else month[2] = 28;
+    if (m < 1 || m > 12 || d < 1 || d > month[m]) return "-1";
+    return s;
+}
+
+string check2(int date) {
+    string s = to_string(date), t = to_string(date);
+    reverse(t.begin(), t.end());
+    s+=t;
+    if (s[0] == s[2] && s[0] == s[5] && s[0] == s[7] && s[1] == s[3] && s[1] == s[4] && s[1] == s[6]) return s;
+    return "-1";
+}
+
+int main() {
+    ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+    cin >> date;
+    string ans1 = "";
+    for (int i = date / 10000; ; i++) {
+        string res = check(i);
+        if ((check(i) == "-1") || check(i) == to_string(date)) continue;
+        if (ans1 == "") ans1 = check(i);
+        if (check2(i) != "-1") {
+            cout << ans1 << endl << check2(i) << endl;
+            return 0;
+        }
+    }
+    return 0;
+}
+```
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    static int[] month = {-1,31,28,31,30,31,30,31,31,30,31,30,31};
+
+    public static String check(int date) {
+        String s = Integer.toString(date);
+        String t = new StringBuilder(s).reverse().toString();
+        s += t;
+        int y = Integer.parseInt(s.substring(0,4));
+        int m = Integer.parseInt(s.substring(4,6));
+        int d = Integer.parseInt(s.substring(6,8));
+        if (y % 4 == 0 && (y % 100 != 0 || y % 400 == 0)) month[2] = 29;
+        else month[2] = 28;
+        if (m < 1 || m > 12 || d < 1 || d > month[m]) return "-1";
+        return s;
+    }
+
+    public static String check2(int date) {
+        String s = Integer.toString(date);
+        String t = new StringBuilder(s).reverse().toString();
+        s += t;
+        if (s.charAt(0) == s.charAt(2) && s.charAt(0) == s.charAt(5) && s.charAt(0) == s.charAt(7) &&
+            s.charAt(1) == s.charAt(3) && s.charAt(1) == s.charAt(4) && s.charAt(1) == s.charAt(6)) {
+            return s;
+        }
+        return "-1";
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int date = sc.nextInt();
+        String ans1 = "";
+        for (int i = date / 10000; ; i++) {
+            String res = check(i);
+            if (res.equals("-1") || res.equals(Integer.toString(date))) continue;
+            if (ans1.equals("")) ans1 = res;
+            if (!check2(i).equals("-1")) {
+                System.out.println(ans1);
+                System.out.println(check2(i));
+                return;
+            }
+        }
+    }
+}
+```
+
+```python
+month = [-1,31,28,31,30,31,30,31,31,30,31,30,31]
+def is_leap_year(year):
+    return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+def check(date):
+    s = str(date)
+    t = s[::-1]
+    s += t
+    y = int(s[0:4])
+    m = int(s[4:6])
+    d = int(s[6:8])
+    if is_leap_year(y):
+        month[2] = 29
+    else:
+        month[2] = 28
+    if m < 1 or m > 12 or d < 1 or d > month[m]:
+        return "-1"
+    return s
+def check2(date):
+    s = str(date)
+    t = s[::-1]
+    s += t
+    if s[0] == s[2] and s[0] == s[5] and s[0] == s[7] and s[1] == s[3] and s[1] == s[4] and s[1] == s[6]:
+        return s
+    return "-1"
+date = int(input())
+ans1 = ""
+for i in range(date // 10000, 10**9):
+    res = check(i)
+    if res == "-1" or res == str(date):
+        continue
+    if ans1 == "":
+        ans1 = res
+    if check2(i) != "-1":
+        print(ans1)
+        print(check2(i))
+        break
+```
