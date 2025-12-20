@@ -17,8 +17,8 @@ export default async function handler(
     }
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.log(err);
-
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("[API /api/activity] Error:", err);
+    // 返回空数组作为降级方案
+    res.status(200).json([]);
   }
 }

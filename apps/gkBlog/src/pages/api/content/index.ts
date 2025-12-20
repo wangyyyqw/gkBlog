@@ -17,8 +17,8 @@ export default async function handler(
     }
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.log(err);
-
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("[API /api/content] Error:", err);
+    // 即使数据库错误，也返回空对象让前端能够正常渲染
+    res.status(200).json({});
   }
 }

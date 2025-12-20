@@ -47,8 +47,19 @@ export default async function handler(
     }
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.log(err);
-
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("[API /api/content/[slug]] Error:", err);
+    // 返回默认值作为降级方案
+    res.status(200).json({
+      meta: {
+        shares: 0,
+        views: 0,
+        reactions: 0,
+        reactionsDetail: { AMAZED: 0, CLAPPING: 0, THINKING: 0 },
+      },
+      metaUser: {
+        reactionsDetail: { AMAZED: 0, CLAPPING: 0, THINKING: 0 },
+      },
+      metaSection: {},
+    });
   }
 }
