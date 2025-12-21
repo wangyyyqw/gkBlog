@@ -25,38 +25,7 @@ function HeaderTitle() {
         animate={animation.show}
         transition={{ delay: 0.1 }}
       >
-        嗨!
-        <m.div
-          initial={{
-            opacity: 0,
-            y: 16,
-            rotate: 30,
-            transformOrigin: "right center",
-          }}
-          animate={controls}
-          transition={{
-            type: "spring",
-            delay: 0.35,
-            bounce: 0.7,
-            duration: 0.7,
-          }}
-        >
-          <Image
-            className={clsx("w-7 md:w-10")}
-            alt="Love-you Gesture"
-            src="/assets/emojis/love-you-gesture.png"
-            width={48}
-            height={48}
-            onLoad={() => {
-              controls.start({
-                opacity: 1,
-                y: 0,
-                rotate: 0,
-              });
-            }}
-            priority
-          />
-        </m.div>
+        这里是蠢卷栖萤的世界
       </m.div>
       <span className={clsx("text-slate-700", "dark:text-slate-300")}>
         <m.span
@@ -68,11 +37,9 @@ function HeaderTitle() {
           animate={animation.show}
           transition={{ delay: 0.2 }}
         >
-          I&apos;m{" "}
           <strong className={clsx("text-accent-600", "dark:text-accent-500")}>
-            qlAD
-          </strong>{" "}
-          乔,{" "}
+            蠢卷栖萤
+          </strong>
         </m.span>
         <m.h1
           className={clsx(
@@ -84,25 +51,7 @@ function HeaderTitle() {
           animate={animation.show}
           transition={{ delay: 0.3 }}
         >
-          <span className={clsx("lowercase")}>做</span>{" "}
-          <strong
-            className={clsx(
-              "font-bold text-lg text-slate-700",
-              "dark:text-slate-300"
-            )}
-          >
-            技术的黑客心态
-          </strong>{" "}
-          <span>加上</span>{" "}
-          <strong
-            className={clsx(
-              "font-bold text-lg text-slate-700",
-              "dark:text-slate-300"
-            )}
-          >
-            开放共进的态度
-          </strong>{" "}
-          <span className={clsx("block")}>是成长和越过高山幽谷的秘籍！</span>
+          <span className={clsx("block")}>向内挖掘，向外建造。</span>
         </m.h1>
       </span>
     </div>
