@@ -5,10 +5,8 @@ import toast from "react-hot-toast";
 import { CodeIcon, HeartIcon, SparklesIcon } from "@/components/Icons";
 import Toast from "@/components/Toast";
 
-import DetailOriented from "@/contents/index/DetailOriented";
 import FeaturedCard from "@/contents/index/FeaturedCard";
 import Header from "@/contents/index/Header";
-import PrettyOptimized from "@/contents/index/PrettyOptimized";
 import Quote01 from "@/contents/index/Quote01";
 
 const privacyToast = {
@@ -109,12 +107,6 @@ function IndexContents() {
       <div className={clsx("-mt-12 mb-12", "md:mt-0 md:mb-24")}>
         <QuoteSection01 />
       </div>
-      <section className={clsx("mb-12", "lg:mb-24")}>
-        <DetailOriented />
-      </section>
-      <section className={clsx("mb-12", "lg:mb-24")}>
-        <PrettyOptimized />
-      </section>
     </>
   );
 }
