@@ -7,6 +7,7 @@ import {
   ExternalLink,
   GitHubIcon,
   RSSIcon,
+  TelegramIcon,
 } from "@/components/Icons";
 
 import dayjs from "@/utils/dayjs";
@@ -132,8 +133,8 @@ function FooterDescription() {
         关于我
       </div>
       <p className={clsx("mb-4 font-normal leading-relaxed")}>
-        我是 qlAD, 一名小小的 <strong>计算机爱好者</strong>{" "}
-        ，致力于探索能改变世界的代码。
+        我是蠢卷栖萤, 一个 <strong>读书爱好者</strong>{" "}
+        ，希望能够在互联网留下属于我的足迹。
       </p>
       <ul className={clsx("-ml-2 flex gap-1")}>
         <li>
@@ -170,6 +171,18 @@ function FooterDescription() {
             title="My Bilibili profile"
           >
             <BilibiliIcon className={clsx("h-5 w-5")} />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://t.me/chunjuanqiying"
+            target="_blank"
+            rel="noreferrer nofollow"
+            className={clsx("flex h-9 w-9 items-center justify-center")}
+            aria-label="My Telegram group"
+            title="My Telegram group"
+          >
+            <TelegramIcon className={clsx("h-5 w-5")} />
           </a>
         </li>
       </ul>
@@ -285,45 +298,16 @@ function Footer() {
         </div>
         <div
           className={clsx(
-            "border-divider-light flex justify-between border-t py-6 text-xs",
+            "border-divider-light flex justify-center border-t py-6 text-xs",
             "dark:border-divider-dark"
           )}
         >
-          <div className={clsx("font-semibold")}>
-            &copy; {dayjs().format("YYYY")}, qlADgk.com 版权所有
-            <div>
-              <span>
-                ICP:
-                <a
-                  href="https://beian.miit.gov.cn/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ margin: "0 5px" }}
-                >
-                  陕ICP备2024050194号-1
-                </a>
-              </span>
-              <br />
-              <span style={{ display: "inline-flex", alignItems: "center" }}>
-                公安:
-                <Image
-                  src="https://cdn.qladgk.com/images/beian.png"
-                  alt="备案图标"
-                  width={15}
-                  height={15}
-                  style={{ margin: "0 5px" }}
-                />
-                <a
-                  href="https://beian.mps.gov.cn/#/query/webSearch?code=61072102000193"
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  陕公网安备61072102000193
-                </a>
-              </span>
-            </div>
+          <div className={clsx("font-semibold text-center")}>
+            &copy; {dayjs().format("YYYY")}, 蠢卷栖萤 版权所有
           </div>
-          <div className={clsx("text-slate-500", "dark:text-slate-400")}>
+          <div
+            className={clsx("text-slate-500", "dark:text-slate-400", "ml-4")}
+          >
             <LastUpdate />
           </div>
         </div>
