@@ -98,7 +98,7 @@ function Navbar() {
               </li>
               <li>
                 <NavLink
-                  title="T.I.L"
+                  title="朋友圈"
                   href="/today-i-learned"
                   onClick={() => playClickSound()}
                 />

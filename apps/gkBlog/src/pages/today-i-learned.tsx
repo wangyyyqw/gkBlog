@@ -5,7 +5,7 @@ function TIL() {
   return (
     <Page
       frontMatter={{
-        title: "T.I.L",
+        title: "朋友圈",
         description: `学习过程记录`,
       }}
     >
