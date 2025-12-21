@@ -5,7 +5,7 @@ import { getSortedPosts } from "./posts";
 const generateRSSFeed = () => {
   const feed = new RSS({
     title: "蠢卷栖萤", // 你的博客名称
-    description: "一名小小的计算机爱好者", // 你的博客描述
+    description: "一个热爱读书和分享的博主", // 你的博客描述
     feed_url: "https://www.qladgk.com/rss.xml", // 这里填写你站点的 RSS 链接
     site_url: "https://www.qladgk.com", // 你的站点首页 URL
     image_url: "https://www.qladgk.com/favicon.ico", // 你的站点 logo 图片 URL

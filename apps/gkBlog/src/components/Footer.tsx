@@ -143,8 +143,8 @@ function FooterDescription() {
             target="_blank"
             rel="noreferrer nofollow"
             className={clsx("flex h-9 w-9 items-center justify-center")}
-            aria-label="RSS Feed"
-            title="RSS Feed"
+            aria-label="RSS订阅"
+            title="RSS订阅"
           >
             <RSSIcon className={clsx("h-5 w-5")} />
           </a>

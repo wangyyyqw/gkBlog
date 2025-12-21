@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { CodeIcon, HeartIcon, SparklesIcon } from "@/components/Icons";
 import Toast from "@/components/Toast";
 
-import CleanIntuitive from "@/contents/index/CleanIntuitive";
 import DetailOriented from "@/contents/index/DetailOriented";
 import FeaturedCard from "@/contents/index/FeaturedCard";
 import Header from "@/contents/index/Header";
@@ -37,7 +36,7 @@ function FeaturedCardSection() {
             <div
               className={clsx(
                 "rounded-full bg-amber-300 p-3.5",
-                "dark:bg-amber-900",
+                "dark:bg-amber-900"
               )}
             >
               <SparklesIcon className={clsx("h-5 w-5 text-white")} />
@@ -51,7 +50,7 @@ function FeaturedCardSection() {
             <div
               className={clsx(
                 "rounded-full bg-pink-300 p-3.5",
-                "dark:bg-pink-900",
+                "dark:bg-pink-900"
               )}
             >
               <HeartIcon className={clsx("h-5 w-5 text-white")} />
@@ -65,7 +64,7 @@ function FeaturedCardSection() {
             <div
               className={clsx(
                 "rounded-full bg-sky-300 p-3.5",
-                "dark:bg-sky-900",
+                "dark:bg-sky-900"
               )}
             >
               <CodeIcon className={clsx("h-5 w-5 text-white")} />
@@ -110,9 +109,6 @@ function IndexContents() {
       <div className={clsx("-mt-12 mb-12", "md:mt-0 md:mb-24")}>
         <QuoteSection01 />
       </div>
-      <section className={clsx("mb-12", "lg:mb-24")}>
-        <CleanIntuitive />
-      </section>
       <section className={clsx("mb-12", "lg:mb-24")}>
         <DetailOriented />
       </section>
