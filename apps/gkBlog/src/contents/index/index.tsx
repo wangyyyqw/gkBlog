@@ -28,50 +28,7 @@ const privacyToast = {
 function FeaturedCardSection() {
   return (
     <div className={clsx("content-wrapper")}>
-      <div className={clsx("flex flex-col gap-4", "lg:flex-row lg:gap-8")}>
-        <FeaturedCard
-          icon={
-            <div
-              className={clsx(
-                "rounded-full bg-amber-300 p-3.5",
-                "dark:bg-amber-900"
-              )}
-            >
-              <SparklesIcon className={clsx("h-5 w-5 text-white")} />
-            </div>
-          }
-          title="简洁直观"
-          desc="保持用户界面简洁且具有现代风格，同时不影响用户体验。"
-        />
-        <FeaturedCard
-          icon={
-            <div
-              className={clsx(
-                "rounded-full bg-pink-300 p-3.5",
-                "dark:bg-pink-900"
-              )}
-            >
-              <HeartIcon className={clsx("h-5 w-5 text-white")} />
-            </div>
-          }
-          title="注重细节"
-          desc="意识到易于访问、UI 一致性和改进的 UX。"
-        />
-        <FeaturedCard
-          icon={
-            <div
-              className={clsx(
-                "rounded-full bg-sky-300 p-3.5",
-                "dark:bg-sky-900"
-              )}
-            >
-              <CodeIcon className={clsx("h-5 w-5 text-white")} />
-            </div>
-          }
-          title="美观优化"
-          desc="编写干净的代码是首要任务，同时尽可能保持其优化。"
-        />
-      </div>
+      <div className={clsx("flex flex-col gap-4", "lg:flex-row lg:gap-8")} />
     </div>
   );
 }
