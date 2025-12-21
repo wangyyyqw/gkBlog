@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Content } from "@/contents/index/CleanIntuitive";
+import { Content } from "@/types/ContentTypes";
 
 export const useAnimateContent = (content: Array<Content>) => {
   const [currentState, setCurrentState] = useState<Content>(content[0]);
