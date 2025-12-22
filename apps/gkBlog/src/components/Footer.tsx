@@ -3,46 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import {
-  BilibiliIcon,
   ExternalLink,
   GitHubIcon,
+  QQIcon,
   RSSIcon,
   TelegramIcon,
 } from "@/components/Icons";
 
 import dayjs from "@/utils/dayjs";
-
-function LastUpdate() {
-  return (
-    <div>
-      <a
-        href="https://github.com/enjidev/enji.dev"
-        target="_blank"
-        rel="noreferrer nofollow"
-        className={clsx("hover:underline")}
-      >
-        <span>查看作者原仓库</span>
-      </a>
-      <br />
-      <Link
-        href="/update"
-        rel="noreferrer nofollow"
-        className={clsx("hover:underline")}
-      >
-        <span>查看 gkBlog 更新</span>
-      </Link>
-      <br />
-      <a
-        href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh-hans"
-        target="_blank"
-        rel="noreferrer nofollow"
-        className={clsx("hover:underline")}
-      >
-        <span>CC BY-NC-ND</span>
-      </a>
-    </div>
-  );
-}
 
 interface FooterLinkProps {
   title: string;
@@ -59,7 +27,13 @@ function FooterLink({
 }: FooterLinkProps) {
   if (label === "soon") {
     return (
-      <span className={clsx("footer-link footer-link--soon")}>
+      <span
+        className={clsx(
+          "footer-link footer-link--soon",
+          "w-full justify-center",
+          "sm:justify-start"
+        )}
+      >
         {title}
         <span className={clsx("footer-link__label")}>{label}</span>
       </span>
@@ -68,7 +42,14 @@ function FooterLink({
 
   if (isInternal) {
     return (
-      <Link href={href} className={clsx("footer-link")}>
+      <Link
+        href={href}
+        className={clsx(
+          "footer-link",
+          "w-full justify-center",
+          "sm:justify-start"
+        )}
+      >
         {title}
         {label && <span className={clsx("footer-link__label")}>{label}</span>}
       </Link>
@@ -80,7 +61,11 @@ function FooterLink({
       href={href}
       target="_blank"
       rel="noreferrer nofollow"
-      className={clsx("footer-link")}
+      className={clsx(
+        "footer-link",
+        "w-full justify-center",
+        "sm:justify-start"
+      )}
     >
       {title}
       <ExternalLink className={clsx("h-3.5 w-3.5")} />
@@ -96,18 +81,19 @@ interface FooterGroupProps {
 
 function FooterGroup({ title, links }: FooterGroupProps) {
   return (
-    <div className={clsx("flex-1")}>
+    <div className={clsx("flex-1 w-full", "sm:w-auto")}>
       <div
         className={clsx(
-          "mb-2 px-2 text-[13px] text-slate-600",
-          "dark:text-slate-400"
+          "mb-2 px-2 text-[13px] text-slate-600 text-center",
+          "dark:text-slate-400",
+          "sm:text-left"
         )}
       >
         {title}
       </div>
-      <ul className={clsx("flex flex-col")}>
+      <ul className={clsx("flex flex-col", "sm:items-start")}>
         {links.map(({ title: linkTitle, href, label, isInternal }) => (
-          <li key={href}>
+          <li key={href} className={clsx("w-full", "sm:w-auto")}>
             <FooterLink
               title={linkTitle}
               href={href}
@@ -123,54 +109,38 @@ function FooterGroup({ title, links }: FooterGroupProps) {
 
 function FooterDescription() {
   return (
-    <div className={clsx("max-w-[348px]")}>
-      <div
-        className={clsx(
-          "mb-3 text-[13px] text-slate-600",
-          "dark:text-slate-400"
-        )}
+    <div className={clsx("max-w-[348px] w-full flex flex-col items-center")}>
+      <ul
+        className={clsx("-ml-2 flex gap-2 justify-center w-full", "sm:gap-1")}
       >
-        关于我
-      </div>
-      <p className={clsx("mb-4 font-normal leading-relaxed")}>
-        我是蠢卷栖萤, 一个 <strong>读书爱好者</strong>{" "}
-        ，希望能够在互联网留下属于我的足迹。
-      </p>
-      <ul className={clsx("-ml-2 flex gap-1")}>
         <li>
           <a
             href="/rss.xml"
             target="_blank"
             rel="noreferrer nofollow"
-            className={clsx("flex h-9 w-9 items-center justify-center")}
+            className={clsx(
+              "flex h-9 w-9 items-center justify-center",
+              "md:h-10 md:w-10"
+            )}
             aria-label="RSS订阅"
             title="RSS订阅"
           >
-            <RSSIcon className={clsx("h-5 w-5")} />
+            <RSSIcon className={clsx("h-5 w-5", "md:h-6 md:w-6")} />
           </a>
         </li>
         <li>
           <a
-            href="https://github.com/qlAD"
+            href="https://qm.qq.com/q/OVjoDKhDyI"
             target="_blank"
             rel="noreferrer nofollow"
-            className={clsx("flex h-9 w-9 items-center justify-center")}
-            aria-label="My GitHub profile"
-            title="My GitHub profile"
+            className={clsx(
+              "flex h-9 w-9 items-center justify-center",
+              "md:h-10 md:w-10"
+            )}
+            aria-label="加入QQ群：照空山"
+            title="加入QQ群：照空山"
           >
-            <GitHubIcon className={clsx("h-5 w-5")} />
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://space.bilibili.com/505243833"
-            target="_blank"
-            rel="noreferrer nofollow"
-            className={clsx("flex h-9 w-9 items-center justify-center")}
-            aria-label="My Bilibili profile"
-            title="My Bilibili profile"
-          >
-            <BilibiliIcon className={clsx("h-5 w-5")} />
+            <QQIcon className={clsx("h-5 w-5", "md:h-6 md:w-6")} />
           </a>
         </li>
         <li>
@@ -178,11 +148,14 @@ function FooterDescription() {
             href="https://t.me/chunjuanqiying"
             target="_blank"
             rel="noreferrer nofollow"
-            className={clsx("flex h-9 w-9 items-center justify-center")}
+            className={clsx(
+              "flex h-9 w-9 items-center justify-center",
+              "md:h-10 md:w-10"
+            )}
             aria-label="My Telegram group"
             title="My Telegram group"
           >
-            <TelegramIcon className={clsx("h-5 w-5")} />
+            <TelegramIcon className={clsx("h-5 w-5", "md:h-6 md:w-6")} />
           </a>
         </li>
       </ul>
@@ -194,121 +167,43 @@ function Footer() {
   return (
     <footer
       className={clsx(
-        "background-grid background-grid--fade-in border-divider-light mt-24 pt-16 text-sm text-slate-900",
+        "background-grid background-grid--fade-in border-divider-light mt-12 pt-16 text-sm text-slate-900",
         "dark:border-divider-dark dark:text-slate-200"
       )}
     >
       <div className={clsx("content-wrapper")}>
-        <div className={clsx("py-10 font-semibold")}>
-          <div className={clsx("flex flex-col-reverse gap-16", "lg:flex-row")}>
-            <div className={clsx("flex-1")}>
+        <div className={clsx("py-8 font-semibold")}>
+          <div className={clsx("flex flex-col-reverse gap-8", "lg:flex-row")}>
+            <div className={clsx("flex-1 flex justify-center")}>
               <FooterDescription />
-            </div>
-            <div
-              className={clsx(
-                "-mx-2 flex flex-1 flex-col gap-8",
-                "sm:flex-row sm:gap-16 lg:mx-0"
-              )}
-            >
-              <div className={clsx("flex", "sm:gap-16")}>
-                <FooterGroup
-                  title="导航"
-                  links={[
-                    { title: "博客", href: "/blog" },
-                    { title: "日记", href: "/today-i-learned" },
-                    { title: "统计", href: "/stats" },
-                  ]}
-                />
-                <FooterGroup
-                  title="我的"
-                  links={[
-                    { title: "回忆录", href: "/essay" },
-                    { title: "相册集", href: "/album" },
-                    { title: "书影音", href: "/media" },
-                  ]}
-                />
-                <FooterGroup
-                  title="更多"
-                  links={[
-                    { title: "组件示例", href: "/shortcodes" },
-                    { title: "友情链接", href: "/links" },
-                    { title: "留言反馈", href: "/feedback" },
-                  ]}
-                />
-              </div>
-              <div className={clsx("flex", "sm:gap-16")}>
-                <FooterGroup
-                  title="协议"
-                  links={[
-                    {
-                      title: "版权信息",
-                      href: "/copyright",
-                    },
-                    {
-                      title: "隐私政策",
-                      href: "/privacy-policy",
-                    },
-                    {
-                      title: "Cookies",
-                      href: "/cookies",
-                    },
-                  ]}
-                />
-                <FooterGroup
-                  title="服务"
-                  links={[
-                    {
-                      title: "十年之约",
-                      href: "https://foreverblog.cn/go.html",
-                      isInternal: false,
-                    },
-                    {
-                      title: "开往",
-                      href: "https://www.travellings.cn/go.html",
-                      isInternal: false,
-                    },
-                    {
-                      title: "Status",
-                      href: "https://status.qladgk.com/status/qlad",
-                      isInternal: false,
-                    },
-                  ]}
-                />
-                <FooterGroup
-                  title="此网站"
-                  links={[
-                    {
-                      title: "致谢",
-                      href: "/credits",
-                    },
-                    {
-                      title: "主题",
-                      href: "/update",
-                    },
-                    {
-                      title: "源代码",
-                      href: "https://github.com/qlAD/gkBlog",
-                      isInternal: false,
-                    },
-                  ]}
-                />
-              </div>
             </div>
           </div>
         </div>
         <div
           className={clsx(
-            "border-divider-light flex justify-center border-t py-6 text-xs",
-            "dark:border-divider-dark"
+            "border-divider-light flex flex-col items-center justify-center border-t py-6 text-xs gap-3",
+            "dark:border-divider-dark",
+            "sm:flex-row sm:gap-4"
           )}
         >
           <div className={clsx("font-semibold text-center")}>
             &copy; {dayjs().format("YYYY")}, 蠢卷栖萤 版权所有
           </div>
           <div
-            className={clsx("text-slate-500", "dark:text-slate-400", "ml-4")}
+            className={clsx(
+              "text-slate-500 text-center text-[10px] leading-relaxed",
+              "dark:text-slate-400",
+              "sm:text-xs"
+            )}
+          />
+          <div
+            className={clsx(
+              "text-slate-500 text-center text-[10px] leading-relaxed",
+              "dark:text-slate-400",
+              "sm:text-xs"
+            )}
           >
-            <LastUpdate />
+            向内挖掘，向外建造。
           </div>
         </div>
       </div>

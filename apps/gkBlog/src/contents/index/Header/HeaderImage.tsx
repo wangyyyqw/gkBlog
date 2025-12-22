@@ -1,56 +1,23 @@
 /* eslint-disable react/no-unknown-property */
-import { OrbitControls, useGLTF } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
 import clsx from "clsx";
 import { m, useAnimationControls } from "framer-motion";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import HeaderImageAnimation from "./HeaderImageAnimation";
 
-// Helper function for smooth transition (lerping)
-const lerp = (start: number, end: number, t: number) =>
-  start + (end - start) * t;
-
-interface RotatingModelProps {
+interface ImageProps {
   onHover: () => void;
   onHoverEnd: () => void;
 }
 
-function RotatingModel({ onHover, onHoverEnd }: RotatingModelProps) {
-  const { scene } = useGLTF("/assets/images/model.glb");
-  const modelRef = useRef(null);
-  const [rotationSpeed, setRotationSpeed] = useState(0.1);
-  const [targetRotationSpeed, setTargetRotationSpeed] = useState(0.1);
-  const [elapsedTime, setElapsedTime] = useState(0);
-
-  useFrame((state, delta) => {
-    if (modelRef.current) {
-      setElapsedTime((prevTime) => prevTime + delta);
-      const smoothSpeed = lerp(
-        rotationSpeed,
-        targetRotationSpeed,
-        Math.min(elapsedTime / 2, 1),
-      );
-      modelRef.current.rotation.y += smoothSpeed;
-      setRotationSpeed(smoothSpeed);
-    }
-  });
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setTargetRotationSpeed(0.01);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
+function StaticImage({ onHover, onHoverEnd }: ImageProps) {
   return (
-    <primitive
-      object={scene}
-      scale={[1.6, 1.6, 1.6]}
-      position={[0, -1.65, 0]}
-      ref={modelRef}
-      onPointerOver={onHover}
-      onPointerOut={onHoverEnd}
+    <img
+      src="/assets/images/coverImage.jpg"
+      alt="Header Image"
+      className="h-full w-full object-cover rounded-full"
+      onMouseEnter={onHover}
+      onMouseLeave={onHoverEnd}
     />
   );
 }
@@ -102,11 +69,11 @@ function HeaderImage() {
   };
 
   return (
-    <div className={clsx("relative h-[590px] w-[603px]")}>
+    <div className={clsx("relative h-[400px] w-[400px]")}>
       <div
         className={clsx(
-          "from-accent-400/20 via-accent-400/0 absolute top-0 right-0 h-[590px] w-[375px] rounded-full bg-gradient-to-t",
-          "dark:from-accent-600/10 dark:via-accent-600/0",
+          "from-accent-400/20 via-accent-400/0 absolute top-0 right-0 h-[400px] w-[250px] rounded-full bg-gradient-to-t",
+          "dark:from-accent-600/10 dark:via-accent-600/0"
         )}
       >
         <div className={clsx("absolute right-0 bottom-0 overflow-hidden")}>
@@ -134,28 +101,14 @@ function HeaderImage() {
             />
           </m.div>
           <m.div
-            className={clsx("h-[500px] w-[500px]")}
+            className={clsx("h-[300px] w-[300px]")}
             initial={{ opacity: 0 }}
             animate={controlsHeaderImage}
-            style={{ pointerEvents: "none" }} // 禁用 Canvas 的鼠标事件
+            style={{ pointerEvents: "none" }} // 禁用图片的鼠标事件
           >
-            <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
-              <Suspense fallback={null}>
-                <ambientLight intensity={1.25} />
-                <spotLight
-                  position={[10, 10, 10]}
-                  angle={0.15}
-                  penumbra={1}
-                  intensity={1}
-                />
-                <pointLight position={[-10, -10, -10]} intensity={1.5} />
-                <RotatingModel
-                  onHover={handleHover}
-                  onHoverEnd={handleHoverEnd}
-                />
-                <OrbitControls />
-              </Suspense>
-            </Canvas>
+            <div className="animate-spin-slow">
+              <StaticImage onHover={handleHover} onHoverEnd={handleHoverEnd} />
+            </div>
           </m.div>
         </div>
       </div>

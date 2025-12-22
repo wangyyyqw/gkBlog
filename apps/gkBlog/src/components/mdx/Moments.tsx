@@ -4,6 +4,58 @@ import { formatDate } from "@/helpers/post";
 
 import type { PropsWithChildren, ReactElement } from "react";
 
+interface User {
+  name: string;
+  avatar?: string;
+}
+
+interface MomentHeaderProps {
+  user: User;
+  date: string;
+}
+
+function MomentHeader({ user, date }: MomentHeaderProps) {
+  const hasAvatar = Boolean(user.avatar);
+
+  return (
+    <div className={clsx("flex items-center justify-between mb-4")}>
+      <div className={clsx("flex items-center")}>
+        <div
+          className={clsx(
+            hasAvatar
+              ? "mr-3"
+              : "w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center overflow-hidden mr-3"
+          )}
+        >
+          {hasAvatar ? (
+            <img
+              src={user.avatar}
+              alt={user.name}
+              className={clsx("w-10 h-10 rounded-full object-cover")}
+            />
+          ) : (
+            <span
+              className={clsx("text-slate-500 dark:text-slate-400 font-medium")}
+            >
+              {user.name.charAt(0)}
+            </span>
+          )}
+        </div>
+        <div>
+          <div
+            className={clsx("font-medium text-slate-900 dark:text-slate-100")}
+          >
+            {user.name}
+          </div>
+        </div>
+      </div>
+      <div className={clsx("text-sm text-slate-500 dark:text-slate-400")}>
+        <time dateTime={date}>{formatDate(date)}</time>
+      </div>
+    </div>
+  );
+}
+
 export function MomentTags({ children = null }: PropsWithChildren) {
   return <div className={clsx("-mt-1 mb-4 flex gap-2")}>{children}</div>;
 }
@@ -21,7 +73,17 @@ export function MomentTag({ children = null }: PropsWithChildren) {
   );
 }
 
-export function Moment({ children = null }: PropsWithChildren) {
+interface MomentProps {
+  user?: User;
+  date?: string;
+  children?: ReactElement | ReactElement[];
+}
+
+export function Moment({
+  user = undefined,
+  date = undefined,
+  children = null,
+}: MomentProps) {
   return (
     <article
       className={clsx(
@@ -29,7 +91,8 @@ export function Moment({ children = null }: PropsWithChildren) {
         "border border-slate-200 dark:border-slate-700"
       )}
     >
-      <div className={clsx("-mt-2")}>{children}</div>
+      {user && date && <MomentHeader user={user} date={date} />}
+      <div className={clsx("")}>{children}</div>
     </article>
   );
 }

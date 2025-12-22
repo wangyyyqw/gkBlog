@@ -1,108 +1,13 @@
 import Moments from "@/components/mdx/Moments";
 import TIL from "@/components/mdx/TIL";
 
-<Moments.Moments date="2025-03-31">
+{/* 朋友圈内容区域，请在这里添加你的朋友圈动态 */}
 
-  <Moments.Moment>
-    
-    ## Docker 蓝绿部署
-
-    假设当前运行的是 Green:3000，此时需要更新 Blue:3001
-
-    ```bash
-    docker compose -f docker-compose-blue.yml pull #给 blue 容器拉取最新镜像
-    ```
-
-    ```bash
-    docker compose -f docker-compose-blue.yml up -d #运行 blue 容器
-    ```
-
-    检查 ip:30001 后无问题切换流量到 3001
-
-    ```bash
-    docker compose -f docker-compose-green.yml pause #先停止 green 容器
-    ```
-
-    过一段时间后发现 Blue 无问题就可停止或删除 Green，反之恢复 Green 后切换流量
-
-  </Moments.Moment>
-
-</Moments.Moments>
-
-<Moments.Moments date="2025-03-01">
-
-  <Moments.Moment>
-    
-    ## 泛域名证书问题
-
-    <Moments.MomentTags>
-      <Moments.MomentTag>SSL</Moments.MomentTag>
-      <Moments.MomentTag>证书</Moments.MomentTag>
-    </Moments.MomentTags>
-
-    原来 *.qladgk.com 的证书不能用在 qladgk.com 上，导致访问 qladgk.com
-    时会提示证书错误。
-
-  </Moments.Moment>
-
-</Moments.Moments>
-
-<Moments.Moments date="2024-11-01">
-
-  <Moments.Moment>
-    
-    ## Git Flow 和 Github Flow
-
-    <Moments.MomentTags>
-      <Moments.MomentTag>Github</Moments.MomentTag>
-      <Moments.MomentTag>编程</Moments.MomentTag>
-    </Moments.MomentTags>
-
-GitHub Flow 与 Git Flow 的对比
-
-| 特性           | GitHub Flow                  | Git Flow                       |
-| -------------- | ---------------------------- | ------------------------------ |
-| 分支模型       | 轻量，只有 main 和功能分支   | 复杂，多分支模型               |
-| 适合的项目类型 | 持续集成、频繁部署的小型项目 | 复杂项目，阶段性发布的大型项目 |
-| 发布流程       | 合并到 main 后自动部署       | 通过 release 分支发布          |
-| 审查流程       | 通过 PR 进行代码审查         | 依赖分支合并及手动审查         |
-
-    [阅读原文](https://www.qladgk.com/blog/github-flow)
-
-  </Moments.Moment>
-
-</Moments.Moments>
-
-<Moments.Moments date="2024-10-21">
-
-  <Moments.Moment>
-    
-    ## Git 日志提交规范
-
-    <Moments.MomentTags>
-      <Moments.MomentTag>Github</Moments.MomentTag>
-      <Moments.MomentTag>Git</Moments.MomentTag>
-    </Moments.MomentTags>
-
-    这种提交同时涉及多个功能或问题，回溯时很难判断哪个部分引入了问题。应该分开为多个小的提交：
-
-    <TIL.DnD>
-      <TIL.Dont>
-        ```md {copy:false} {footer:false}
-        fix: fix login issue, update readme, refactor header component
-
-        ```
-
-      </TIL.Dont>
-      <TIL.Do>
-        ```md {copy:false} {footer:false}
-        fix: fix login issue
-        docs: update readme for new login feature
-        refactor: refactor header component
-        ```
-      </TIL.Do>
-    </TIL.DnD>
-
-  </Moments.Moment>
-
-</Moments.Moments>
+<Moments.Moment
+  user={{ name: "蠢卷栖萤", avatar: "/assets/images/cover.jpg" }}
+  date="2025-12-21"
+>
+  <p>
+    在数字世界里开辟一方小天地，开始搭建属于自己的博客空间。愿这里成为思想的花园，记录读书的足迹。
+  </p>
+</Moments.Moment>

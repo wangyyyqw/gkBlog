@@ -49,7 +49,7 @@ function StatsContents({ initialStats }: StatsContentsProps) {
   }, []);
 
   const runningTime = useMemo(() => {
-    const startDate = new Date("2020-09-27");
+    const startDate = new Date("2025-12-20");
     const now = new Date();
 
     let years = now.getFullYear() - startDate.getFullYear();

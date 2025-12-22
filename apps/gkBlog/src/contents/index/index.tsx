@@ -7,7 +7,6 @@ import Toast from "@/components/Toast";
 
 import FeaturedCard from "@/contents/index/FeaturedCard";
 import Header from "@/contents/index/Header";
-import Quote01 from "@/contents/index/Quote01";
 
 const privacyToast = {
   title: "隐私协议助手",
@@ -33,16 +32,6 @@ function FeaturedCardSection() {
   );
 }
 
-function QuoteSection01() {
-  return (
-    <div className={clsx("content-wrapper")}>
-      <div className={clsx("flex items-center justify-center py-8")}>
-        <Quote01 />
-      </div>
-    </div>
-  );
-}
-
 function IndexContents() {
   const toastRef = useRef(null);
 
@@ -60,9 +49,6 @@ function IndexContents() {
       <Header />
       <div className={clsx("hidden", "lg:-mt-16 lg:mb-24 lg:block")}>
         <FeaturedCardSection />
-      </div>
-      <div className={clsx("-mt-12 mb-12", "md:mt-0 md:mb-24")}>
-        <QuoteSection01 />
       </div>
     </>
   );

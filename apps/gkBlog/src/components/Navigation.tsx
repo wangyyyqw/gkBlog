@@ -27,18 +27,14 @@ function Navbar() {
       { title: "回忆录", href: "/essay" },
       { title: "相册集", href: "/album" },
       { title: "书影音", href: "/media" },
-    ],
-    []
-  );
-  const moreLinks = useMemo(
-    () => [
-      { title: "组件示例", href: "/shortcodes" },
+      { title: "关于我", href: "/about-me" },
       { title: "友情链接", href: "/links" },
       { title: "留言反馈", href: "/feedback" },
+      { title: "致谢", href: "/credits" },
     ],
     []
   );
-
+  const moreLinks = useMemo(() => [], []);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -110,19 +106,11 @@ function Navbar() {
                   onClick={() => playClickSound()}
                 />
               </li>
+
               <li className={clsx("hidden md:block")} data-accent="blue">
                 <NavLinkDropdown
                   title="我的"
                   items={myLinks}
-                  onOpenClick={() => playOpenSound()}
-                  onCloseClick={() => playCloseSound()}
-                  onLinkClick={() => playClickSound()}
-                />
-              </li>
-              <li className={clsx("")} data-accent="blue">
-                <NavLinkDropdown
-                  title="更多"
-                  items={combinedMoreLinks}
                   onOpenClick={() => playOpenSound()}
                   onCloseClick={() => playCloseSound()}
                   onLinkClick={() => playClickSound()}
@@ -133,13 +121,6 @@ function Navbar() {
 
           {/* 右侧图标 */}
           <ul className={clsx("flex items-center")}>
-            <li className={clsx("hidden", "sm:block")}>
-              <NavIcon
-                href="https://www.travellings.cn/go.html"
-                icon={<TravellingIcon className={clsx("h-5 w-5")} />}
-                title="Travelling"
-              />
-            </li>
             <li className={clsx("hidden", "sm:block")}>
               <div
                 className={clsx(
@@ -157,5 +138,4 @@ function Navbar() {
     </header>
   );
 }
-
 export default Navbar;

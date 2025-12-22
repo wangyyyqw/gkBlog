@@ -23,13 +23,13 @@ type LinkRefProps = HTMLAttributes<HTMLAnchorElement> & {
 const LinkRef = forwardRef(
   (
     { href, onClick, children, ...rest }: LinkRefProps,
-    ref: Ref<HTMLAnchorElement>,
+    ref: Ref<HTMLAnchorElement>
   ) => (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Link href={href} ref={ref} {...rest} onClick={onClick}>
       {children}
     </Link>
-  ),
+  )
 );
 
 LinkRef.displayName = "LinkRef";
@@ -93,7 +93,7 @@ function NavLinkDropdown({
                   animate="show"
                   className={clsx(
                     "border-divider-light absolute top-11 flex w-40 flex-col rounded-2xl border bg-white/70 p-2 backdrop-blur",
-                    "dark:border-divider-dark dark:bg-slate-900/80",
+                    "dark:border-divider-dark dark:bg-slate-900/80"
                   )}
                 >
                   {items.map((item) => (
