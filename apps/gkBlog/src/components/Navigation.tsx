@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { useEffect, useMemo, useState } from "react";
 import useSound from "use-sound";
 
-import { TravellingIcon } from "@/components/Icons";
 import NavIcon from "@/components/navigations/NavIcon";
 import NavIconQuickAccess from "@/components/navigations/NavIconQuickAccess";
 import NavLink from "@/components/navigations/NavLink";

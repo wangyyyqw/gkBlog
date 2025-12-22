@@ -14,7 +14,7 @@ function StaticImage({ onHover, onHoverEnd }: ImageProps) {
   return (
     <img
       src="/assets/images/coverImage.jpg"
-      alt="Header Image"
+      alt="封面图片"
       className="h-full w-full object-cover rounded-full"
       onMouseEnter={onHover}
       onMouseLeave={onHoverEnd}
