@@ -1,8 +1,9 @@
+import Moments from "@/components/mdx/Moments";
 import TIL from "@/components/mdx/TIL";
 
-<TIL.Items date="2025-03-31">
+<Moments.Moments date="2025-03-31">
 
-  <TIL.Item>
+  <Moments.Moment>
     
     ## Docker 蓝绿部署
 
@@ -24,38 +25,38 @@ import TIL from "@/components/mdx/TIL";
 
     过一段时间后发现 Blue 无问题就可停止或删除 Green，反之恢复 Green 后切换流量
 
-  </TIL.Item>
+  </Moments.Moment>
 
-</TIL.Items>
+</Moments.Moments>
 
-<TIL.Items date="2025-03-01">
+<Moments.Moments date="2025-03-01">
 
-  <TIL.Item>
+  <Moments.Moment>
     
     ## 泛域名证书问题
 
-    <TIL.ItemTags>
-      <TIL.ItemTag>SSL</TIL.ItemTag>
-      <TIL.ItemTag>证书</TIL.ItemTag>
-    </TIL.ItemTags>
+    <Moments.MomentTags>
+      <Moments.MomentTag>SSL</Moments.MomentTag>
+      <Moments.MomentTag>证书</Moments.MomentTag>
+    </Moments.MomentTags>
 
     原来 *.qladgk.com 的证书不能用在 qladgk.com 上，导致访问 qladgk.com
     时会提示证书错误。
 
-  </TIL.Item>
+  </Moments.Moment>
 
-</TIL.Items>
+</Moments.Moments>
 
-<TIL.Items date="2024-11-01">
+<Moments.Moments date="2024-11-01">
 
-  <TIL.Item>
+  <Moments.Moment>
     
     ## Git Flow 和 Github Flow
 
-    <TIL.ItemTags>
-      <TIL.ItemTag>Github</TIL.ItemTag>
-      <TIL.ItemTag>编程</TIL.ItemTag>
-    </TIL.ItemTags>
+    <Moments.MomentTags>
+      <Moments.MomentTag>Github</Moments.MomentTag>
+      <Moments.MomentTag>编程</Moments.MomentTag>
+    </Moments.MomentTags>
 
 GitHub Flow 与 Git Flow 的对比
 
@@ -68,20 +69,20 @@ GitHub Flow 与 Git Flow 的对比
 
     [阅读原文](https://www.qladgk.com/blog/github-flow)
 
-  </TIL.Item>
+  </Moments.Moment>
 
-</TIL.Items>
+</Moments.Moments>
 
-<TIL.Items date="2024-10-21">
+<Moments.Moments date="2024-10-21">
 
-  <TIL.Item>
+  <Moments.Moment>
     
     ## Git 日志提交规范
 
-    <TIL.ItemTags>
-      <TIL.ItemTag>Github</TIL.ItemTag>
-      <TIL.ItemTag>Git</TIL.ItemTag>
-    </TIL.ItemTags>
+    <Moments.MomentTags>
+      <Moments.MomentTag>Github</Moments.MomentTag>
+      <Moments.MomentTag>Git</Moments.MomentTag>
+    </Moments.MomentTags>
 
     这种提交同时涉及多个功能或问题，回溯时很难判断哪个部分引入了问题。应该分开为多个小的提交：
 
@@ -98,10 +99,10 @@ GitHub Flow 与 Git Flow 的对比
         fix: fix login issue
         docs: update readme for new login feature
         refactor: refactor header component
-        ````
+        ```
       </TIL.Do>
     </TIL.DnD>
 
-  </TIL.Item>
+  </Moments.Moment>
 
-</TIL.Items>
+</Moments.Moments>
