@@ -112,7 +112,7 @@ interface TimelineProps {
 
 export function Timeline({ children }: PropsWithChildren<TimelineProps>) {
   const items = Array.isArray(children) ? children : [children];
-  
+
   return (
     <div className={clsx("w-full max-w-6xl mx-auto py-4")}>
       {/* 超小屏幕简单堆叠布局 */}
@@ -136,12 +136,12 @@ export function Timeline({ children }: PropsWithChildren<TimelineProps>) {
                   {formatDate(date)}
                 </time>
               </div>
-              <div>{itemChildren}</div>
+              <div className="pt-2">{itemChildren}</div>
             </div>
           );
         })}
       </div>
-      
+
       {/* 小屏幕到中等屏幕也使用堆叠布局 */}
       <div className="hidden sm:block md:hidden space-y-6">
         {items.map((item, globalIndex) => {
@@ -163,7 +163,7 @@ export function Timeline({ children }: PropsWithChildren<TimelineProps>) {
                   {formatDate(date)}
                 </time>
               </div>
-              <div>{itemChildren}</div>
+              <div className="pt-2">{itemChildren}</div>
             </div>
           );
         })}
@@ -173,7 +173,7 @@ export function Timeline({ children }: PropsWithChildren<TimelineProps>) {
       <div className="hidden md:block relative">
         {/* 中间时间轴 */}
         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700 transform -translate-x-1/2" />
-        
+
         <div className="relative">
           {/* 日期和内容交替显示 */}
           <div className="space-y-6">
@@ -196,7 +196,7 @@ export function Timeline({ children }: PropsWithChildren<TimelineProps>) {
                       {formatDate(date)}
                     </time>
                   </div>
-                  
+
                   {/* 桌面端分列布局 - 显示时间轴和左右交替的内容 */}
                   <div
                     className={clsx(
