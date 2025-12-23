@@ -93,8 +93,8 @@ export function ItemTag({ children = null }: PropsWithChildren) {
 
 export function Item({ children = null }: PropsWithChildren) {
   return (
-    <article className={clsx("", "pb-4 sm:pb-16")}>
-      <div className={clsx("-mt-12 sm:-mt-12")}>{children}</div>
+    <article className={clsx("", "pb-4 lg:pb-16")}>
+      <div className={clsx("-mt-12 lg:-mt-12")}>{children}</div>
     </article>
   );
 }
@@ -142,8 +142,8 @@ export function Timeline({ children }: PropsWithChildren<TimelineProps>) {
         })}
       </div>
 
-      {/* 小屏幕到中等屏幕也使用堆叠布局 */}
-      <div className="hidden sm:block md:hidden space-y-6">
+      {/* 小屏幕到大屏幕也使用堆叠布局 */}
+      <div className="hidden sm:block lg:hidden space-y-6">
         {items.map((item, globalIndex) => {
           const { date, children: itemChildren } = (
             item as ReactElement<{ date: string; children: ReactNode }>
@@ -170,7 +170,7 @@ export function Timeline({ children }: PropsWithChildren<TimelineProps>) {
       </div>
 
       {/* 桌面端时间轴布局 */}
-      <div className="hidden md:block relative">
+      <div className="hidden lg:block relative">
         {/* 中间时间轴 */}
         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700 transform -translate-x-1/2" />
 
