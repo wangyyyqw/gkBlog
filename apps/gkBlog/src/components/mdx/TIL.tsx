@@ -114,57 +114,84 @@ export function Timeline({ children }: PropsWithChildren<TimelineProps>) {
   const items = Array.isArray(children) ? children : [children];
 
   return (
-    <div className={clsx("relative w-full max-w-6xl mx-auto py-4")}>
-      {/* 中间时间轴 - 只在桌面端显示 */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700 transform -translate-x-1/2 hidden md:block" />
+    <div className={clsx("w-full max-w-6xl mx-auto py-4")}>
+      {/* 移动端简单堆叠布局 */}
+      <div className="md:hidden space-y-6">
+        {items.map((item, globalIndex) => {
+          const { date, children: itemChildren } = (
+            item as ReactElement<{ date: string; children: ReactNode }>
+          ).props;
 
-      <div className="relative">
-        {/* 日期和内容交替显示 */}
-        <div className="space-y-6">
-          {items.map((item, globalIndex) => {
-            const { date, children: itemChildren } = (
-              item as ReactElement<{ date: string; children: ReactNode }>
-            ).props;
+          const childKey = item.key || `item-${globalIndex}`;
 
-            const childKey = item.key || `item-${globalIndex}`;
-
-            return (
-              <div key={childKey} className="relative md:py-2">
-                <div className="text-center mb-3">
-                  <time
-                    className={clsx(
-                      "font-mono font-bold text-slate-700 dark:text-slate-300"
-                    )}
-                    dateTime={date}
-                  >
-                    {formatDate(date)}
-                  </time>
-                </div>
-
-                {/* 移动端堆叠布局 - 只显示内容，不显示时间轴 */}
-                <div className="md:hidden">{itemChildren}</div>
-
-                {/* 桌面端分列布局 - 显示时间轴和左右交替的内容 */}
-                <div
+          return (
+            <div key={childKey} className="relative py-2">
+              <div className="text-center mb-3">
+                <time
                   className={clsx(
-                    "hidden md:flex items-start relative",
-                    globalIndex % 2 === 0 ? "flex-row" : "flex-row-reverse"
+                    "font-mono font-bold text-slate-700 dark:text-slate-300"
                   )}
+                  dateTime={date}
                 >
-                  <div className="w-5/12 px-2">{itemChildren}</div>
-                  {/* 时间轴点 */}
-                  <div className="relative z-10 flex-shrink-0 w-2/12 flex items-center justify-center">
-                    <div className="w-4 h-4 rounded-full bg-accent-500 border-4 border-white dark:border-slate-900 z-10" />
-                    <div
-                      className="absolute h-full w-0.5 bg-slate-200 dark:bg-slate-700 transform -translate-x-1/2"
-                      style={{ left: "50%" }}
-                    />
-                  </div>
-                  <div className="w-5/12 px-2">{/* 空div用于占位 */}</div>
-                </div>
+                  {formatDate(date)}
+                </time>
               </div>
-            );
-          })}
+              <div>{itemChildren}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* 桌面端时间轴布局 */}
+      <div className="hidden md:block relative">
+        {/* 中间时间轴 */}
+        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700 transform -translate-x-1/2" />
+
+        <div className="relative">
+          {/* 日期和内容交替显示 */}
+          <div className="space-y-6">
+            {items.map((item, globalIndex) => {
+              const { date, children: itemChildren } = (
+                item as ReactElement<{ date: string; children: ReactNode }>
+              ).props;
+
+              const childKey = item.key || `item-${globalIndex}`;
+
+              return (
+                <div key={childKey} className="relative md:py-2">
+                  <div className="text-center mb-3">
+                    <time
+                      className={clsx(
+                        "font-mono font-bold text-slate-700 dark:text-slate-300"
+                      )}
+                      dateTime={date}
+                    >
+                      {formatDate(date)}
+                    </time>
+                  </div>
+
+                  {/* 桌面端分列布局 - 显示时间轴和左右交替的内容 */}
+                  <div
+                    className={clsx(
+                      "flex items-start relative",
+                      globalIndex % 2 === 0 ? "flex-row" : "flex-row-reverse"
+                    )}
+                  >
+                    <div className="w-5/12 px-2">{itemChildren}</div>
+                    {/* 时间轴点 */}
+                    <div className="relative z-10 flex-shrink-0 w-2/12 flex items-center justify-center">
+                      <div className="w-4 h-4 rounded-full bg-accent-500 border-4 border-white dark:border-slate-900 z-10" />
+                      <div
+                        className="absolute h-full w-0.5 bg-slate-200 dark:bg-slate-700 transform -translate-x-1/2"
+                        style={{ left: "50%" }}
+                      />
+                    </div>
+                    <div className="w-5/12 px-2">{/* 空div用于占位 */}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
