@@ -115,7 +115,7 @@ export function Timeline({ children }: PropsWithChildren<TimelineProps>) {
 
   return (
     <div className={clsx("w-full max-w-6xl mx-auto py-4")}>
-      {/* 超小屏幕简单堆叠布局 */}
+      {/* 超小屏幕简单堆叠布局 - 不显示时间 */}
       <div className="sm:hidden space-y-6">
         {items.map((item, globalIndex) => {
           const { date, children: itemChildren } = (
@@ -126,51 +126,50 @@ export function Timeline({ children }: PropsWithChildren<TimelineProps>) {
 
           return (
             <div key={childKey} className="relative py-2">
-              <div className="text-center mb-3">
-                <time
-                  className={clsx(
-                    "font-mono font-bold text-slate-700 dark:text-slate-300"
-                  )}
-                  dateTime={date}
-                >
-                  {formatDate(date)}
-                </time>
-              </div>
-              <div className="pt-2">{itemChildren}</div>
+              <div className="pt-2 py-2.5">{itemChildren}</div>
             </div>
           );
         })}
       </div>
 
-      {/* 小屏幕到大屏幕也使用堆叠布局 */}
-      <div className="hidden sm:block lg:hidden space-y-6">
-        {items.map((item, globalIndex) => {
-          const { date, children: itemChildren } = (
-            item as ReactElement<{ date: string; children: ReactNode }>
-          ).props;
+      {/* 小屏幕（sm及以上但小于md）时间轴在左侧，内容在右侧 - 不显示时间 */}
+      <div className="hidden sm:block md:hidden relative">
+        {/* 左侧时间轴 */}
+        <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700" />
 
-          const childKey = item.key || `item-${globalIndex}`;
+        <div className="relative">
+          {/* 内容显示，不显示时间 */}
+          <div className="space-y-6">
+            {items.map((item, globalIndex) => {
+              const { date, children: itemChildren } = (
+                item as ReactElement<{ date: string; children: ReactNode }>
+              ).props;
 
-          return (
-            <div key={childKey} className="relative py-2">
-              <div className="text-center mb-3">
-                <time
-                  className={clsx(
-                    "font-mono font-bold text-slate-700 dark:text-slate-300"
-                  )}
-                  dateTime={date}
-                >
-                  {formatDate(date)}
-                </time>
-              </div>
-              <div className="pt-2">{itemChildren}</div>
-            </div>
-          );
-        })}
+              const childKey = item.key || `item-${globalIndex}`;
+
+              return (
+                <div key={childKey} className="relative md:py-2">
+                  {/* 小屏幕分列布局 - 时间轴在左侧，内容在右侧 */}
+                  <div className="flex items-start relative">
+                    {/* 时间轴点 */}
+                    <div className="relative z-10 flex-shrink-0 w-2/12 flex items-center justify-center">
+                      <div className="w-4 h-4 rounded-full bg-accent-500 border-4 border-white dark:border-slate-900 z-10" />
+                      <div
+                        className="absolute h-full w-0.5 bg-slate-200 dark:bg-slate-700"
+                        style={{ left: "50%" }}
+                      />
+                    </div>
+                    <div className="w-10/12 px-2 py-2.5">{itemChildren}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
-      {/* 桌面端时间轴布局 */}
-      <div className="hidden lg:block relative">
+      {/* 中等屏幕到大屏幕使用交替布局 */}
+      <div className="hidden md:block relative">
         {/* 中间时间轴 */}
         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700 transform -translate-x-1/2" />
 
@@ -204,7 +203,7 @@ export function Timeline({ children }: PropsWithChildren<TimelineProps>) {
                       globalIndex % 2 === 0 ? "flex-row" : "flex-row-reverse"
                     )}
                   >
-                    <div className="w-5/12 px-2">{itemChildren}</div>
+                    <div className="w-5/12 px-2 py-2.5">{itemChildren}</div>
                     {/* 时间轴点 */}
                     <div className="relative z-10 flex-shrink-0 w-2/12 flex items-center justify-center">
                       <div className="w-4 h-4 rounded-full bg-accent-500 border-4 border-white dark:border-slate-900 z-10" />
