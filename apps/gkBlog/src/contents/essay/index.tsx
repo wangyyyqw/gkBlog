@@ -191,7 +191,15 @@ function EssayContents() {
               </div>
             </div>
             <p className="text-gray-600 py-1 px-6 leading-relaxed dark:text-gray-400">
-              {essay.content}
+              {essay.content.split("\n").map((line, index) => {
+                const key = `line-${essay.id}-${index}`;
+                return (
+                  <span key={key}>
+                    {line}
+                    {index < essay.content.split("\n").length - 1 && <br />}
+                  </span>
+                );
+              })}
             </p>
             {essay.images && (
               <div className="py-1 px-6">
