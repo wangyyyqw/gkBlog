@@ -93,8 +93,8 @@ export function ItemTag({ children = null }: PropsWithChildren) {
 
 export function Item({ children = null }: PropsWithChildren) {
   return (
-    <article className={clsx("", "md:pb-16")}>
-      <div className={clsx("-mt-12")}>{children}</div>
+    <article className={clsx("", "pb-4 sm:pb-16")}>
+      <div className={clsx("-mt-12 sm:-mt-12")}>{children}</div>
     </article>
   );
 }
