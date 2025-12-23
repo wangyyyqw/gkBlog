@@ -8,7 +8,7 @@ const nextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   reactStrictMode: true,
   images: {
-    unoptimized: true,
+    domains: ["cdn.qladgk.com", "laoshuan.dpdns.org", "a1.qpic.cn"],
   },
 };
 

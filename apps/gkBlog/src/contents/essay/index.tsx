@@ -11,6 +11,128 @@ interface Essay {
   images?: string[];
 }
 
+interface ImageCarouselProps {
+  images: string | string[];
+}
+
+function ImageCarousel({ images }: ImageCarouselProps) {
+  const imageArray = Array.isArray(images) ? images : [images];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToPrevious = () => {
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? imageArray.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const goToNext = () => {
+    const isLastSlide = currentIndex === imageArray.length - 1;
+    const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  return (
+    <div className="relative w-full max-w-md mx-auto">
+      <div
+        className="relative w-full overflow-hidden rounded-lg"
+        style={{ height: "300px" }}
+      >
+        {imageArray.map((img, index) => (
+          <div
+            key={`${img}-${index}`}
+            className={`absolute inset-0 transition-opacity duration-300 ${index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"}`}
+            style={{ height: "300px" }}
+          >
+            <Zoom>
+              <div
+                className="w-full h-full relative"
+                style={{ height: "300px" }}
+              >
+                <Image
+                  src={img}
+                  alt={`图片 ${index + 1}`}
+                  fill
+                  objectFit="cover"
+                  className="w-full h-full object-cover rounded-lg"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            </Zoom>
+          </div>
+        ))}
+
+        {/* 左箭头 */}
+        <button
+          type="button"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center transition-opacity duration-300"
+          onClick={goToPrevious}
+          aria-label="上一张图片"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
+
+        {/* 右箭头 */}
+        <button
+          type="button"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center transition-opacity duration-300"
+          onClick={goToNext}
+          aria-label="下一张图片"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {/* 指示器 */}
+      <div className="flex justify-center mt-3 space-x-2">
+        {imageArray.map((_, index) => (
+          <button
+            key={`indicator-${index}`}
+            type="button"
+            className={`w-2 h-2 rounded-full ${index === currentIndex ? "bg-accent-500" : "bg-gray-300"}`}
+            onClick={() => goToSlide(index)}
+            aria-label={`跳转到图片 ${index + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* 当前图片编号 */}
+      <div className="text-center text-sm text-gray-500 mt-2">
+        {currentIndex + 1} / {imageArray.length}
+      </div>
+    </div>
+  );
+}
+
 function EssayContents() {
   const [essays, setEssays] = useState<Essay[]>([]);
   const [loading, setLoading] = useState(true);
@@ -72,23 +194,8 @@ function EssayContents() {
               {essay.content}
             </p>
             {essay.images && (
-              <div className="py-1 px-6 flex flex-wrap gap-4">
-                {(Array.isArray(essay.images)
-                  ? essay.images
-                  : [essay.images]
-                ).map((img, imgIndex) => (
-                  <Zoom key={img}>
-                    <div className="w-32 h-32 relative rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-105">
-                      <Image
-                        src={img}
-                        alt={`图片 ${imgIndex + 1}`}
-                        layout="fill"
-                        objectFit="cover"
-                        className="object-cover"
-                      />
-                    </div>
-                  </Zoom>
-                ))}
+              <div className="py-1 px-6">
+                <ImageCarousel images={essay.images} />
               </div>
             )}
           </div>
