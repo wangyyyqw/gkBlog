@@ -43,7 +43,7 @@ function ImageCarousel({ images }: ImageCarouselProps) {
       >
         {imageArray.map((img, index) => (
           <div
-            key={`${img}-${index}`}
+            key={`image-${img}`}
             className={`absolute inset-0 transition-opacity duration-300 ${index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"}`}
             style={{ height: "300px" }}
           >
@@ -116,7 +116,7 @@ function ImageCarousel({ images }: ImageCarouselProps) {
       <div className="flex justify-center mt-3 space-x-2">
         {imageArray.map((_, index) => (
           <button
-            key={`indicator-${index}`}
+            key={`indicator-${imageArray[index]}`}
             type="button"
             className={`w-2 h-2 rounded-full ${index === currentIndex ? "bg-accent-500" : "bg-gray-300"}`}
             onClick={() => goToSlide(index)}
