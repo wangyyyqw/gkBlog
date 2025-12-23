@@ -1,13 +1,21 @@
-import Moments from "@/components/mdx/Moments";
 import TIL from "@/components/mdx/TIL";
 
 {/* 朋友圈内容区域，请在这里添加你的朋友圈动态 */}
 
-<Moments.Moment
-  user={{ name: "蠢卷栖萤", avatar: "/assets/images/cover.jpg" }}
-  date="2025-12-21"
->
-  <p>
-    在数字世界里开辟一方小天地，开始搭建属于自己的博客空间。愿这里成为思想的花园，记录读书的足迹。
-  </p>
-</Moments.Moment>
+<TIL.Timeline>
+  <TIL.Items date="2025-12-23">
+    <TIL.Item title="新添加的测试内容" tags={["测试", "内容"]}>
+      <p>
+        这是一条新的测试内容，用于验证时光轴功能是否正常工作，包含大约三十个字的描述。
+      </p>
+    </TIL.Item>
+  </TIL.Items>
+
+  <TIL.Items date="2025-12-21">
+    <TIL.Item title="在数字世界里开辟一方小天地" tags={["博客", "记录"]}>
+      <p>
+        在数字世界里开辟一方小天地，开始搭建属于自己的博客空间。愿这里成为思想的花园，记录读书的足迹。
+      </p>
+    </TIL.Item>
+  </TIL.Items>
+</TIL.Timeline>
