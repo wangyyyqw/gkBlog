@@ -8,7 +8,13 @@ const nextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   reactStrictMode: true,
   images: {
-    domains: ["cdn.qladgk.com", "laoshuan.dpdns.org", "a1.qpic.cn"],
+    domains: [
+      "cdn.qladgk.com",
+      "laoshuan.dpdns.org",
+      "a1.qpic.cn",
+      "neodb.social",
+      "img1.doubanio.com",
+    ],
   },
 };
 

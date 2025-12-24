@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "shelf_type": "completed",
+      "visibility": 1,
+      "item": {
+        "title": "黑神话：悟空",
+        "cover_image_url": "https://neodb.social/m/item/game/2024/12/20/bf90a214-e194-4446-a0e3-944cf4f8d9da.jpg",
+        "rating": 7.5,
+        "uuid": "2fbcMAaC9Nhr2HhDH6BtCO",
+        "category": "game"
+      }
+    },
+    {
+      "shelf_type": "completed",
+      "visibility": 1,
+      "item": {
+        "title": "反恐精英：全球攻势",
+        "cover_image_url": "https://neodb.social/m/item/doubangame/2024/07/16/8be68de4-0d12-4460-bd87-0788af9908cd.jpg",
+        "rating": 8.9,
+        "uuid": "31tN2DdJW8ES5GhNVaZPLt",
+        "category": "game"
+      }
+    },
+    {
+      "shelf_type": "completed",
+      "visibility": 1,
+      "item": {
+        "title": "我的世界",
+        "cover_image_url": "https://neodb.social/m/item/game/2024/12/20/4cd9e07d-ff81-4e63-8e16-ac2cd5f81bd7.jpg",
+        "rating": 9.5,
+        "uuid": "2psMXUufasnomW0woLnlie",
+        "category": "game"
+      }
+    }
+  ]
+}
