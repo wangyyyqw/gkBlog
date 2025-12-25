@@ -4,7 +4,7 @@ function Document() {
   return (
     <Html lang="zh-CN">
       <Head>
-        <link rel="icon" href="/assets/images/cover.jpg" type="image/jpg" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/assets/images/cover.jpg" />
       </Head>
       <body>
