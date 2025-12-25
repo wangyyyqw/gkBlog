@@ -153,7 +153,7 @@ function StatsContents({ initialStats }: StatsContentsProps) {
               />
               <img
                 alt="Website"
-                src="https://img.shields.io/website?url=https%3A%2F%2Fwww.qladgk.com%2F&up_message=%E8%BF%90%E8%A1%8C%E4%B8%AD&down_message=%E5%A4%B1%E8%B4%A5&label=%E2%9C%85%20%E7%BD%91%E7%AB%99%E6%83%85%E5%86%B5"
+                src="https://img.shields.io/website?url=https%3A%2F%2Fhebieqingshan.us.kg%2F&up_message=%E8%BF%90%E8%A1%8C%E4%B8%AD&down_message=%E5%A4%B1%E8%B4%A5&label=%E2%9C%85%20%E7%BD%91%E7%AB%99%E6%83%85%E5%86%B5"
               />
               <img
                 alt="GitHub deployments"

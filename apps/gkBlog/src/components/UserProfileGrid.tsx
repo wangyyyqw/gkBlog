@@ -27,7 +27,7 @@ function UserProfileCard({
       <div className="flex items-center justify-between">
         <span
           className={`${getScoreColor(
-            score,
+            score
           )} rounded px-1.5 py-0.5 text-[10px] font-medium text-white`}
         >
           ¥ {score}
@@ -78,7 +78,7 @@ function UserProfileGrid({
         <div className="mt-4 flex justify-center space-x-4">
           <div className="flex flex-col items-center">
             <Image
-              src="https://cdn.qladgk.com/images/zanshang.png"
+              src="https://hebieqingshan.us.kg/assets/images/zanshang.png"
               alt="收款码"
               width={150}
               height={150}
@@ -87,7 +87,7 @@ function UserProfileGrid({
           </div>
           <div className="flex flex-col items-center">
             <Image
-              src="https://cdn.qladgk.com/images/zhifubao.jpg"
+              src="https://hebieqingshan.us.kg/assets/images/zhifubao.jpg"
               alt="收款码"
               width={150}
               height={150}

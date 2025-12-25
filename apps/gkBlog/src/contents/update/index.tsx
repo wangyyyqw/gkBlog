@@ -61,7 +61,7 @@ function UpdateContents() {
                   browserTabs={[
                     {
                       icon: <ReactIcon className="h-4 w-4" />,
-                      title: "www.qladgk.com - nextjsblog",
+                      title: "hebieqingshan.us.kg - nextjsblog",
                       isActive: currentState === "nextjsblog",
                       onClick: () => setCurrentState("nextjsblog"), // 添加 onClick 事件
                     },

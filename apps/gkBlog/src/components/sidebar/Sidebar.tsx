@@ -23,7 +23,7 @@ interface SidebarProps {
 }
 
 function Sidebar({ show }: SidebarProps) {
-  const imageUrl = "https://cdn.qladgk.com/images/gongzhonghao.png";
+  const imageUrl = "https://hebieqingshan.us.kg/assets/images/gongzhonghao.png";
   const [recentArticles, setRecentArticles] = useState<RecentArticle[]>([]);
   const [tagsWithCount, setTagsWithCount] = useState<Record<string, number>>(
     {}

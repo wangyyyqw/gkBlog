@@ -1,6 +1,6 @@
 export const getBaseUrl = () => "https://hebieqingshan.us.kg";
 export const getParams = (
-  obj: Record<string, string | Array<string> | undefined>,
+  obj: Record<string, string | Array<string> | undefined>
 ) =>
   Object.entries(obj)
     .filter((entry) => entry[1])
