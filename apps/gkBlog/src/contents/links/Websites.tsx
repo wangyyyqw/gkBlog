@@ -1,7 +1,7 @@
 const Websites = [
   {
     name: "梦中小城",
-    url: "https://laoshuan.dpdns.org/",
+    url: "https://www.llh1347.com/",
     preview:
       "https://laoshuan.dpdns.org/file/BQACAgIAAyEGAASYNuCMAANXaU0sK8fAxlzTCmzPwAuKOAnTorYAAo-KAALxJ2hKUk-8irqEZxo2BA.png",
     avatar:
