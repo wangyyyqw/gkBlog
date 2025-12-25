@@ -57,22 +57,14 @@ export const formatLang = (lang: TPostFrontMatter["lang"]) => {
 
 export const formatNumber = (number: number): string => number.toLocaleString();
 
-export const getPostOgImageUrl = (data: TPostOgImage) => {
-  const getUrl = (aspectRatio?: TPostOgImage["aspectRatio"]) => {
-    const params = aspectRatio
-      ? getParams({ ...data, aspectRatio })
-      : getParams(data);
-
-    return encodeURI(`${getBaseUrl()}/api/og-post?${params}`);
-  };
-
-  return {
-    default: getUrl(),
-    "16/9": getUrl("16/9"),
-    "4/3": getUrl("4/3"),
-    "1/1": getUrl("1/1"),
-  };
-};
+export const getPostOgImageUrl = (data: TPostOgImage) =>
+  // 在静态导出模式下，API 调用被禁用，返回默认图片
+  ({
+    default: "/default-og-image.png",
+    "16/9": "/default-og-image.png",
+    "4/3": "/default-og-image.png",
+    "1/1": "/default-og-image.png",
+  });
 
 export const getPostStructuredData = ({
   title,

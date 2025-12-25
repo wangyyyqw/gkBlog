@@ -7,7 +7,6 @@ export const getPageOgImageUrl = ({
   title,
   description,
 }: TPageOgImage) => ({
-  default: encodeURI(
-    `${getBaseUrl()}/api/og-page?${getParams({ caption, title, description })}`,
-  ),
+  // 在静态导出模式下，返回默认图片或空字符串
+  default: "/default-og-image.png", // 替换为默认的 OG 图片路径
 });

@@ -42,17 +42,8 @@ function Sidebar({ show }: SidebarProps) {
   }, [twikooLoaded]);
 
   const fetchArticles = async () => {
-    try {
-      const response = await fetch("/api/content/latest"); // API 路径
-      const data = await response.json();
-      const articles = data.map((article: IArticle) => ({
-        title: article.title,
-        url: `/blog/${article.slug}`,
-      }));
-      setRecentArticles(articles);
-    } catch (error) {
-      // console.warn('Error fetching recent articles:', error);
-    }
+    // 在静态导出模式下，返回空数组或预生成的数据
+    setRecentArticles([]);
   };
 
   useEffect(() => {
@@ -60,16 +51,10 @@ function Sidebar({ show }: SidebarProps) {
   }, []);
 
   const fetchTags = async () => {
-    const response = await fetch("/api/tags");
-    const data = await response.json();
-
-    // 对 tags 按数量排序
-    const sortedTags = Object.entries(data).sort(
-      ([, countA], [, countB]) => Number(countB) - Number(countA)
-    );
-
+    // 在静态导出模式下，返回空对象或预生成的数据
+    const data = {};
     setTagsWithCount(data); // 保存完整标签数据
-    setVisibleTags(sortedTags.slice(0, 15).map(([tag]) => tag)); // 初始化只显示前 15 个
+    setVisibleTags([]); // 初始化只显示前 15 个
   };
 
   useEffect(() => {
@@ -77,8 +62,8 @@ function Sidebar({ show }: SidebarProps) {
   }, []);
 
   const fetchCategories = async () => {
-    const response = await fetch("/api/categories");
-    const data = await response.json();
+    // 在静态导出模式下，返回空数组或预生成的数据
+    const data = {};
     setVisibleCategories(Object.keys(data));
   };
 

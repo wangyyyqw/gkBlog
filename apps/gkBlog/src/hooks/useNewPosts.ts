@@ -1,21 +1,11 @@
-import useSWR from "swr";
-
-import fetcher from "@/utils/fetcher";
+// import useSWR from "swr";
+// import fetcher from "@/utils/fetcher";
 
 export default function useNewPosts() {
-  const {
-    data,
-    error: isError,
-    isLoading,
-  } = useSWR<
-    {
-      slug: string;
-      title: string;
-      createdAt: string;
-    }[]
-  >("/api/content/latest", fetcher, {
-    fallbackData: [],
-  });
+  // 在静态导出模式下，API 调用被禁用，直接返回静态数据
+  const data = [];
+  const isError = null;
+  const isLoading = false;
 
   return {
     isLoading,

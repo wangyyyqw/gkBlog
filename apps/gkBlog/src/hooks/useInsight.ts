@@ -1,9 +1,9 @@
 import { ContentType, ReactionType, ShareType } from "@prisma/client";
 import merge from "lodash/merge";
 import { useEffect, useRef } from "react";
-import useSWR from "swr";
 
-import fetcher from "@/utils/fetcher";
+// import useSWR from "swr";
+// import fetcher from "@/utils/fetcher";
 import { postReaction, postShare, postView } from "@/helpers/api";
 
 import type { TContentMetaDetail } from "@/types";
@@ -53,13 +53,11 @@ export default function useInsight({
   });
   // #endregion
 
-  const { isLoading, data, mutate } = useSWR<TContentMetaDetail>(
-    `/api/content/${slug}`,
-    fetcher,
-    {
-      fallbackData: INITIAL_VALUE,
-    },
-  );
+  // 在静态导出模式下，API 调用被禁用，直接返回初始值
+  const isLoading = false;
+  const data = INITIAL_VALUE;
+  const mutate = (newData?: TContentMetaDetail, shouldRevalidate?: boolean) =>
+    Promise.resolve(newData || INITIAL_VALUE);
 
   // post view count
   useEffect(() => {
@@ -76,7 +74,7 @@ export default function useInsight({
           shares: data.meta.shares + 1,
         },
       }),
-      false,
+      false
     );
 
     postShare({
@@ -109,7 +107,7 @@ export default function useInsight({
           },
         },
       }),
-      false,
+      false
     );
 
     // increment the current batch click count

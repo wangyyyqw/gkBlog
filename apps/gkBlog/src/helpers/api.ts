@@ -18,17 +18,15 @@ export const postReaction = async ({
   count: number;
   section: string;
 }) => {
-  try {
-    await axios.post<TApiResponse>(`/api/reactions/${slug}`, {
-      contentType,
-      contentTitle,
-      type,
-      count,
-      section,
-    });
-  } catch (err) {
-    //
-  }
+  // 在静态导出模式下，API 调用被禁用
+  console.log("API call disabled in static export mode:", {
+    slug,
+    contentType,
+    contentTitle,
+    type,
+    count,
+    section,
+  });
 };
 
 export const postShare = async ({
@@ -42,15 +40,13 @@ export const postShare = async ({
   contentTitle: string;
   type: ShareType;
 }) => {
-  try {
-    await axios.post<TApiResponse>(`/api/shares/${slug}`, {
-      contentType,
-      contentTitle,
-      type,
-    });
-  } catch (err) {
-    //
-  }
+  // 在静态导出模式下，API 调用被禁用
+  console.log("API call disabled in static export mode:", {
+    slug,
+    contentType,
+    contentTitle,
+    type,
+  });
 };
 
 export const postView = async ({
@@ -62,12 +58,10 @@ export const postView = async ({
   contentType: ContentType;
   contentTitle: string;
 }) => {
-  try {
-    await axios.post<TApiResponse>(`/api/views/${slug}`, {
-      contentType,
-      contentTitle,
-    });
-  } catch (err) {
-    //
-  }
+  // 在静态导出模式下，API 调用被禁用
+  console.log("API call disabled in static export mode:", {
+    slug,
+    contentType,
+    contentTitle,
+  });
 };
