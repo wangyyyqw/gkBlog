@@ -105,11 +105,10 @@ export const setShare = async ({
   contentTitle: string;
   type: ShareType;
   sessionId: string;
-}) => (
+}) =>
   // In static export mode, this would be a no-op or API call
   // console.warn("Database operations are not supported in static export mode");
-  null
-);
+  null;
 
 export const getViewsBy = async (
   slug: string,
@@ -126,8 +125,7 @@ export const setView = async ({
   contentType: ContentType;
   contentTitle: string;
   sessionId: string;
-}) => (
+}) =>
   // In static export mode, this would be a no-op or API call
   // console.warn("Database operations are not supported in static export mode");
-  null
-);
+  null;
