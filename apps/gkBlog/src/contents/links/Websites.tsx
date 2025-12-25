@@ -1,12 +1,14 @@
 const Websites = [
-  // {
-  //   name: "示例网站",
-  //   url: "https://example.com",
-  //   preview: "https://hebieqingshan.us.kg/assets/images/preview.png",
-  //   avatar: "https://hebieqingshan.us.kg/assets/images/avatar.png",
-  //   description: "网站描述",
-  //   category: "推荐", // 或 "技术" 或 "生活"
-  // },
+  {
+    name: "梦中小城",
+    url: "https://laoshuan.dpdns.org/",
+    preview:
+      "https://laoshuan.dpdns.org/file/BQACAgIAAyEGAASYNuCMAANXaU0sK8fAxlzTCmzPwAuKOAnTorYAAo-KAALxJ2hKUk-8irqEZxo2BA.png",
+    avatar:
+      "https://laoshuan.dpdns.org/file/BQACAgIAAyEGAASYNuCMAANYaU0tR31Hs7jsxo2TzJsnsHDbacwAApyKAALxJ2hKQM9mOLQq0TE2BA.jpg",
+    description: "毕竟西湖六月中，风光不与四时同。",
+    category: "推荐",
+  },
 ];
 
 export default Websites;
