@@ -78,7 +78,7 @@ function UserProfileGrid({
         <div className="mt-4 flex justify-center space-x-4">
           <div className="flex flex-col items-center">
             <Image
-              src="https://hebieqingshan.us.kg/assets/images/zanshang.png"
+              src="https://laoshuan.dpdns.org/file/BQACAgIAAyEGAASYNuCMAANUaU0hkRDg9IlVpT1IKEZZRrhxu78AAlWJAALxJ2hK3myxNh9_y8I2BA.png"
               alt="收款码"
               width={150}
               height={150}
@@ -87,7 +87,7 @@ function UserProfileGrid({
           </div>
           <div className="flex flex-col items-center">
             <Image
-              src="https://hebieqingshan.us.kg/assets/images/zhifubao.jpg"
+              src="https://laoshuan.dpdns.org/file/BQACAgIAAyEGAASYNuCMAANVaU0hruJSTpnEoPhqqWxsTnM7-KUAAluJAALxJ2hKt0nyupEmit02BA.png"
               alt="收款码"
               width={150}
               height={150}
