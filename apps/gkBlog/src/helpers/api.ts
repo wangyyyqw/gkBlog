@@ -19,14 +19,14 @@ export const postReaction = async ({
   section: string;
 }) => {
   // 在静态导出模式下，API 调用被禁用
-  console.log("API call disabled in static export mode:", {
-    slug,
-    contentType,
-    contentTitle,
-    type,
-    count,
-    section,
-  });
+  // console.log("API call disabled in static export mode:", {
+  //   slug,
+  //   contentType,
+  //   contentTitle,
+  //   type,
+  //   count,
+  //   section,
+  // });
 };
 
 export const postShare = async ({
@@ -41,12 +41,12 @@ export const postShare = async ({
   type: ShareType;
 }) => {
   // 在静态导出模式下，API 调用被禁用
-  console.log("API call disabled in static export mode:", {
-    slug,
-    contentType,
-    contentTitle,
-    type,
-  });
+  // console.log("API call disabled in static export mode:", {
+  //   slug,
+  //   contentType,
+  //   contentTitle,
+  //   type,
+  // });
 };
 
 export const postView = async ({
@@ -59,9 +59,9 @@ export const postView = async ({
   contentTitle: string;
 }) => {
   // 在静态导出模式下，API 调用被禁用
-  console.log("API call disabled in static export mode:", {
-    slug,
-    contentType,
-    contentTitle,
-  });
+  // console.log("API call disabled in static export mode:", {
+  //   slug,
+  //   contentType,
+  //   contentTitle,
+  // });
 };
