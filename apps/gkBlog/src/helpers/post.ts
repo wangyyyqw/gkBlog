@@ -86,9 +86,9 @@ export const getPostStructuredData = ({
   author: [
     {
       "@type": "Person",
-      name: "qlAD",
-      jobTitle: "计算机爱好者",
-      url: "https://www.qladgk.com/about-me",
+      name: "蠢卷栖萤",
+      jobTitle: "图书爱好者",
+      url: "https://hebieqingshan.us.kg/",
     },
   ],
 });
