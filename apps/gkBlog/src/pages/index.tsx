@@ -24,7 +24,7 @@ function Index() {
       name: "蠢卷栖萤",
       url: "https://hebieqingshan.us.kg/about-me",
     },
-    sameAs: ["https://github.com/qlAD"],
+    sameAs: [],
   };
 
   return (
