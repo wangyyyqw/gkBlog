@@ -1,4 +1,4 @@
-export const getBaseUrl = () => "https://www.qladgk.com";
+export const getBaseUrl = () => "https://hebieqingshan.us.kg";
 export const getParams = (
   obj: Record<string, string | Array<string> | undefined>,
 ) =>
