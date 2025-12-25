@@ -33,7 +33,9 @@ function MessagesContents() {
     try {
       const envId = process.env.NEXT_PUBLIC_TWIKOO_ENVID;
       if (!envId) {
-        throw new Error("环境变量 NEXT_PUBLIC_TWIKOO_ENVID 未配置");
+        // 如果没有配置环境变量，则不获取评论
+        setComments([]);
+        return;
       }
 
       const recentComments = await window.twikoo.getRecentComments({

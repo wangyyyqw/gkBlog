@@ -1,7 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+// For Cloudflare Pages deployment, we need to handle database differently
+// Since static export doesn't support server-side database connections
+// We'll export a mock client for build time and handle data differently
 
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
+// This is a placeholder for static export compatibility
+export const prisma = null;
 
-export const prisma = globalForPrisma.prisma || new PrismaClient();
-
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+// For actual implementation, we would need to use a different approach
+// such as pre-generating data at build time or using a REST API

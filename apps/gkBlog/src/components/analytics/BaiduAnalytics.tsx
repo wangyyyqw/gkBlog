@@ -6,6 +6,11 @@ import Script from "next/script";
  * 使用 Next.js 的 Script 组件来加载百度统计脚本，并确保在页面交互完成后加载
  */
 function BaiDuAnalytics() {
+  // 检查环境变量是否存在，仅在存在时渲染脚本
+  if (!process.env.NEXT_PUBLIC_BAIDU_TONGJI) {
+    return null;
+  }
+
   return (
     <Script
       id="baidu-tongji"

@@ -2,142 +2,43 @@
 import jsonata from "jsonata";
 
 import dayjs from "@/utils/dayjs";
-import { prisma } from "@/utils/prisma";
 
 import type { TContentActivity, TContentMeta, TReaction } from "@/types";
 import type { ContentType, ReactionType, ShareType } from "@prisma/client";
 
+// For Cloudflare Pages static export, we need to replace database operations
+// with build-time generated data or API calls
+
+// Mock data for static export
+const mockContentMeta = {
+  views: 0,
+  shares: 0,
+};
+
+const mockReactions = {
+  CLAPPING: 0,
+  THINKING: 0,
+  AMAZED: 0,
+};
+
 export const getAllContentMeta = async (): Promise<
   Record<string, TContentMeta>
-> => {
-  const result = await prisma.contentMeta.findMany({
-    include: {
-      _count: {
-        select: {
-          shares: true,
-          views: true,
-        },
-      },
-    },
-    orderBy: {
-      createdAt: "asc",
-    },
-  });
-
-  return result && result.length > 0
-    ? result.reduce(
-        (acc, cur) => ({
-          ...acc,
-          [cur.slug]: {
-            meta: {
-              views: cur._count.views,
-              shares: cur._count.shares,
-            },
-          },
-        }),
-        {} as Record<string, TContentMeta>,
-      )
-    : {};
-};
+> =>
+  // In static export mode, return empty object or pre-generated data
+  ({});
 
 export const getContentMeta = async (
-  slug: string,
-): Promise<{ shares: number; views: number }> => {
-  const result = await prisma.contentMeta.findFirst({
-    where: {
-      slug,
-    },
-    include: {
-      _count: {
-        select: {
-          shares: true,
-          views: true,
-        },
-      },
-    },
+  slug: string
+): Promise<{ shares: number; views: number }> =>
+  // In static export mode, return mock data
+  ({
+    shares: 0,
+    views: 0,
   });
 
-  return {
-    shares: result?._count.shares || 0,
-    views: result?._count.views || 0,
-  };
-};
-
-export const getContentActivity = async (): Promise<TContentActivity[]> => {
-  // last 24 hours
-  const date = dayjs().subtract(24, "hours").toDate();
-
-  const result = await prisma.contentMeta.findMany({
-    include: {
-      reactions: {
-        select: {
-          type: true,
-          count: true,
-          createdAt: true,
-          content: {
-            select: { slug: true, title: true, type: true },
-          },
-        },
-        orderBy: {
-          createdAt: "asc",
-        },
-        where: {
-          createdAt: {
-            gte: date,
-          },
-        },
-        take: 5,
-      },
-      shares: {
-        select: {
-          type: true,
-          createdAt: true,
-          content: {
-            select: { slug: true, title: true, type: true },
-          },
-        },
-        orderBy: {
-          createdAt: "asc",
-        },
-        where: {
-          createdAt: {
-            gte: date,
-          },
-        },
-        take: 5,
-      },
-    },
-  });
-
-  const expression = `
-    $sort([
-      $.reactions.{
-        'activityType': 'REACTION',
-        'type': type,
-        'count': count,
-        'createdAt': createdAt,
-        'slug': content.slug,
-        'contentTitle': content.title,
-        'contentType': content.type
-      }, 
-      $.shares.{
-        'activityType': 'SHARE',
-        'type': type,
-        'createdAt': createdAt,
-        'slug': content.slug,
-        'contentTitle': content.title,
-        'contentType': content.type
-      }
-    ], function($l, $r) {
-      $string($l.createdAt) < $string($r.createdAt)
-    })[[0..4]]
-  `;
-
-  // transform result
-  const transformed = await jsonata(expression).evaluate(result);
-
-  return transformed;
-};
+export const getContentActivity = async (): Promise<TContentActivity[]> =>
+  // In static export mode, return empty array
+  [];
 
 export const getNewPosts = async (): Promise<
   {
@@ -145,65 +46,13 @@ export const getNewPosts = async (): Promise<
     title: string;
     createdAt: Date;
   }[]
-> => {
-  // last 14 days
-  const date = dayjs().subtract(14, "days").toDate();
+> => []; // In static export mode, return empty array
 
-  const result = await prisma.contentMeta.findMany({
-    where: {
-      type: "POST",
-      AND: {
-        createdAt: {
-          gte: date,
-        },
-      },
-    },
-    select: {
-      slug: true,
-      title: true,
-      createdAt: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-    take: 1,
-  });
-
-  return result;
-};
-
-export const getReactions = async (slug: string): Promise<TReaction> => {
-  const result = await prisma.reaction.groupBy({
-    by: ["type"],
-    _sum: {
-      count: true,
-    },
-    where: {
-      content: {
-        slug,
-      },
-    },
-  });
-
-  const expression = `$merge([
-    {
-      'CLAPPING': 0,
-      'THINKING': 0,
-      'AMAZED': 0
-    },
-    $.{
-      type: _sum.count
-    }
-  ])`;
-
-  // transform result
-  const transformed = await jsonata(expression).evaluate(result);
-
-  return transformed;
-};
+export const getReactions = async (slug: string): Promise<TReaction> =>
+  mockReactions; // In static export mode, return mock reactions
 
 export const getSectionMeta = async (
-  slug: string,
+  slug: string
 ): Promise<
   Record<
     string,
@@ -211,80 +60,12 @@ export const getSectionMeta = async (
       reactionsDetail: TReaction;
     }
   >
-> => {
-  const result = await prisma.reaction.groupBy({
-    by: ["section", "type"],
-    _sum: {
-      count: true,
-    },
-    where: {
-      section: {
-        not: null,
-      },
-      content: {
-        slug,
-      },
-    },
-    orderBy: {
-      section: "asc",
-    },
-  });
-
-  const expression = `$\
-    {
-      section: {
-        'reactionsDetail': $merge([
-          {
-            'CLAPPING': 0,
-            'THINKING': 0,
-            'AMAZED': 0
-          },
-          {
-            type: _sum.count
-          }
-        ])
-      }
-    }`;
-
-  // transform result
-  const transformed = await jsonata(expression).evaluate(result);
-
-  return transformed;
-};
+> => ({}); // In static export mode, return empty object
 
 export const getReactionsBy = async (
   slug: string,
-  sessionId: string,
-): Promise<TReaction> => {
-  const result = await prisma.reaction.groupBy({
-    by: ["type"],
-    _sum: {
-      count: true,
-    },
-    where: {
-      sessionId,
-      content: {
-        slug,
-      },
-    },
-  });
-
-  const expression = `$merge([
-    {
-      'CLAPPING': 0,
-      'THINKING': 0,
-      'AMAZED': 0
-    },
-    $.{
-      type: _sum.count
-    }
-  ])`;
-
-  // transform result
-  const transformed = await jsonata(expression).evaluate(result);
-
-  return transformed;
-};
+  sessionId: string
+): Promise<TReaction> => mockReactions; // In static export mode, return mock reactions
 
 export const setReaction = async ({
   slug,
@@ -303,45 +84,15 @@ export const setReaction = async ({
   sessionId: string;
   type: ReactionType;
 }) => {
-  const result = await prisma.reaction.create({
-    data: {
-      count,
-      type,
-      section,
-      sessionId,
-      content: {
-        connectOrCreate: {
-          where: {
-            slug,
-          },
-          create: {
-            slug,
-            type: contentType,
-            title: contentTitle,
-          },
-        },
-      },
-    },
-  });
-
-  return result;
+  // In static export mode, this would be a no-op or API call
+  console.warn("Database operations are not supported in static export mode");
+  return null;
 };
 
 export const getSharesBy = async (
   slug: string,
-  sessionId: string,
-): Promise<number> => {
-  const result = await prisma.share.count({
-    where: {
-      sessionId,
-      content: {
-        slug,
-      },
-    },
-  });
-
-  return result || 0;
-};
+  sessionId: string
+): Promise<number> => 0; // In static export mode, return 0
 
 export const setShare = async ({
   slug,
@@ -356,43 +107,15 @@ export const setShare = async ({
   type: ShareType;
   sessionId: string;
 }) => {
-  const result = await prisma.share.create({
-    data: {
-      type,
-      sessionId,
-      content: {
-        connectOrCreate: {
-          where: {
-            slug,
-          },
-          create: {
-            slug,
-            type: contentType,
-            title: contentTitle,
-          },
-        },
-      },
-    },
-  });
-
-  return result;
+  // In static export mode, this would be a no-op or API call
+  console.warn("Database operations are not supported in static export mode");
+  return null;
 };
 
 export const getViewsBy = async (
   slug: string,
-  sessionId: string,
-): Promise<number> => {
-  const result = await prisma.view.count({
-    where: {
-      sessionId,
-      content: {
-        slug,
-      },
-    },
-  });
-
-  return result || 0;
-};
+  sessionId: string
+): Promise<number> => 0; // In static export mode, return 0
 
 export const setView = async ({
   slug,
@@ -405,23 +128,7 @@ export const setView = async ({
   contentTitle: string;
   sessionId: string;
 }) => {
-  const result = await prisma.view.create({
-    data: {
-      sessionId,
-      content: {
-        connectOrCreate: {
-          where: {
-            slug,
-          },
-          create: {
-            slug,
-            type: contentType,
-            title: contentTitle,
-          },
-        },
-      },
-    },
-  });
-
-  return result;
+  // In static export mode, this would be a no-op or API call
+  console.warn("Database operations are not supported in static export mode");
+  return null;
 };

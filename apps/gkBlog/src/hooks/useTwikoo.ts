@@ -39,6 +39,11 @@ function useTwikoo(options?: { envId?: string }) {
 
   // 加载 twikoo 脚本
   useEffect(() => {
+    // 如果没有配置环境变量，则不加载 Twikoo
+    if (!envId) {
+      return () => {};
+    }
+
     if (scriptLoadedRef.current) {
       // 始终返回一个空函数
       return () => {};
@@ -61,11 +66,11 @@ function useTwikoo(options?: { envId?: string }) {
         script.parentNode.removeChild(script);
       }
     };
-  }, []);
+  }, [envId]);
 
   // 初始化评论区
   const initTwikoo = (el: string) => {
-    if (window.twikoo && twikooLoaded) {
+    if (envId && window.twikoo && twikooLoaded) {
       window.twikoo.init({
         envId,
         el,
@@ -75,7 +80,7 @@ function useTwikoo(options?: { envId?: string }) {
 
   // 获取最新评论
   const fetchRecentComments = async (pageSize = 3) => {
-    if (window.twikoo && twikooLoaded) {
+    if (envId && window.twikoo && twikooLoaded) {
       try {
         const comments = await window.twikoo.getRecentComments({
           envId,

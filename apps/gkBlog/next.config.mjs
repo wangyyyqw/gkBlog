@@ -16,6 +16,7 @@ const nextConfig = {
       "img1.doubanio.com",
     ],
   },
+  output: "export",
 };
 
 const withBundleAnalyzer = bundleAnalyzer({

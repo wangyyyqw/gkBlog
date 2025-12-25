@@ -6,6 +6,11 @@ import Script from "next/script";
  * 该组件利用 Next.js 的 Script 组件将 Clarity 的跟踪代码注入到页面中
  */
 function ClarityAnalytics() {
+  // 检查环境变量是否存在，仅在存在时渲染脚本
+  if (!process.env.NEXT_PUBLIC_CLARITY_TAG_ID) {
+    return null;
+  }
+
   return (
     <Script
       id="clarity-analytics"
