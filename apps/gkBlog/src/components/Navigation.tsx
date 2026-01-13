@@ -3,7 +3,8 @@ import { useEffect, useMemo, useState } from "react";
 import useSound from "use-sound";
 
 import NavIcon from "@/components/navigations/NavIcon";
-import NavIconQuickAccess from "@/components/navigations/NavIconQuickAccess";
+import NavIconSearch from "@/components/navigations/NavIconSearch";
+import NavIconThemeToggle from "@/components/navigations/NavIconThemeToggle";
 import NavLink from "@/components/navigations/NavLink";
 import NavLinkDropdown from "@/components/navigations/NavLinkDropdown";
 import NavLogo from "@/components/navigations/NavLogo";
@@ -21,18 +22,7 @@ function Navbar() {
   const [playOpenSound] = useSound(openSound, { preload: true });
   const [playCloseSound] = useSound(closeSound, { preload: true });
 
-  const myLinks = useMemo(
-    () => [
-      { title: "回忆录", href: "/essay" },
-      { title: "相册集", href: "/album" },
-      { title: "书影音", href: "/media" },
-      { title: "关于我", href: "/about-me" },
-      { title: "友情链接", href: "/links" },
-      { title: "留言反馈", href: "/feedback" },
-      { title: "致谢", href: "/credits" },
-    ],
-    []
-  );
+  const myLinks = useMemo(() => [], []);
   const moreLinks = useMemo(() => [], []);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -86,33 +76,30 @@ function Navbar() {
             <ul className={clsx("flex items-center", "md:gap-1")}>
               <li>
                 <NavLink
-                  title="博客"
-                  href="/blog"
+                  title="图书"
+                  href="/media?category=book"
                   onClick={() => playClickSound()}
                 />
               </li>
               <li>
                 <NavLink
-                  title="朋友圈"
-                  href="/today-i-learned"
+                  title="工具"
+                  href="/tools"
                   onClick={() => playClickSound()}
                 />
               </li>
               <li>
                 <NavLink
-                  title="统计"
-                  href="/stats"
+                  title="推荐"
+                  href="/recommend"
                   onClick={() => playClickSound()}
                 />
               </li>
-
-              <li className={clsx("hidden md:block")} data-accent="blue">
-                <NavLinkDropdown
-                  title="我的"
-                  items={myLinks}
-                  onOpenClick={() => playOpenSound()}
-                  onCloseClick={() => playCloseSound()}
-                  onLinkClick={() => playClickSound()}
+              <li>
+                <NavLink
+                  title="致谢"
+                  href="/credits"
+                  onClick={() => playClickSound()}
                 />
               </li>
             </ul>
@@ -129,7 +116,10 @@ function Navbar() {
               />
             </li>
             <li className={clsx("mr-2")}>
-              <NavIconQuickAccess onClick={() => playClickSound()} />
+              <NavIconSearch />
+            </li>
+            <li className={clsx("mr-2")}>
+              <NavIconThemeToggle />
             </li>
           </ul>
         </div>

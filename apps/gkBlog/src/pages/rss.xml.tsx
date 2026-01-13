@@ -7,7 +7,7 @@ interface RSSProps {
 }
 
 function RSSPage({ rss }: RSSProps) {
-  // 在静态导出模式下，我们返回一个包含 XML 内容的页面
+  // 在静态导出模式下，我返回一个包含 XML 内容的页面
   // 但实际的 RSS 文件将在构建时生成
   return (
     <div>
@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       rss,
     },
-    // 在静态导出模式下，我们不能设置动态头部
+    // 在静态导出模式下，我不能设置动态头部
     // 头部将在部署配置中处理
   };
 };

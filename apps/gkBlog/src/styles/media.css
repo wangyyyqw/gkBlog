@@ -1,32 +1,52 @@
 .movie {
   display: grid;
-  grid-gap: 5px;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
   margin-top: 1rem;
   min-height: 350px;
+  width: 100%;
+}
+
+/* 在md断点(768px)及以上显示4列 */
+@media (min-width: 768px) {
+  .movie {
+    grid-template-columns: repeat(4, minmax(170px, 1fr));
+  }
+}
+
+/* 在lg断点(1024px)及以上调整列宽 */
+@media (min-width: 1024px) {
+  .movie {
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+  }
+}
+
+/* 在768-900px之间优化布局，防止溢出 */
+@media (min-width: 768px) and (max-width: 900px) {
+  .movie {
+    grid-gap: 15px;
+  }
 }
 
 .card {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   position: relative;
   overflow: hidden;
   border-radius: 4px;
 }
 
+/* 禁用鼠标悬停动画 */
 .card:hover .movie_details {
-  bottom: 0;
-  transition: all 0.5s;
+  bottom: -400px;
+  transition: none;
 }
 
 .card:hover .poster:before {
-  bottom: 0;
+  bottom: -100%;
 }
 
 .card:hover .poster img {
-  filter: blur(2px);
-  transform: translateY(-40px);
+  filter: none;
+  transform: none;
 }
 
 .card .poster {
@@ -74,7 +94,7 @@
   left: 0;
   bottom: -400px;
   z-index: 2;
-  transition: all 0.4s ease;
+  transition: none;
 }
 
 .movie_details h2 {
@@ -88,23 +108,18 @@
   color: #cccccc; /* 设置文字为灰色 */
 }
 
-/* // 页面宽度大于700小于900样式 */
-@media screen and (min-width: 700px) and (max-width: 900px) {
+/* 在小屏幕下保持3列布局 */
+@media (max-width: 766px) {
   .movie {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    min-height: 250px;
-    margin-top: 3rem;
+    grid-template-columns: repeat(3, minmax(120px, 1fr));
+    min-height: 200px;
   }
 }
 
-/* // 页面宽度小于700样式 */
-@media (max-width: 700px) {
+/* 在超小屏幕下显示2列 */
+@media (max-width: 500px) {
   .movie {
-    width: 100%;
-    margin-left: 0;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    min-height: 200px;
-    margin-top: 0.5rem;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
   }
 }
 

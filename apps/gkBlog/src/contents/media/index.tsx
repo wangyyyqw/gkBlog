@@ -1,6 +1,9 @@
 import clsx from "clsx";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
+
+import { bookTitles } from "@/constants/books";
 
 interface Item {
   title: string;
@@ -8,6 +11,7 @@ interface Item {
   rating: number;
   uuid: string;
   category: string;
+  download_url: string;
 }
 
 interface MediaData {
@@ -21,45 +25,90 @@ function MediaContents() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [filteredData, setFilteredData] = useState<MediaData[]>([]);
-  const [activeCategory, setActiveCategory] = useState<string>("movie");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [activeCategory, setActiveCategory] = useState<string>("book");
+  // 分页状态
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [booksPerPage, setBooksPerPage] = useState<number>(12);
+  const movieContainerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // 处理图书点击事件，跳转到详情页面
+  const handleBookClick = (bookId: string) => {
+    router.push(`/book/${bookId}`);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // 根据活动类别加载相应的数据
-        let response;
-        if (activeCategory === "movie") {
-          response = await fetch("/assets/data/neodb/movie.json");
-        } else if (activeCategory === "book") {
-          response = await fetch("/assets/data/neodb/book.json");
-        } else if (activeCategory === "game") {
-          response = await fetch("/assets/data/neodb/game.json");
-        } else {
-          response = await fetch("/assets/data/neodb/movie.json"); // 默认
-        }
+    // 从URL参数获取默认分类
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryFromUrl = urlParams.get("category") || "book";
+    setActiveCategory(categoryFromUrl);
+  }, []);
 
-        if (!response.ok) {
-          throw new Error("网络错误");
-        }
+  useEffect(() => {
+    try {
+      // 创建样本图书数据
+      const sampleBook: MediaData = {
+        shelf_type: "read",
+        visibility: 1,
+        item: {
+          title: "卢克明的偷偷一笑",
+          cover_image_url:
+            "https://laoshuan.dpdns.org/file/BQACAgIAAyEGAASYNuCMAANTaUv_Hd34kAbZLZyMpW4NiFI3TjMAAhOPAALxJ2BKYe2wYxrZrhE2BA.jpg",
+          rating: 7.5,
+          uuid: "book-1",
+          category: "book",
+        },
+      };
 
-        const data = await response.json();
-        setMediaData(data.data);
-        setFilteredData(data.data); // 设置为当前类别数据
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+      // 生成25本图书，每本都有唯一的uuid和书名
+      const books: MediaData[] = Array.from({ length: 25 }, (_, index) => ({
+        ...sampleBook,
+        item: {
+          ...sampleBook.item,
+          title: bookTitles[index],
+          uuid: `book-${index + 1}`,
+          download_url: `https://chunjuanqiying.us.kg/file/1768313652834_X-024《刺客后传3：弄臣命运》作者：罗苹·荷布V1.0_encode.epub`,
+        },
+      }));
 
-    fetchData();
+      setMediaData(books);
+      setFilteredData(books); // 设置为当前类别数据
+      setCurrentPage(1); // 切换类别时重置到第一页
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   }, [activeCategory]);
 
-  const categories = [
-    { label: "电影", value: "movie" },
-    { label: "图书", value: "book" },
-    { label: "游戏", value: "game" },
-  ];
+  // 根据搜索查询过滤图书
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setFilteredData(mediaData);
+    } else {
+      const filtered = mediaData.filter((book) =>
+        book.item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredData(filtered);
+    }
+    setCurrentPage(1); // 搜索时重置到第一页
+  }, [searchQuery, mediaData]);
+
+  // 计算当前页显示的图书
+  const indexOfLastBook = currentPage * booksPerPage;
+  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  const currentBooks = filteredData.slice(indexOfFirstBook, indexOfLastBook);
+  const totalPages = Math.ceil(filteredData.length / booksPerPage);
+
+  // 处理页码变化
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const categories = [{ label: "图书", value: "book" }];
 
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
@@ -82,37 +131,35 @@ function MediaContents() {
 
   return (
     <div className={clsx("content-wrapper mdx-contents")}>
-      <div className="flex flex-wrap justify-center gap-2 mb-6">
-        {categories.map((cat) => (
-          <button
-            type="button"
-            key={cat.value}
-            onClick={() => handleCategoryChange(cat.value)}
-            className={`px-2.5 py-2 rounded-lg transition-colors duration-300 ${activeCategory === cat.value ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-800 hover:bg-gray-300"}`}
-          >
-            {cat.label}
-          </button>
-        ))}
+      {/* 搜索框 */}
+      <div className="mb-8">
+        <input
+          type="text"
+          placeholder="搜索图书..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              // 回车键按下时滚动到搜索结果顶部
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              // 聚焦到搜索结果容器，提高可访问性
+              if (movieContainerRef.current) {
+                movieContainerRef.current.focus();
+              }
+              console.log("搜索执行:", searchQuery);
+            }
+          }}
+          className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:focus:ring-blue-400"
+        />
       </div>
-
-      <div className="movie">
-        {filteredData.length > 0 ? (
-          filteredData.map((media) => (
+      <div className="movie" ref={movieContainerRef} tabIndex={-1}>
+        {currentBooks.length > 0 ? (
+          currentBooks.map((media) => (
             <div
               key={media.item.uuid}
-              className="card"
-              onMouseEnter={(e) => {
-                const info = e.currentTarget.querySelector(
-                  ".movie_details"
-                ) as HTMLElement;
-                if (info) info.style.bottom = "0";
-              }}
-              onMouseLeave={(e) => {
-                const info = e.currentTarget.querySelector(
-                  ".movie_details"
-                ) as HTMLElement;
-                if (info) info.style.bottom = "-400px";
-              }}
+              className="card cursor-pointer"
+              onClick={() => handleBookClick(media.item.uuid)}
             >
               <div className="poster">
                 <Image
@@ -122,13 +169,12 @@ function MediaContents() {
                       : `/assets/images/neodb/cover/${media.item.cover_image_url.split("/").pop()}`
                   }
                   alt={media.item.title}
-                  width={300}
-                  height={150}
+                  width={200}
+                  height={300}
+                  style={{ objectFit: "cover", borderRadius: "8px" }}
                 />
                 <div className="movie_details">
                   <h2>{media.item.title}</h2>
-
-                  <p>评分: {media.item.rating}</p>
                 </div>
               </div>
             </div>
@@ -137,6 +183,45 @@ function MediaContents() {
           <p>没有找到匹配的内容</p>
         )}
       </div>
+
+      {/* 分页控件 */}
+      {totalPages > 1 && (
+        <div className="flex flex-wrap justify-center items-center gap-2 mt-12 mb-2 p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-xl shadow-sm">
+          {/* 上一页按钮 */}
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`px-3 py-2 rounded-lg transition-all duration-200 font-medium text-sm ${currentPage === 1 ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 dark:bg-slate-800 dark:text-gray-500 dark:border-slate-700" : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"}`}
+          >
+            上一页
+          </button>
+
+          {/* 页码按钮 */}
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => handlePageChange(page)}
+              className={`w-8 h-8 rounded-lg transition-all duration-200 font-medium flex items-center justify-center ${currentPage === page ? "bg-blue-600 text-white shadow-md transform scale-105 dark:bg-blue-500" : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"}`}
+            >
+              {page}
+            </button>
+          ))}
+
+          {/* 下一页按钮 */}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`px-3 py-2 rounded-lg transition-all duration-200 font-medium text-sm ${currentPage === totalPages ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 dark:bg-slate-800 dark:text-gray-500 dark:border-slate-700" : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"}`}
+          >
+            下一页
+          </button>
+
+          {/* 页码信息 */}
+          <span className="ml-4 text-sm text-slate-500 dark:text-slate-400 font-medium">
+            第 {currentPage} / {totalPages} 页
+          </span>
+        </div>
+      )}
     </div>
   );
 }

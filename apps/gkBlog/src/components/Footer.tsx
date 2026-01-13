@@ -6,7 +6,6 @@ import {
   ExternalLink,
   GitHubIcon,
   QQIcon,
-  RSSIcon,
   TelegramIcon,
 } from "@/components/Icons";
 
@@ -115,21 +114,6 @@ function FooterDescription() {
       >
         <li>
           <a
-            href="/rss.xml"
-            target="_blank"
-            rel="noreferrer nofollow"
-            className={clsx(
-              "flex h-9 w-9 items-center justify-center",
-              "md:h-10 md:w-10"
-            )}
-            aria-label="RSS订阅"
-            title="RSS订阅"
-          >
-            <RSSIcon className={clsx("h-5 w-5", "md:h-6 md:w-6")} />
-          </a>
-        </li>
-        <li>
-          <a
             href="https://qm.qq.com/q/OVjoDKhDyI"
             target="_blank"
             rel="noreferrer nofollow"
@@ -167,13 +151,13 @@ function Footer() {
   return (
     <footer
       className={clsx(
-        "background-grid background-grid--fade-in border-divider-light mt-12 pt-16 text-sm text-slate-900",
+        "background-grid background-grid--fade-in border-divider-light mt-2 pt-4 text-sm text-slate-900",
         "dark:border-divider-dark dark:text-slate-200"
       )}
     >
       <div className={clsx("content-wrapper")}>
-        <div className={clsx("py-8 font-semibold")}>
-          <div className={clsx("flex flex-col-reverse gap-8", "lg:flex-row")}>
+        <div className={clsx("py-2 font-semibold")}>
+          <div className={clsx("flex flex-col-reverse gap-2", "lg:flex-row")}>
             <div className={clsx("flex-1 flex justify-center")}>
               <FooterDescription />
             </div>
@@ -181,13 +165,13 @@ function Footer() {
         </div>
         <div
           className={clsx(
-            "border-divider-light flex flex-col items-center justify-center border-t py-6 text-xs gap-3",
+            "border-divider-light flex flex-col items-center justify-center border-t py-3 text-xs gap-1",
             "dark:border-divider-dark",
             "sm:flex-row sm:gap-4"
           )}
         >
           <div className={clsx("font-semibold text-center")}>
-            &copy; {dayjs().format("YYYY")}, 蠢卷栖萤 版权所有
+            &copy; 2025-{new Date().getFullYear()}, 蠢卷栖萤 版权所有
           </div>
           <div
             className={clsx(

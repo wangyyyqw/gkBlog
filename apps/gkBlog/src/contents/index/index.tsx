@@ -35,14 +35,7 @@ function FeaturedCardSection() {
 function IndexContents() {
   const toastRef = useRef(null);
 
-  useEffect(() => {
-    if (toastRef.current) {
-      toast.remove(toastRef.current.id);
-    }
-    toastRef.current = toast.custom((t) => (
-      <Toast title={privacyToast.title} message={privacyToast.message} t={t} />
-    ));
-  }, []);
+
 
   return (
     <>

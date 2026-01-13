@@ -24,9 +24,9 @@ function PageWithMDX({
     >
       <div className={clsx("flex flex-row gap-6")}>
         {/* 左侧 */}
-        <div className={clsx("flex min-w-0 flex-col ")}>
+        <div className={clsx("flex min-w-0 flex-col flex-1")}>
           {/* 上 */}
-          <div className={clsx("flex flex-row gap-8")}>
+          <div className={clsx("flex flex-row")}>
             <div
               className={clsx(
                 "border-divider-light hidden border-l",
@@ -47,22 +47,7 @@ function PageWithMDX({
             <TwikooComments />
           </div>
         </div>
-        {/* 右侧 */}
-        <div className={clsx("-mt-48 hidden", "lg:block")}>
-          <div
-            className={clsx(
-              "sticky top-24 z-[901] w-64",
-              "xl:w-[272px]",
-              "fm:relative fm:top-0",
-            )}
-          >
-            <TableOfContents items={tableOfContents} />
-            <div className={clsx("my-6")} />
-            <Sidebar
-              show={["publicAccount", "recentArticles", "recentComments"]}
-            />
-          </div>
-        </div>
+
       </div>
     </div>
   );

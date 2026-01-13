@@ -28,8 +28,7 @@ function PageHeader({
     <header
       id="page-header"
       className={clsx(
-        "background-grid background-grid--fade-out border-divider-light z-[900] mb-10 border-b pt-32 pb-10",
-        "md:mb-0 md:border-none md:pb-20 md:pt-40",
+        "background-grid background-grid--fade-out border-divider-light z-[900] mb-3 border-b pt-20 pb-3",
         "dark:border-divider-dark"
       )}
     >
@@ -51,7 +50,7 @@ function PageHeader({
           </div>
         </div>
       )}
-      <div className={clsx("content-wrapper")}>
+      <div className={clsx("content-wrapper pt-1")}>
         {caption && (
           <m.div
             initial={animation.hide}
@@ -60,8 +59,7 @@ function PageHeader({
           >
             <span
               className={clsx(
-                "text-accent-600 mb-1 block text-lg font-extrabold capitalize leading-none",
-                "md:mb-0 md:text-2xl",
+                "text-accent-600 mb-0.5 block text-base font-extrabold capitalize leading-none",
                 "dark:text-accent-400"
               )}
             >
@@ -76,29 +74,30 @@ function PageHeader({
         >
           <h1
             className={clsx(
-              "text-[2.0rem] font-extrabold leading-tight text-slate-700",
-              "md:text-6xl md:leading-snug",
+              "text-[1.5rem] font-extrabold leading-tight text-slate-700 mt-1",
+              "md:text-4xl md:leading-snug",
               "dark:text-slate-300"
             )}
           >
             {title}
           </h1>
         </m.div>
-        <m.div
-          initial={animation.hide}
-          animate={animation.show}
-          transition={{ delay: 0.2 }}
-        >
-          <p
-            className={clsx(
-              "mt-4 text-lg text-slate-600",
-              "md:mt-6 md:text-2xl max-w-[700px]",
-              "dark:text-slate-400"
-            )}
+        {description && (
+          <m.div
+            initial={animation.hide}
+            animate={animation.show}
+            transition={{ delay: 0.2 }}
           >
-            {description}
-          </p>
-        </m.div>
+            <p
+              className={clsx(
+                "mt-2 text-base text-slate-600 max-w-[700px]",
+                "dark:text-slate-400"
+              )}
+            >
+              {description}
+            </p>
+          </m.div>
+        )}
       </div>
     </header>
   );

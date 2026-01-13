@@ -217,7 +217,7 @@ flowchart TB
 ### 🌐 运行架构
 
 - **国内**：阿里云 Docker 容器、ESA [https://www.qladgk.com](https://www.qladgk.com)
-- **国外**：Vercel [https://gkblog.vercel.app](https://gkblog.vercel.app)
+- **国外**：Vercel [https://chunjuanqiying.vercel.app](https://chunjuanqiying.vercel.app)
 
 ---
 

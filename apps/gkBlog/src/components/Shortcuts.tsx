@@ -38,28 +38,7 @@ function Shortcuts() {
     }
   });
 
-  useEffect(() => {
-    if (toastRef.current) {
-      toast.remove(toastRef.current.id);
-    }
-    if (focusMode) {
-      toastRef.current = toast.custom((t) => (
-        <Toast
-          title={focusToast.title.replace("{STATUS}", "开启")}
-          message={focusToast.message}
-          t={t}
-        />
-      ));
-    } else {
-      toastRef.current = toast.custom((t) => (
-        <Toast
-          title={focusToast.title.replace("{STATUS}", "关闭")}
-          message={focusToast.message}
-          t={t}
-        />
-      ));
-    }
-  }, [focusMode]);
+
 
   return null;
 }

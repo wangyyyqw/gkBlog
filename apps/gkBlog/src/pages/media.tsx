@@ -5,8 +5,8 @@ function Media() {
   return (
     <Page
       frontMatter={{
-        title: "书影音",
-        description: "我的 NeoDB 观影标记",
+        title: "书架",
+        description: "我的图书收藏",
         caption: "My",
       }}
     >
