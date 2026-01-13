@@ -59,6 +59,8 @@ function MediaContents() {
           rating: 7.5,
           uuid: "book-1",
           category: "book",
+          download_url:
+            "https://chunjuanqiying.us.kg/file/1768313652834_X-024《刺客后传3：弄臣命运》作者：罗苹·荷布V1.0_encode.epub",
         },
       };
 
@@ -147,7 +149,6 @@ function MediaContents() {
               if (movieContainerRef.current) {
                 movieContainerRef.current.focus();
               }
-              console.log("搜索执行:", searchQuery);
             }
           }}
           className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:focus:ring-blue-400"
@@ -156,10 +157,17 @@ function MediaContents() {
       <div className="movie" ref={movieContainerRef} tabIndex={-1}>
         {currentBooks.length > 0 ? (
           currentBooks.map((media) => (
-            <div
+            <button
               key={media.item.uuid}
+              type="button"
               className="card cursor-pointer"
               onClick={() => handleBookClick(media.item.uuid)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  handleBookClick(media.item.uuid);
+                }
+              }}
+              tabIndex={0}
             >
               <div className="poster">
                 <Image
@@ -177,7 +185,7 @@ function MediaContents() {
                   <h2>{media.item.title}</h2>
                 </div>
               </div>
-            </div>
+            </button>
           ))
         ) : (
           <p>没有找到匹配的内容</p>
@@ -189,6 +197,7 @@ function MediaContents() {
         <div className="flex flex-wrap justify-center items-center gap-2 mt-12 mb-2 p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm rounded-xl shadow-sm">
           {/* 上一页按钮 */}
           <button
+            type="button"
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
             className={`px-3 py-2 rounded-lg transition-all duration-200 font-medium text-sm ${currentPage === 1 ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 dark:bg-slate-800 dark:text-gray-500 dark:border-slate-700" : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"}`}
@@ -200,6 +209,7 @@ function MediaContents() {
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <button
               key={page}
+              type="button"
               onClick={() => handlePageChange(page)}
               className={`w-8 h-8 rounded-lg transition-all duration-200 font-medium flex items-center justify-center ${currentPage === page ? "bg-blue-600 text-white shadow-md transform scale-105 dark:bg-blue-500" : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"}`}
             >
@@ -209,6 +219,7 @@ function MediaContents() {
 
           {/* 下一页按钮 */}
           <button
+            type="button"
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
             className={`px-3 py-2 rounded-lg transition-all duration-200 font-medium text-sm ${currentPage === totalPages ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 dark:bg-slate-800 dark:text-gray-500 dark:border-slate-700" : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"}`}
