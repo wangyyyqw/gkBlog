@@ -151,7 +151,11 @@ function MediaDetail() {
               alt={book.item.title}
               width={200}
               height={300}
-              style={{ objectFit: "cover", borderRadius: "8px" }}
+              style={{
+                objectFit: "cover",
+                borderRadius: "4px",
+                border: "2px solid #d1d5db",
+              }}
             />
           </div>
           <div className="text-center">
