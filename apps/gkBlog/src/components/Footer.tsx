@@ -171,7 +171,7 @@ function Footer() {
           )}
         >
           <div className={clsx("font-semibold text-center")}>
-            &copy; 2025-{new Date().getFullYear()}, 蠢卷栖萤 版权所有
+            &copy; 2025-{new Date().getFullYear()}, 蠢卷栖萤
           </div>
           <div
             className={clsx(
