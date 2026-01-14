@@ -275,7 +275,7 @@ function MediaContents() {
                   style={{
                     objectFit: "cover",
                     borderRadius: "4px",
-                    border: "2px solid #d1d5db",
+                    border: "3px solid #d1d5db",
                   }}
                 />
                 <div className="movie_details">
