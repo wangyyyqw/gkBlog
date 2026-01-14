@@ -33,7 +33,7 @@ function Tools() {
           {/* 阅读软件推荐卡片 */}
           <div className="mb-12">
             <h2 className="text-2xl font-semibold mb-4">阅读软件推荐</h2>
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6">
               {readingApps.map((app, index) => (
                 <a
                   key={index}
