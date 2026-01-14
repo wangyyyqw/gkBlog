@@ -12,6 +12,9 @@ interface Item {
   uuid: string;
   category: string;
   download_url: string;
+  tablet_download_url?: string;
+  kindle_download_url?: string;
+  password?: string;
 }
 
 interface MediaData {
@@ -26,44 +29,6 @@ function MediaDetail() {
   const [book, setBook] = useState<MediaData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  // 验证码状态
-  const [userInput, setUserInput] = useState<string>("");
-  const [showCaptcha, setShowCaptcha] = useState<boolean>(false);
-  const [captchaError, setCaptchaError] = useState<string>("");
-  // 固定验证码（实际应用中可以从后端获取或配置）
-  const FIXED_CAPTCHA = "蠢卷栖萤";
-
-  // 验证验证码
-  const validateCaptcha = () => {
-    if (userInput.toLowerCase() === FIXED_CAPTCHA.toLowerCase()) {
-      setCaptchaError("");
-      return true;
-    }
-    setCaptchaError("验证码错误，请重新输入");
-    return false;
-  };
-
-  // 处理下载点击
-  const handleDownload = () => {
-    if (!showCaptcha) {
-      // 第一次点击，显示验证码
-      setShowCaptcha(true);
-      return;
-    }
-
-    if (validateCaptcha()) {
-      // 验证码正确，执行下载
-      const link = document.createElement("a");
-      link.href = book?.item.download_url || "";
-      link.download = "";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      // 重置状态
-      setShowCaptcha(false);
-      setUserInput("");
-    }
-  };
 
   useEffect(() => {
     if (!id) return;
@@ -72,7 +37,7 @@ function MediaDetail() {
       try {
         // 如果是我生成的样本数据（uuid格式为book-数字），直接创建图书对象
         if (typeof id === "string" && id.startsWith("book-")) {
-          // 从id中提取数字部分，获取对应的豆瓣榜单书名
+          // 从id中提取数字部分，获取对应的图书书名
           const bookNumber = parseInt(id.replace("book-", ""), 10);
           // 创建样本图书对象
           const sampleBook: MediaData = {
@@ -81,13 +46,59 @@ function MediaDetail() {
             item: {
               title: bookTitles[bookNumber - 1] || `图书${bookNumber}`,
               cover_image_url:
-                "https://laoshuan.dpdns.org/file/BQACAgIAAyEGAASYNuCMAANTaUv_Hd34kAbZLZyMpW4NiFI3TjMAAhOPAALxJ2BKYe2wYxrZrhE2BA.jpg",
+                "/assets/images/neodb/cover/dongwu-100-years.jpg",
               rating: 7.5,
               uuid: id,
               category: "book",
-              download_url: `https://chunjuanqiying.us.kg/file/1768313652834_X-024《刺客后传3：弄臣命运》作者：罗苹·荷布V1.0_encode.epub`,
+              download_url: `https://wwbes.lanzoue.com/iKG3R3d2v10b`,
             },
           };
+
+          // 为不同图书设置特殊配置
+          if (bookNumber === 1) {
+            // 《基督山伯爵 - 大仲马》
+            sampleBook.item.cover_image_url =
+              "/assets/images/neodb/cover/jidushanbojue-dazhongma.png";
+            sampleBook.item.download_url = `https://imgbed-80b.pages.dev/file/1768393274151_C-032_基督山伯爵_-_大仲马【手机】.epub`;
+            sampleBook.item.tablet_download_url = `https://imgbed-80b.pages.dev/file/1768393297589_C-032_基督山伯爵_-_大仲马【平板】.epub`;
+            sampleBook.item.kindle_download_url = `https://imgbed-80b.pages.dev/file/1768392582744_C-032_基督山伯爵_-_大仲马【Kindle】.epub`;
+          } else if (bookNumber === 2) {
+            // 《咸的玩笑-刘震云》
+            sampleBook.item.cover_image_url =
+              "/assets/images/neodb/cover/xiandewanxiao-liuzhenyun.png";
+            sampleBook.item.download_url = `https://wwbes.lanzoue.com/ig25P3fmlhsh`;
+            sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iR7Kb3fmlhyd`;
+          } else if (bookNumber === 3) {
+            // 《伦敦魔法师·暗黑魔法-维多利亚·舒瓦》
+            sampleBook.item.cover_image_url =
+              "/assets/images/neodb/cover/lundunmofashi-anheimofa-weiduoliyashuwa.jpg";
+            sampleBook.item.download_url = `https://wwbes.lanzoue.com/iXYUz3e6hm8b`;
+            sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iW7NZ3e6hlpc`;
+          } else if (bookNumber === 4) {
+            // 《她的山，她的海-扶华》
+            sampleBook.item.cover_image_url =
+              "/assets/images/neodb/cover/tashan-tahai-fuhua.jpg";
+            sampleBook.item.download_url = `https://wwbes.lanzoue.com/ihduM3elfdyb`;
+            sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/izrgk3elfcyf`;
+          } else if (bookNumber === 5) {
+            // 《谢家的短命鬼长命百岁了-怡然》
+            sampleBook.item.cover_image_url =
+              "/assets/images/neodb/cover/xiejia-duanminggui-changmingbaisui-yi.jpg";
+            sampleBook.item.download_url = `https://wwbes.lanzoue.com/iJu463dmclzc`;
+            sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iHpH43dmclsf`;
+          } else if (bookNumber === 6) {
+            // 《史记-司马迁 张大可》
+            sampleBook.item.cover_image_url =
+              "/assets/images/neodb/cover/shiji-simaqian-zhangdake.png";
+            sampleBook.item.download_url = `https://wwbes.lanzoue.com/iID003d2qf5a`;
+            sampleBook.item.password = "hgaz";
+          } else if (bookNumber === 7) {
+            // 《东吴100年-握中悬璧》
+            sampleBook.item.cover_image_url =
+              "/assets/images/neodb/cover/dongwu-100-years.jpg";
+            sampleBook.item.download_url = `https://wwbes.lanzoue.com/iKG3R3d2v10b`;
+          }
+
           setBook(sampleBook);
         } else {
           // 否则从真实数据文件中获取
@@ -146,7 +157,7 @@ function MediaDetail() {
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-6">{book.item.title}</h1>
             <div className="flex flex-col items-center gap-4">
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   type="button"
                   onClick={() => router.back()}
@@ -154,34 +165,68 @@ function MediaDetail() {
                 >
                   返回书架
                 </button>
-                <button
-                  type="button"
-                  onClick={handleDownload}
-                  className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300"
-                >
-                  {showCaptcha ? "验证并下载" : "下载图书"}
-                </button>
-              </div>
-
-              {/* 验证码输入区域 */}
-              {showCaptcha && (
-                <div className="mt-4 w-full max-w-sm">
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="text"
-                        placeholder="请输入验证码"
-                        value={userInput}
-                        onChange={(e) => setUserInput(e.target.value)}
-                        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-                    {captchaError && (
-                      <p className="text-red-500 text-sm">{captchaError}</p>
-                    )}
-                  </div>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const link = document.createElement("a");
+                      link.href = book?.item.download_url || "";
+                      link.download = "";
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}
+                    className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300"
+                  >
+                    下载手机版
+                  </button>
+                  {book?.item.tablet_download_url && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const link = document.createElement("a");
+                        link.href = book.item.tablet_download_url || "";
+                        link.download = "";
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }}
+                      className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-300"
+                    >
+                      下载平板版
+                    </button>
+                  )}
+                  {book?.item.kindle_download_url && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const link = document.createElement("a");
+                        link.href = book.item.kindle_download_url || "";
+                        link.download = "";
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }}
+                      className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors duration-300"
+                    >
+                      下载Kindle版
+                    </button>
+                  )}
+                  {book?.item.password && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard.writeText(book.item.password);
+                        // 可以添加一个提示，但用户要求移除toast，所以直接复制
+                      }}
+                      className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-300 whitespace-nowrap"
+                      title="复制提取码"
+                    >
+                      复制提取码: {book.item.password}
+                    </button>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>

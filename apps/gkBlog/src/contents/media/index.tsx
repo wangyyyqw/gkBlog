@@ -12,6 +12,9 @@ interface Item {
   uuid: string;
   category: string;
   download_url: string;
+  tablet_download_url?: string;
+  kindle_download_url?: string;
+  password?: string;
 }
 
 interface MediaData {
@@ -59,21 +62,111 @@ function MediaContents() {
           rating: 7.5,
           uuid: "book-1",
           category: "book",
-          download_url:
-            "https://chunjuanqiying.us.kg/file/1768313652834_X-024《刺客后传3：弄臣命运》作者：罗苹·荷布V1.0_encode.epub",
+          download_url: `https://wwbes.lanzoue.com/iID003d2qf5a`,
         },
       };
 
-      // 生成25本图书，每本都有唯一的uuid和书名
-      const books: MediaData[] = Array.from({ length: 25 }, (_, index) => ({
-        ...sampleBook,
-        item: {
-          ...sampleBook.item,
-          title: bookTitles[index],
-          uuid: `book-${index + 1}`,
-          download_url: `https://chunjuanqiying.us.kg/file/1768313652834_X-024《刺客后传3：弄臣命运》作者：罗苹·荷布V1.0_encode.epub`,
-        },
-      }));
+      // 生成7本图书
+      const books: MediaData[] = Array.from({ length: 7 }, (_, index) => {
+        // 基础图书配置
+        const baseBook = {
+          ...sampleBook,
+          item: {
+            ...sampleBook.item,
+            title: bookTitles[index],
+            uuid: `book-${index + 1}`,
+          },
+        };
+
+        // 为不同图书设置特殊配置
+        if (index === 0) {
+          // 《基督山伯爵 - 大仲马》
+          return {
+            ...baseBook,
+            item: {
+              ...baseBook.item,
+              cover_image_url:
+                "/assets/images/neodb/cover/jidushanbojue-dazhongma.png",
+              download_url: `https://imgbed-80b.pages.dev/file/1768393274151_C-032_基督山伯爵_-_大仲马【手机】.epub`,
+              tablet_download_url: `https://imgbed-80b.pages.dev/file/1768393297589_C-032_基督山伯爵_-_大仲马【平板】.epub`,
+              kindle_download_url: `https://imgbed-80b.pages.dev/file/1768392582744_C-032_基督山伯爵_-_大仲马【Kindle】.epub`,
+            },
+          };
+        }
+        if (index === 1) {
+          // 《咸的玩笑-刘震云》
+          return {
+            ...baseBook,
+            item: {
+              ...baseBook.item,
+              cover_image_url:
+                "/assets/images/neodb/cover/xiandewanxiao-liuzhenyun.png",
+              download_url: `https://wwbes.lanzoue.com/ig25P3fmlhsh`,
+              tablet_download_url: `https://wwbes.lanzoue.com/iR7Kb3fmlhyd`,
+            },
+          };
+        }
+        if (index === 2) {
+          // 《伦敦魔法师·暗黑魔法-维多利亚·舒瓦》
+          return {
+            ...baseBook,
+            item: {
+              ...baseBook.item,
+              cover_image_url:
+                "/assets/images/neodb/cover/lundunmofashi-anheimofa-weiduoliyashuwa.jpg",
+              download_url: `https://wwbes.lanzoue.com/iXYUz3e6hm8b`,
+              tablet_download_url: `https://wwbes.lanzoue.com/iW7NZ3e6hlpc`,
+            },
+          };
+        }
+        if (index === 3) {
+          // 《她的山，她的海-扶华》
+          return {
+            ...baseBook,
+            item: {
+              ...baseBook.item,
+              cover_image_url:
+                "/assets/images/neodb/cover/tashan-tahai-fuhua.jpg",
+              download_url: `https://wwbes.lanzoue.com/ihduM3elfdyb`,
+              tablet_download_url: `https://wwbes.lanzoue.com/izrgk3elfcyf`,
+            },
+          };
+        }
+        if (index === 4) {
+          // 《谢家的短命鬼长命百岁了-怡然》
+          return {
+            ...baseBook,
+            item: {
+              ...baseBook.item,
+              cover_image_url:
+                "/assets/images/neodb/cover/xiejia-duanminggui-changmingbaisui-yi.jpg",
+              download_url: `https://wwbes.lanzoue.com/iJu463dmclzc`,
+              tablet_download_url: `https://wwbes.lanzoue.com/iHpH43dmclsf`,
+            },
+          };
+        }
+        if (index === 5) {
+          // 《史记-司马迁 张大可》
+          return {
+            ...baseBook,
+            item: {
+              ...baseBook.item,
+              cover_image_url:
+                "/assets/images/neodb/cover/shiji-simaqian-zhangdake.png",
+              download_url: `https://wwbes.lanzoue.com/iID003d2qf5a`,
+            },
+          };
+        }
+        // 《东吴100年-握中悬璧》
+        return {
+          ...baseBook,
+          item: {
+            ...baseBook.item,
+            cover_image_url: "/assets/images/neodb/cover/dongwu-100-years.jpg",
+            download_url: `https://wwbes.lanzoue.com/iKG3R3d2v10b`,
+          },
+        };
+      });
 
       setMediaData(books);
       setFilteredData(books); // 设置为当前类别数据
