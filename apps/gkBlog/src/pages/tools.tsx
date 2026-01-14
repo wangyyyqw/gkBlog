@@ -40,7 +40,7 @@ function Tools() {
                   href={app.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-divider-light rounded-xl border bg-white p-5 hover:shadow-lg transition-all duration-300 dark:border-divider-dark dark:bg-[#161e31]"
+                  className="border-divider-light rounded-xl border bg-gray-50 p-5 hover:shadow-lg transition-all duration-300 dark:border-divider-dark dark:bg-slate-800"
                 >
                   <div className="flex items-center gap-4">
                     {app.isImage ? (
