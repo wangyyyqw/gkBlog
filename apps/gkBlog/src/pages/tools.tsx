@@ -37,8 +37,11 @@ function Tools() {
             <h2 className="text-2xl font-semibold mb-4">阅读软件推荐</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {readingApps.map((app, index) => (
-                <div
+                <a
                   key={index}
+                  href={app.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="border-divider-light rounded-xl border bg-white p-5 hover:shadow-lg transition-all duration-300 dark:border-divider-dark dark:bg-[#161e31]"
                 >
                   <div className="flex items-center gap-4">
@@ -64,7 +67,7 @@ function Tools() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>
