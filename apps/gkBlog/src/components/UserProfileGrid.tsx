@@ -115,8 +115,8 @@ function UserProfileGrid({
             <Image
               src="https://laoshuan.dpdns.org/file/BQACAgIAAyEGAASYNuCMAANUaU0hkRDg9IlVpT1IKEZZRrhxu78AAlWJAALxJ2hK3myxNh9_y8I2BA.png"
               alt="收款码"
-              width={150}
-              height={150}
+              width={200}
+              height={200}
             />
             <span className="mt-2 text-sm">微信</span>
           </div>
@@ -124,8 +124,8 @@ function UserProfileGrid({
             <Image
               src="https://laoshuan.dpdns.org/file/BQACAgIAAyEGAASYNuCMAANVaU0hruJSTpnEoPhqqWxsTnM7-KUAAluJAALxJ2hKt0nyupEmit02BA.png"
               alt="收款码"
-              width={150}
-              height={150}
+              width={200}
+              height={200}
             />
             <span className="mt-2 text-sm">支付宝</span>
           </div>
