@@ -13,20 +13,6 @@ function Tools() {
       link: "https://sj.qq.com/appdetail/app.zhendong.reamicro?supply_id=2702800336&ocpc=0&platform=bing&account_id=300000000&landing_type=pcyyb&keyword_id=1726113027077&plan_id=1726113027077&group_id=1726113027077&creative_id=1726113027077&use_previous_query=1",
     },
     {
-      name: "Kindle",
-      description: "亚马逊电子书阅读器官方应用，适合深度阅读",
-      icon: "🔥",
-      isImage: false,
-      link: "https://www.amazon.cn/kindle-dbs/fd/kcp",
-    },
-    {
-      name: "掌阅iReader",
-      description: "国内知名阅读平台，提供丰富的正版图书",
-      icon: "📖",
-      isImage: false,
-      link: "https://www.ireader.com/",
-    },
-    {
       name: "多看阅读",
       description: "小米旗下阅读应用，支持多种格式和自定义排版",
       icon: "🌟",
