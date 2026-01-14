@@ -46,7 +46,7 @@ function Tools() {
                 >
                   <div className="flex items-center gap-4">
                     {app.isImage ? (
-                      <div className="w-12 h-12 rounded-lg overflow-hidden">
+                      <div className="w-12 aspect-square rounded-lg overflow-hidden">
                         <Image
                           src={app.icon}
                           alt={`${app.name} 图标`}
@@ -56,7 +56,9 @@ function Tools() {
                         />
                       </div>
                     ) : (
-                      <div className="text-4xl">{app.icon}</div>
+                      <div className="w-12 aspect-square flex items-center justify-center text-4xl">
+                        {app.icon}
+                      </div>
                     )}
                     <div>
                       <h3 className="text-xl font-bold text-slate-700 dark:text-slate-300">
