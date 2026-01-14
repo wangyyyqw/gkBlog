@@ -35,7 +35,7 @@ function Tools() {
           {/* 阅读软件推荐卡片 */}
           <div className="mb-12">
             <h2 className="text-2xl font-semibold mb-4">阅读软件推荐</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
               {readingApps.map((app, index) => (
                 <a
                   key={index}
@@ -46,17 +46,17 @@ function Tools() {
                 >
                   <div className="flex items-center gap-4">
                     {app.isImage ? (
-                      <div className="w-12 aspect-square rounded-lg overflow-hidden">
+                      <div className="w-16 aspect-square rounded-lg overflow-hidden">
                         <Image
                           src={app.icon}
                           alt={`${app.name} 图标`}
-                          width={48}
-                          height={48}
+                          width={64}
+                          height={64}
                           className="w-full h-full object-cover"
                         />
                       </div>
                     ) : (
-                      <div className="w-12 aspect-square flex items-center justify-center text-4xl">
+                      <div className="w-16 aspect-square flex items-center justify-center text-5xl">
                         {app.icon}
                       </div>
                     )}
