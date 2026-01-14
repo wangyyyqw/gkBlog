@@ -34,9 +34,9 @@ function Tools() {
           <div className="mb-12">
             <h2 className="text-2xl font-semibold mb-4">阅读软件推荐</h2>
             <div className="grid grid-cols-1 gap-6">
-              {readingApps.map((app, index) => (
+              {readingApps.map((app) => (
                 <a
-                  key={index}
+                  key={app.name}
                   href={app.link}
                   target="_blank"
                   rel="noopener noreferrer"
