@@ -30,12 +30,10 @@ function Tools() {
     >
       <div className="content-wrapper mdx-contents">
         <div className="p-8">
-          <h1 className="text-3xl font-bold mb-6">工具页面</h1>
-
           {/* 阅读软件推荐卡片 */}
           <div className="mb-12">
             <h2 className="text-2xl font-semibold mb-4">阅读软件推荐</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 gap-6">
               {readingApps.map((app, index) => (
                 <a
                   key={index}
