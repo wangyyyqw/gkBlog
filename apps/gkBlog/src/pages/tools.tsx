@@ -15,8 +15,8 @@ function Tools() {
     {
       name: "多看阅读",
       description: "小米旗下阅读应用，支持多种格式和自定义排版",
-      icon: "🌟",
-      isImage: false,
+      icon: "/assets/images/app-icons/duokan.png",
+      isImage: true,
       link: "https://sj.qq.com/appdetail/com.duokan.reader?supply_id=2702800336&ocpc=0&platform=bing&account_id=300000000&landing_type=pcyyb&keyword_id=1726113027077&plan_id=1726113027077&group_id=1726113027077&creative_id=1726113027077&use_previous_query=1",
     },
   ];
