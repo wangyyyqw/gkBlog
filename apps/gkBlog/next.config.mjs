@@ -15,10 +15,11 @@ const nextConfig = {
       "neodb.social",
       "img1.doubanio.com",
     ],
+    unoptimized: true,
   },
   output: "export",
-  images: {
-    unoptimized: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
   },
 };
 

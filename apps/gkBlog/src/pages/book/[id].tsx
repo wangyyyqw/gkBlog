@@ -59,9 +59,9 @@ function MediaDetail() {
             // 《基督山伯爵 - 大仲马》
             sampleBook.item.cover_image_url =
               "/assets/images/neodb/cover/jidushanbojue-dazhongma.png";
-            sampleBook.item.download_url = `https://imgbed-80b.pages.dev/file/1768393274151_C-032_基督山伯爵_-_大仲马【手机】.epub`;
-            sampleBook.item.tablet_download_url = `https://imgbed-80b.pages.dev/file/1768393297589_C-032_基督山伯爵_-_大仲马【平板】.epub`;
-            sampleBook.item.kindle_download_url = `https://imgbed-80b.pages.dev/file/1768392582744_C-032_基督山伯爵_-_大仲马【Kindle】.epub`;
+            sampleBook.item.download_url = `https://115cdn.com/s/swfqr173h6e?password=b7c3&#`;
+            sampleBook.item.tablet_download_url = `https://115cdn.com/s/swfqr133h6e?password=r011&#`;
+            sampleBook.item.kindle_download_url = `https://115cdn.com/s/swfqrx73h6e?password=of40&#`;
           } else if (bookNumber === 2) {
             // 《咸的玩笑-刘震云》
             sampleBook.item.cover_image_url =
