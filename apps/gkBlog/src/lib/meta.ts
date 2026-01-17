@@ -107,12 +107,7 @@ export const getViewsBy = async (
   _sessionId: string,
 ): Promise<number> => 0; // In static export mode, return 0
 
-export const setView = async (_: {
-  _slug: string;
-  _contentType: ContentType;
-  _contentTitle: string;
-  _sessionId: string;
-}) =>
+export const setView = async (_: never) =>
   // In static export mode, this would be a no-op or API call
   // console.warn("Database operations are not supported in static export mode");
   null;

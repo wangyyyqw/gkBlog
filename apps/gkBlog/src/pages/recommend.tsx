@@ -81,9 +81,9 @@ function Recommend() {
               推荐公众号
             </h2>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 max-w-4xl mx-auto">
-              {RECOMMEND_ITEMS.map((item, index) => (
+              {RECOMMEND_ITEMS.map((item) => (
                 <RecommendCard
-                  key={index}
+                  key={item.title}
                   title={item.title}
                   desc={item.desc}
                   image={item.image}

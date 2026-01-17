@@ -1,8 +1,8 @@
 import fs from "fs";
-import path from "path";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import path from "path";
 
 import { bookTitles } from "@/constants/books";
 import Page from "@/contents-layouts/Page";
@@ -41,7 +41,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // Try both relative paths to be safe with CWD
   let filePath = path.join(process.cwd(), "public/assets/data/neodb/book.json");
   if (!fs.existsSync(filePath)) {
-    filePath = path.join(process.cwd(), "apps/gkBlog/public/assets/data/neodb/book.json");
+    filePath = path.join(
+      process.cwd(),
+      "apps/gkBlog/public/assets/data/neodb/book.json",
+    );
   }
 
   try {
@@ -57,7 +60,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       }
     }
   } catch (error) {
-    console.error("Error reading book.json for getStaticPaths:", error);
+    // console.error("Error reading book.json for getStaticPaths:", error);
   }
 
   return {
@@ -135,9 +138,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     book = sampleBook;
   } else {
     // 否则从真实数据文件中获取
-    let filePath = path.join(process.cwd(), "public/assets/data/neodb/book.json");
+    let filePath = path.join(
+      process.cwd(),
+      "public/assets/data/neodb/book.json",
+    );
     if (!fs.existsSync(filePath)) {
-      filePath = path.join(process.cwd(), "apps/gkBlog/public/assets/data/neodb/book.json");
+      filePath = path.join(
+        process.cwd(),
+        "apps/gkBlog/public/assets/data/neodb/book.json",
+      );
     }
 
     try {
@@ -145,14 +154,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         const fileContent = fs.readFileSync(filePath, "utf-8");
         const jsonData = JSON.parse(fileContent);
         const foundBook = jsonData.data.find(
-          (item: MediaData) => item.item.uuid === id
+          (item: MediaData) => item.item.uuid === id,
         );
         if (foundBook) {
           book = foundBook;
         }
       }
     } catch (error) {
-      console.error("Error reading book.json for getStaticProps:", error);
+      // console.error("Error reading book.json for getStaticProps:", error);
     }
   }
 
@@ -257,7 +266,9 @@ function MediaDetail({ book }: MediaDetailProps) {
                   <button
                     type="button"
                     onClick={() => {
-                      navigator.clipboard.writeText(book.item.password as string);
+                      navigator.clipboard.writeText(
+                        book.item.password as string,
+                      );
                     }}
                     className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-300 whitespace-nowrap"
                     title="复制提取码"
