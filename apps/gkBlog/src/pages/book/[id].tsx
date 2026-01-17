@@ -1,6 +1,8 @@
+import fs from "fs";
+import path from "path";
+import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 import { bookTitles } from "@/constants/books";
 import Page from "@/contents-layouts/Page";
@@ -23,117 +25,152 @@ interface MediaData {
   item: Item;
 }
 
-function MediaDetail() {
-  const router = useRouter();
-  const { id } = router.query;
-  const [book, setBook] = useState<MediaData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+interface MediaDetailProps {
+  book: MediaData;
+}
 
-  useEffect(() => {
-    if (!id) return;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: { params: { id: string } }[] = [];
 
-    const fetchBookData = async () => {
-      try {
-        // 如果是我生成的样本数据（uuid格式为book-数字），直接创建图书对象
-        if (typeof id === "string" && id.startsWith("book-")) {
-          // 从id中提取数字部分，获取对应的图书书名
-          const bookNumber = parseInt(id.replace("book-", ""), 10);
-          // 创建样本图书对象
-          const sampleBook: MediaData = {
-            shelf_type: "read",
-            visibility: 1,
-            item: {
-              title: bookTitles[bookNumber - 1] || `图书${bookNumber}`,
-              cover_image_url:
-                "/assets/images/neodb/cover/dongwu-100-years.jpg",
-              rating: 7.5,
-              uuid: id,
-              category: "book",
-              download_url: `https://wwbes.lanzoue.com/iKG3R3d2v10b`,
-            },
-          };
+  // 1. Generate paths for book-1 to book-7 (using bookTitles length)
+  bookTitles.forEach((_, index) => {
+    paths.push({ params: { id: `book-${index + 1}` } });
+  });
 
-          // 为不同图书设置特殊配置
-          if (bookNumber === 1) {
-            // 《基督山伯爵 - 大仲马》
-            sampleBook.item.cover_image_url =
-              "/assets/images/neodb/cover/jidushanbojue-dazhongma.png";
-            sampleBook.item.download_url = `https://115cdn.com/s/swfqr173h6e?password=b7c3&#`;
-            sampleBook.item.tablet_download_url = `https://115cdn.com/s/swfqr133h6e?password=r011&#`;
-            sampleBook.item.kindle_download_url = `https://115cdn.com/s/swfqrx73h6e?password=of40&#`;
-          } else if (bookNumber === 2) {
-            // 《咸的玩笑-刘震云》
-            sampleBook.item.cover_image_url =
-              "/assets/images/neodb/cover/xiandewanxiao-liuzhenyun.png";
-            sampleBook.item.download_url = `https://wwbes.lanzoue.com/ig25P3fmlhsh`;
-            sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iR7Kb3fmlhyd`;
-          } else if (bookNumber === 3) {
-            // 《伦敦魔法师·暗黑魔法-维多利亚·舒瓦》
-            sampleBook.item.cover_image_url =
-              "/assets/images/neodb/cover/lundunmofashi-anheimofa-weiduoliyashuwa.jpg";
-            sampleBook.item.download_url = `https://wwbes.lanzoue.com/iXYUz3e6hm8b`;
-            sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iW7NZ3e6hlpc`;
-          } else if (bookNumber === 4) {
-            // 《她的山，她的海-扶华》
-            sampleBook.item.cover_image_url =
-              "/assets/images/neodb/cover/tashan-tahai-fuhua.jpg";
-            sampleBook.item.download_url = `https://wwbes.lanzoue.com/ihduM3elfdyb`;
-            sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/izrgk3elfcyf`;
-          } else if (bookNumber === 5) {
-            // 《谢家的短命鬼长命百岁了-怡然》
-            sampleBook.item.cover_image_url =
-              "/assets/images/neodb/cover/xiejia-duanminggui-changmingbaisui-yi.jpg";
-            sampleBook.item.download_url = `https://wwbes.lanzoue.com/iJu463dmclzc`;
-            sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iHpH43dmclsf`;
-          } else if (bookNumber === 6) {
-            // 《史记-司马迁 张大可》
-            sampleBook.item.cover_image_url =
-              "/assets/images/neodb/cover/shiji-simaqian-zhangdake.png";
-            sampleBook.item.download_url = `https://wwbes.lanzoue.com/iID003d2qf5a`;
-            sampleBook.item.password = "hgaz";
-          } else if (bookNumber === 7) {
-            // 《东吴100年-握中悬璧》
-            sampleBook.item.cover_image_url =
-              "/assets/images/neodb/cover/dongwu-100-years.jpg";
-            sampleBook.item.download_url = `https://wwbes.lanzoue.com/iKG3R3d2v10b`;
+  // 2. Read public/assets/data/neodb/book.json to get UUIDs
+  // Try both relative paths to be safe with CWD
+  let filePath = path.join(process.cwd(), "public/assets/data/neodb/book.json");
+  if (!fs.existsSync(filePath)) {
+    filePath = path.join(process.cwd(), "apps/gkBlog/public/assets/data/neodb/book.json");
+  }
+
+  try {
+    if (fs.existsSync(filePath)) {
+      const fileContent = fs.readFileSync(filePath, "utf-8");
+      const jsonData = JSON.parse(fileContent);
+      if (jsonData.data && Array.isArray(jsonData.data)) {
+        jsonData.data.forEach((entry: MediaData) => {
+          if (entry.item && entry.item.uuid) {
+            paths.push({ params: { id: entry.item.uuid } });
           }
-
-          setBook(sampleBook);
-        } else {
-          // 否则从真实数据文件中获取
-          const response = await fetch("/assets/data/neodb/book.json");
-          if (!response.ok) {
-            throw new Error("网络错误");
-          }
-          const data = await response.json();
-          // 查找匹配的图书
-          const foundBook = data.data.find(
-            (item: MediaData) => item.item.uuid === id
-          );
-          if (foundBook) {
-            setBook(foundBook);
-          } else {
-            setError("未找到图书");
-          }
-        }
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+        });
       }
+    }
+  } catch (error) {
+    console.error("Error reading book.json for getStaticPaths:", error);
+  }
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const id = params?.id as string;
+  let book: MediaData | null = null;
+
+  if (id.startsWith("book-")) {
+    // 从id中提取数字部分，获取对应的图书书名
+    const bookNumber = parseInt(id.replace("book-", ""), 10);
+    // 创建样本图书对象
+    const sampleBook: MediaData = {
+      shelf_type: "read",
+      visibility: 1,
+      item: {
+        title: bookTitles[bookNumber - 1] || `图书${bookNumber}`,
+        cover_image_url: "/assets/images/neodb/cover/dongwu-100-years.jpg",
+        rating: 7.5,
+        uuid: id,
+        category: "book",
+        download_url: `https://wwbes.lanzoue.com/iKG3R3d2v10b`,
+      },
     };
 
-    fetchBookData();
-  }, [id]);
+    // 为不同图书设置特殊配置
+    if (bookNumber === 1) {
+      // 《基督山伯爵 - 大仲马》
+      sampleBook.item.cover_image_url =
+        "/assets/images/neodb/cover/jidushanbojue-dazhongma.png";
+      sampleBook.item.download_url = `https://115cdn.com/s/swfqr173h6e?password=b7c3&#`;
+      sampleBook.item.tablet_download_url = `https://115cdn.com/s/swfqr133h6e?password=r011&#`;
+      sampleBook.item.kindle_download_url = `https://115cdn.com/s/swfqrx73h6e?password=of40&#`;
+    } else if (bookNumber === 2) {
+      // 《咸的玩笑-刘震云》
+      sampleBook.item.cover_image_url =
+        "/assets/images/neodb/cover/xiandewanxiao-liuzhenyun.png";
+      sampleBook.item.download_url = `https://wwbes.lanzoue.com/ig25P3fmlhsh`;
+      sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iR7Kb3fmlhyd`;
+    } else if (bookNumber === 3) {
+      // 《伦敦魔法师·暗黑魔法-维多利亚·舒瓦》
+      sampleBook.item.cover_image_url =
+        "/assets/images/neodb/cover/lundunmofashi-anheimofa-weiduoliyashuwa.jpg";
+      sampleBook.item.download_url = `https://wwbes.lanzoue.com/iXYUz3e6hm8b`;
+      sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iW7NZ3e6hlpc`;
+    } else if (bookNumber === 4) {
+      // 《她的山，她的海-扶华》
+      sampleBook.item.cover_image_url =
+        "/assets/images/neodb/cover/tashan-tahai-fuhua.jpg";
+      sampleBook.item.download_url = `https://wwbes.lanzoue.com/ihduM3elfdyb`;
+      sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/izrgk3elfcyf`;
+    } else if (bookNumber === 5) {
+      // 《谢家的短命鬼长命百岁了-怡然》
+      sampleBook.item.cover_image_url =
+        "/assets/images/neodb/cover/xiejia-duanminggui-changmingbaisui-yi.jpg";
+      sampleBook.item.download_url = `https://wwbes.lanzoue.com/iJu463dmclzc`;
+      sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iHpH43dmclsf`;
+    } else if (bookNumber === 6) {
+      // 《史记-司马迁 张大可》
+      sampleBook.item.cover_image_url =
+        "/assets/images/neodb/cover/shiji-simaqian-zhangdake.png";
+      sampleBook.item.download_url = `https://wwbes.lanzoue.com/iID003d2qf5a`;
+      sampleBook.item.password = "hgaz";
+    } else if (bookNumber === 7) {
+      // 《东吴100年-握中悬璧》
+      sampleBook.item.cover_image_url =
+        "/assets/images/neodb/cover/dongwu-100-years.jpg";
+      sampleBook.item.download_url = `https://wwbes.lanzoue.com/iKG3R3d2v10b`;
+    }
 
-  if (loading) {
-    return <div className="content-wrapper">加载中...</div>;
+    book = sampleBook;
+  } else {
+    // 否则从真实数据文件中获取
+    let filePath = path.join(process.cwd(), "public/assets/data/neodb/book.json");
+    if (!fs.existsSync(filePath)) {
+      filePath = path.join(process.cwd(), "apps/gkBlog/public/assets/data/neodb/book.json");
+    }
+
+    try {
+      if (fs.existsSync(filePath)) {
+        const fileContent = fs.readFileSync(filePath, "utf-8");
+        const jsonData = JSON.parse(fileContent);
+        const foundBook = jsonData.data.find(
+          (item: MediaData) => item.item.uuid === id
+        );
+        if (foundBook) {
+          book = foundBook;
+        }
+      }
+    } catch (error) {
+      console.error("Error reading book.json for getStaticProps:", error);
+    }
   }
 
-  if (error || !book) {
-    return <div className="content-wrapper">{error || "图书不存在"}</div>;
+  if (!book) {
+    return {
+      notFound: true,
+    };
   }
+
+  return {
+    props: {
+      book,
+    },
+  };
+};
+
+function MediaDetail({ book }: MediaDetailProps) {
+  const router = useRouter();
 
   return (
     <Page
@@ -220,8 +257,7 @@ function MediaDetail() {
                     <button
                       type="button"
                       onClick={() => {
-                        navigator.clipboard.writeText(book.item.password);
-                        // 可以添加一个提示，但用户要求移除toast，所以直接复制
+                        navigator.clipboard.writeText(book.item.password as string);
                       }}
                       className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-300 whitespace-nowrap"
                       title="复制提取码"
