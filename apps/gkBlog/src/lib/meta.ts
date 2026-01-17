@@ -28,7 +28,7 @@ export const getAllContentMeta = async (): Promise<
   ({});
 
 export const getContentMeta = async (
-  slug: string
+  slug: string,
 ): Promise<{ shares: number; views: number }> =>
   // In static export mode, return mock data
   ({
@@ -52,7 +52,7 @@ export const getReactions = async (slug: string): Promise<TReaction> =>
   mockReactions; // In static export mode, return mock reactions
 
 export const getSectionMeta = async (
-  slug: string
+  slug: string,
 ): Promise<
   Record<
     string,
@@ -63,19 +63,11 @@ export const getSectionMeta = async (
 > => ({}); // In static export mode, return empty object
 
 export const getReactionsBy = async (
-  slug: string,
-  sessionId: string
+  _slug: string,
+  _sessionId: string,
 ): Promise<TReaction> => mockReactions; // In static export mode, return mock reactions
 
-export const setReaction = async ({
-  slug,
-  contentType,
-  contentTitle,
-  count,
-  section,
-  sessionId,
-  type,
-}: {
+export const setReaction = async (_: {
   slug: string;
   contentType: ContentType;
   contentTitle: string;
@@ -89,16 +81,16 @@ export const setReaction = async ({
   null;
 
 export const getSharesBy = async (
-  slug: string,
-  sessionId: string
+  _slug: string,
+  _sessionId: string,
 ): Promise<number> => 0; // In static export mode, return 0
 
 export const setShare = async ({
-  slug,
-  contentType,
-  contentTitle,
-  type,
-  sessionId,
+  slug: _slug,
+  contentType: _contentType,
+  contentTitle: _contentTitle,
+  type: _type,
+  sessionId: _sessionId,
 }: {
   slug: string;
   contentType: ContentType;
@@ -111,16 +103,11 @@ export const setShare = async ({
   null;
 
 export const getViewsBy = async (
-  slug: string,
-  _sessionId: string
+  _slug: string,
+  _sessionId: string,
 ): Promise<number> => 0; // In static export mode, return 0
 
-export const setView = async ({
-  _slug,
-  _contentType,
-  _contentTitle,
-  _sessionId,
-}: {
+export const setView = async (_: {
   _slug: string;
   _contentType: ContentType;
   _contentTitle: string;

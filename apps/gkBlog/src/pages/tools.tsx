@@ -29,15 +29,13 @@ function Tools() {
       }}
     >
       <div className="content-wrapper mdx-contents">
-        <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-
-
+        <div className="py-8">
           <div className="mb-16">
             <h2 className="mb-8 text-2xl font-bold text-slate-900 dark:text-slate-100">
               阅读软件推荐
             </h2>
             {/* Grid Layout */}
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 max-w-4xl mx-auto">
               {READING_APPS.map((app) => (
                 <a
                   key={app.name}
@@ -60,9 +58,9 @@ function Tools() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                      <polyline points="15 3 21 3 21 9"></polyline>
-                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
                     </svg>
                   </div>
 
@@ -96,18 +94,17 @@ function Tools() {
               ))}
             </div>
           </div>
-
           {/* Coming Soon Section */}
-          <div className="rounded-3xl bg-slate-50 py-16 text-center dark:bg-slate-800/50">
+          <div className="rounded-3xl bg-slate-50 py-16 text-center dark:bg-slate-800/50 max-w-4xl mx-auto">
             <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
               更多精彩即将上线
             </h3>
             <p className="mt-2 text-slate-500 dark:text-slate-400">
-              我们正在整理更多优质工具，敬请期待！
+              更多工具正在建设中，敬请期待！
             </p>
           </div>
         </div>
-      </div>
+      </div>{" "}
     </Page>
   );
 }

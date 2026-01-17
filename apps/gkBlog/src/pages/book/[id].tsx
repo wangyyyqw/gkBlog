@@ -187,6 +187,7 @@ function MediaDetail({ book }: MediaDetailProps) {
             alt={book.item.title}
             width={200}
             height={300}
+            className="shadow-[0_0_2px_rgba(0,0,0,0.5)]"
             style={{
               objectFit: "cover",
               borderRadius: "4px",
