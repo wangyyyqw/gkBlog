@@ -184,7 +184,7 @@ function MediaContents() {
       setFilteredData(mediaData);
     } else {
       const filtered = mediaData.filter((book) =>
-        book.item.title.toLowerCase().includes(searchQuery.toLowerCase())
+        book.item.title.toLowerCase().includes(searchQuery.toLowerCase()),
       );
       setFilteredData(filtered);
     }
@@ -225,7 +225,7 @@ function MediaContents() {
   }
 
   return (
-    <div className={clsx("content-wrapper mdx-contents")}>
+    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       {/* 搜索框 */}
       <div className="mb-8">
         <input
@@ -244,16 +244,21 @@ function MediaContents() {
               }
             }
           }}
-          className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:focus:ring-blue-400"
+          className="w-full rounded-2xl border border-gray-300/50 bg-slate-50 px-6 py-4 text-lg focus:border-accent-500 focus:ring-accent-500 dark:border-gray-700/50 dark:bg-slate-900/50"
         />
       </div>
-      <div className="movie" ref={movieContainerRef} tabIndex={-1}>
+
+      <div
+        ref={movieContainerRef}
+        tabIndex={-1}
+        className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4"
+      >
         {currentBooks.length > 0 ? (
           currentBooks.map((media) => (
             <button
               key={media.item.uuid}
               type="button"
-              className="card cursor-pointer"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-accent-500 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900"
               onClick={() => handleBookClick(media.item.uuid)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
@@ -262,7 +267,7 @@ function MediaContents() {
               }}
               tabIndex={0}
             >
-              <div className="poster">
+              <div className="aspect-[2/3] relative w-full overflow-hidden bg-slate-100 shadow-[0_0_2px_rgba(0,0,0,0.5)]">
                 <Image
                   src={
                     media.item.cover_image_url.includes("http")
@@ -270,22 +275,17 @@ function MediaContents() {
                       : `/assets/images/neodb/cover/${media.item.cover_image_url.split("/").pop()}`
                   }
                   alt={media.item.title}
-                  width={200}
-                  height={300}
-                  style={{
-                    objectFit: "cover",
-                    borderRadius: "4px",
-                    border: "3px solid #d1d5db",
-                  }}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
-                <div className="movie_details">
-                  <h2>{media.item.title}</h2>
-                </div>
               </div>
             </button>
           ))
         ) : (
-          <p>没有找到匹配的内容</p>
+          <p className="col-span-full text-center text-slate-500">
+            没有找到匹配的内容
+          </p>
         )}
       </div>
 
@@ -297,7 +297,11 @@ function MediaContents() {
             type="button"
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className={`px-3 py-2 rounded-lg transition-all duration-200 font-medium text-sm ${currentPage === 1 ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 dark:bg-slate-800 dark:text-gray-500 dark:border-slate-700" : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"}`}
+            className={`px-3 py-2 rounded-lg transition-all duration-200 font-medium text-sm ${
+              currentPage === 1
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 dark:bg-slate-800 dark:text-gray-500 dark:border-slate-700"
+                : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"
+            }`}
           >
             上一页
           </button>
@@ -308,7 +312,11 @@ function MediaContents() {
               key={page}
               type="button"
               onClick={() => handlePageChange(page)}
-              className={`w-8 h-8 rounded-lg transition-all duration-200 font-medium flex items-center justify-center ${currentPage === page ? "bg-blue-600 text-white shadow-md transform scale-105 dark:bg-blue-500" : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"}`}
+              className={`w-8 h-8 rounded-lg transition-all duration-200 font-medium flex items-center justify-center ${
+                currentPage === page
+                  ? "bg-blue-600 text-white shadow-md transform scale-105 dark:bg-blue-500"
+                  : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"
+              }`}
             >
               {page}
             </button>
@@ -319,7 +327,11 @@ function MediaContents() {
             type="button"
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className={`px-3 py-2 rounded-lg transition-all duration-200 font-medium text-sm ${currentPage === totalPages ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 dark:bg-slate-800 dark:text-gray-500 dark:border-slate-700" : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"}`}
+            className={`px-3 py-2 rounded-lg transition-all duration-200 font-medium text-sm ${
+              currentPage === totalPages
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 dark:bg-slate-800 dark:text-gray-500 dark:border-slate-700"
+                : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-blue-400 dark:hover:border-blue-600"
+            }`}
           >
             下一页
           </button>

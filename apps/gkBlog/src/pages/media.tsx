@@ -7,7 +7,6 @@ function Media() {
       frontMatter={{
         title: "书架",
         description: "我的图书收藏",
-        caption: "My",
       }}
     >
       <MediaContents />

@@ -180,92 +180,90 @@ function MediaDetail({ book }: MediaDetailProps) {
         description: "图书详情页面",
       }}
     >
-      <div className="content-wrapper mdx-contents">
-        <div className="flex flex-col items-center p-8">
-          <div className="mb-6">
-            <Image
-              src={book.item.cover_image_url}
-              alt={book.item.title}
-              width={200}
-              height={300}
-              style={{
-                objectFit: "cover",
-                borderRadius: "4px",
-                border: "3px solid #d1d5db",
-              }}
-            />
-          </div>
-          <div className="text-center">
-            <h1 className="text-4xl font-bold mb-6">{book.item.title}</h1>
-            <div className="flex flex-col items-center gap-4">
-              <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col items-center p-8">
+        <div className="mb-6">
+          <Image
+            src={book.item.cover_image_url}
+            alt={book.item.title}
+            width={200}
+            height={300}
+            style={{
+              objectFit: "cover",
+              borderRadius: "4px",
+              border: "3px solid #d1d5db",
+            }}
+          />
+        </div>
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-6">{book.item.title}</h1>
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                type="button"
+                onClick={() => router.back()}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+              >
+                返回书架
+              </button>
+              <div className="flex flex-col sm:flex-row gap-2">
                 <button
                   type="button"
-                  onClick={() => router.back()}
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+                  onClick={() => {
+                    const link = document.createElement("a");
+                    link.href = book.item.download_url || "";
+                    link.download = "";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300"
                 >
-                  返回书架
+                  下载手机版
                 </button>
-                <div className="flex flex-col sm:flex-row gap-2">
+                {book.item.tablet_download_url && (
                   <button
                     type="button"
                     onClick={() => {
                       const link = document.createElement("a");
-                      link.href = book?.item.download_url || "";
+                      link.href = book.item.tablet_download_url || "";
                       link.download = "";
                       document.body.appendChild(link);
                       link.click();
                       document.body.removeChild(link);
                     }}
-                    className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300"
+                    className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-300"
                   >
-                    下载手机版
+                    下载平板版
                   </button>
-                  {book?.item.tablet_download_url && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const link = document.createElement("a");
-                        link.href = book.item.tablet_download_url || "";
-                        link.download = "";
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                      }}
-                      className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-300"
-                    >
-                      下载平板版
-                    </button>
-                  )}
-                  {book?.item.kindle_download_url && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const link = document.createElement("a");
-                        link.href = book.item.kindle_download_url || "";
-                        link.download = "";
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                      }}
-                      className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors duration-300"
-                    >
-                      下载Kindle版
-                    </button>
-                  )}
-                  {book?.item.password && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        navigator.clipboard.writeText(book.item.password as string);
-                      }}
-                      className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-300 whitespace-nowrap"
-                      title="复制提取码"
-                    >
-                      复制提取码: {book.item.password}
-                    </button>
-                  )}
-                </div>
+                )}
+                {book.item.kindle_download_url && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const link = document.createElement("a");
+                      link.href = book.item.kindle_download_url || "";
+                      link.download = "";
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}
+                    className="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors duration-300"
+                  >
+                    下载Kindle版
+                  </button>
+                )}
+                {book.item.password && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText(book.item.password as string);
+                    }}
+                    className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-300 whitespace-nowrap"
+                    title="复制提取码"
+                  >
+                    复制提取码: {book.item.password}
+                  </button>
+                )}
               </div>
             </div>
           </div>
