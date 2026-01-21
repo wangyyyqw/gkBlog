@@ -20,6 +20,16 @@ const READING_APPS = [
   },
 ];
 
+const TOOLS = [
+  {
+    name: "EPUB 工具",
+    description: "专业的 EPUB 电子书工具，支持格式转换、编辑和优化",
+    icon: "📚",
+    isImage: false,
+    link: "/tools/epub",
+  },
+];
+
 function Tools() {
   return (
     <Page
@@ -87,6 +97,49 @@ function Tools() {
                       </h3>
                       <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                         {app.description}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+          <div className="mb-16">
+            <h2 className="mb-8 text-2xl font-bold text-slate-900 dark:text-slate-100">
+              实用工具
+            </h2>
+            {/* Grid Layout */}
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 max-w-4xl mx-auto">
+              {TOOLS.map((tool) => (
+                <a
+                  key={tool.name}
+                  href={tool.link}
+                  // Card Design
+                  className="group relative flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:border-accent-500 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900 dark:hover:border-accent-400"
+                >
+                  <div className="flex items-start gap-4">
+                    {/* Image Handling */}
+                    <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800">
+                      {tool.isImage ? (
+                        <Image
+                          src={tool.icon}
+                          alt={`${tool.name} 图标`}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center text-3xl">
+                          {tool.icon}
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+                        {tool.name}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                        {tool.description}
                       </p>
                     </div>
                   </div>
