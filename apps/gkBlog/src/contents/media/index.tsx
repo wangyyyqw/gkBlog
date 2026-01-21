@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -32,10 +31,8 @@ function MediaContents() {
   const [activeCategory, setActiveCategory] = useState<string>("book");
   // 分页状态
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [booksPerPage, setBooksPerPage] = useState<number>(12);
   const movieContainerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const searchInputRef = useRef<HTMLInputElement>(null);
 
   // 处理图书点击事件，跳转到详情页面
   const handleBookClick = (bookId: string) => {
@@ -66,8 +63,8 @@ function MediaContents() {
         },
       };
 
-      // 生成7本图书
-      const books: MediaData[] = Array.from({ length: 7 }, (_, index) => {
+      // 生成8本图书
+      const books: MediaData[] = Array.from({ length: 8 }, (_, index) => {
         // 基础图书配置
         const baseBook = {
           ...sampleBook,
@@ -80,6 +77,18 @@ function MediaContents() {
 
         // 为不同图书设置特殊配置
         if (index === 0) {
+          // 《没有宽恕就没有未来》
+          return {
+            ...baseBook,
+            item: {
+              ...baseBook.item,
+              cover_image_url:
+                "/assets/images/neodb/cover/no-forgiveness-no-future.png",
+              download_url: `https://115cdn.com/s/swfbkgi3h6e?password=0121&#`,
+            },
+          };
+        }
+        if (index === 1) {
           // 《基督山伯爵 - 大仲马》
           return {
             ...baseBook,
@@ -93,7 +102,7 @@ function MediaContents() {
             },
           };
         }
-        if (index === 1) {
+        if (index === 2) {
           // 《咸的玩笑-刘震云》
           return {
             ...baseBook,
@@ -106,7 +115,7 @@ function MediaContents() {
             },
           };
         }
-        if (index === 2) {
+        if (index === 3) {
           // 《伦敦魔法师·暗黑魔法-维多利亚·舒瓦》
           return {
             ...baseBook,
@@ -119,7 +128,7 @@ function MediaContents() {
             },
           };
         }
-        if (index === 3) {
+        if (index === 4) {
           // 《她的山，她的海-扶华》
           return {
             ...baseBook,
@@ -132,7 +141,7 @@ function MediaContents() {
             },
           };
         }
-        if (index === 4) {
+        if (index === 5) {
           // 《谢家的短命鬼长命百岁了-怡然》
           return {
             ...baseBook,
@@ -145,7 +154,7 @@ function MediaContents() {
             },
           };
         }
-        if (index === 5) {
+        if (index === 6) {
           // 《史记-司马迁 张大可》
           return {
             ...baseBook,
@@ -192,28 +201,15 @@ function MediaContents() {
   }, [searchQuery, mediaData]);
 
   // 计算当前页显示的图书
-  const indexOfLastBook = currentPage * booksPerPage;
-  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  const indexOfLastBook = currentPage * 12;
+  const indexOfFirstBook = indexOfLastBook - 12;
   const currentBooks = filteredData.slice(indexOfFirstBook, indexOfLastBook);
-  const totalPages = Math.ceil(filteredData.length / booksPerPage);
+  const totalPages = Math.ceil(filteredData.length / 12);
 
   // 处理页码变化
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const categories = [{ label: "图书", value: "book" }];
-
-  const handleCategoryChange = (category: string) => {
-    setActiveCategory(category);
-    // 切换类别时会重新获取对应的数据
-  };
-
-  const getResourceName = (url: string) => {
-    const urlObj = new URL(url);
-    const hostname = urlObj.hostname.replace("www.", "");
-    return hostname.charAt(0).toUpperCase() + hostname.slice(1);
   };
 
   if (loading) {

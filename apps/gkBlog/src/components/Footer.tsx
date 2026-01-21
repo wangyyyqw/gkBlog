@@ -1,15 +1,7 @@
 import clsx from "clsx";
-import Image from "next/image";
 import Link from "next/link";
 
-import {
-  ExternalLink,
-  GitHubIcon,
-  QQIcon,
-  TelegramIcon,
-} from "@/components/Icons";
-
-import dayjs from "@/utils/dayjs";
+import { ExternalLink, TelegramIcon } from "@/components/Icons";
 
 interface FooterLinkProps {
   title: string;
@@ -30,7 +22,7 @@ function FooterLink({
         className={clsx(
           "footer-link footer-link--soon",
           "w-full justify-center",
-          "sm:justify-start"
+          "sm:justify-start",
         )}
       >
         {title}
@@ -46,7 +38,7 @@ function FooterLink({
         className={clsx(
           "footer-link",
           "w-full justify-center",
-          "sm:justify-start"
+          "sm:justify-start",
         )}
       >
         {title}
@@ -63,7 +55,7 @@ function FooterLink({
       className={clsx(
         "footer-link",
         "w-full justify-center",
-        "sm:justify-start"
+        "sm:justify-start",
       )}
     >
       {title}
@@ -73,46 +65,12 @@ function FooterLink({
   );
 }
 
-interface FooterGroupProps {
-  title: string;
-  links: Array<FooterLinkProps>;
-}
-
-function FooterGroup({ title, links }: FooterGroupProps) {
-  return (
-    <div className={clsx("flex-1 w-full", "sm:w-auto")}>
-      <div
-        className={clsx(
-          "mb-2 px-2 text-[13px] text-slate-600 text-center",
-          "dark:text-slate-400",
-          "sm:text-left"
-        )}
-      >
-        {title}
-      </div>
-      <ul className={clsx("flex flex-col", "sm:items-start")}>
-        {links.map(({ title: linkTitle, href, label, isInternal }) => (
-          <li key={href} className={clsx("w-full", "sm:w-auto")}>
-            <FooterLink
-              title={linkTitle}
-              href={href}
-              label={label}
-              isInternal={isInternal}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 function FooterDescription() {
   return (
     <div className={clsx("max-w-[348px] w-full flex flex-col items-center")}>
       <ul
         className={clsx("-ml-2 flex gap-2 justify-center w-full", "sm:gap-1")}
       >
-
         <li>
           <a
             href="https://t.me/chunjuanqiying"
@@ -120,7 +78,7 @@ function FooterDescription() {
             rel="noreferrer nofollow"
             className={clsx(
               "flex h-9 w-9 items-center justify-center",
-              "md:h-10 md:w-10"
+              "md:h-10 md:w-10",
             )}
             aria-label="My Telegram group"
             title="My Telegram group"
@@ -138,7 +96,7 @@ function Footer() {
     <footer
       className={clsx(
         "background-grid background-grid--fade-in border-divider-light mt-2 pt-4 text-sm text-slate-900",
-        "dark:border-divider-dark dark:text-slate-200"
+        "dark:border-divider-dark dark:text-slate-200",
       )}
     >
       <div className={clsx("content-wrapper")}>
@@ -153,7 +111,7 @@ function Footer() {
           className={clsx(
             "border-divider-light flex flex-col items-center justify-center border-t py-3 text-xs gap-1",
             "dark:border-divider-dark",
-            "sm:flex-row sm:gap-4"
+            "sm:flex-row sm:gap-4",
           )}
         >
           <div className={clsx("font-semibold text-center")}>
@@ -163,14 +121,14 @@ function Footer() {
             className={clsx(
               "text-slate-500 text-center text-[10px] leading-relaxed",
               "dark:text-slate-400",
-              "sm:text-xs"
+              "sm:text-xs",
             )}
           />
           <div
             className={clsx(
               "text-slate-500 text-center text-[10px] leading-relaxed",
               "dark:text-slate-400",
-              "sm:text-xs"
+              "sm:text-xs",
             )}
           >
             向内挖掘，向外建造。

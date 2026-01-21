@@ -1,9 +1,6 @@
 import clsx from "clsx";
 import { m, useReducedMotion } from "framer-motion";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-
-import { DocumentIcon } from "@/components/Icons";
 
 const animation = {
   hide: {
@@ -52,17 +49,15 @@ interface HeaderCtaProps {
 }
 
 function HeaderCta({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isFree = true,
   isFreeAnimationDuration = 4,
 }: HeaderCtaProps) {
   const shouldReduceMotion = useReducedMotion();
-  const [hovered, setHovered] = useState(false);
   const [isAvailableVisible, setIsAvailableVisible] = useState(true);
 
   useEffect(() => {
-    setIsAvailableVisible(hovered);
-  }, [hovered]);
+    setIsAvailableVisible(true);
+  }, []);
 
   let isFreeVariants = {
     hide: {

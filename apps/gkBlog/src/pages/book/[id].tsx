@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import path from "path";
+import { useState } from "react";
 
 import { bookTitles } from "@/constants/books";
 import Page from "@/contents-layouts/Page";
@@ -92,43 +93,48 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     // 为不同图书设置特殊配置
     if (bookNumber === 1) {
+      // 《没有宽恕就没有未来》
+      sampleBook.item.cover_image_url =
+        "/assets/images/neodb/cover/no-forgiveness-no-future.png";
+      sampleBook.item.download_url = `https://115cdn.com/s/swfbkgi3h6e?password=0121&#`;
+    } else if (bookNumber === 2) {
       // 《基督山伯爵 - 大仲马》
       sampleBook.item.cover_image_url =
         "/assets/images/neodb/cover/jidushanbojue-dazhongma.png";
       sampleBook.item.download_url = `https://115cdn.com/s/swfqr173h6e?password=b7c3&#`;
       sampleBook.item.tablet_download_url = `https://115cdn.com/s/swfqr133h6e?password=r011&#`;
       sampleBook.item.kindle_download_url = `https://115cdn.com/s/swfqrx73h6e?password=of40&#`;
-    } else if (bookNumber === 2) {
+    } else if (bookNumber === 3) {
       // 《咸的玩笑-刘震云》
       sampleBook.item.cover_image_url =
         "/assets/images/neodb/cover/xiandewanxiao-liuzhenyun.png";
       sampleBook.item.download_url = `https://wwbes.lanzoue.com/ig25P3fmlhsh`;
       sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iR7Kb3fmlhyd`;
-    } else if (bookNumber === 3) {
+    } else if (bookNumber === 4) {
       // 《伦敦魔法师·暗黑魔法-维多利亚·舒瓦》
       sampleBook.item.cover_image_url =
         "/assets/images/neodb/cover/lundunmofashi-anheimofa-weiduoliyashuwa.jpg";
       sampleBook.item.download_url = `https://wwbes.lanzoue.com/iXYUz3e6hm8b`;
       sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iW7NZ3e6hlpc`;
-    } else if (bookNumber === 4) {
+    } else if (bookNumber === 5) {
       // 《她的山，她的海-扶华》
       sampleBook.item.cover_image_url =
         "/assets/images/neodb/cover/tashan-tahai-fuhua.jpg";
       sampleBook.item.download_url = `https://wwbes.lanzoue.com/ihduM3elfdyb`;
       sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/izrgk3elfcyf`;
-    } else if (bookNumber === 5) {
+    } else if (bookNumber === 6) {
       // 《谢家的短命鬼长命百岁了-怡然》
       sampleBook.item.cover_image_url =
         "/assets/images/neodb/cover/xiejia-duanminggui-changmingbaisui-yi.jpg";
       sampleBook.item.download_url = `https://wwbes.lanzoue.com/iJu463dmclzc`;
       sampleBook.item.tablet_download_url = `https://wwbes.lanzoue.com/iHpH43dmclsf`;
-    } else if (bookNumber === 6) {
+    } else if (bookNumber === 7) {
       // 《史记-司马迁 张大可》
       sampleBook.item.cover_image_url =
         "/assets/images/neodb/cover/shiji-simaqian-zhangdake.png";
       sampleBook.item.download_url = `https://wwbes.lanzoue.com/iID003d2qf5a`;
       sampleBook.item.password = "hgaz";
-    } else if (bookNumber === 7) {
+    } else if (bookNumber === 8) {
       // 《东吴100年-握中悬璧》
       sampleBook.item.cover_image_url =
         "/assets/images/neodb/cover/dongwu-100-years.jpg";
@@ -180,6 +186,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 function MediaDetail({ book }: MediaDetailProps) {
   const router = useRouter();
+  const [showQRCode, setShowQRCode] = useState(false);
 
   return (
     <Page
@@ -205,7 +212,38 @@ function MediaDetail({ book }: MediaDetailProps) {
           />
         </div>
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-6">{book.item.title}</h1>
+          <h1 className="text-4xl font-bold mb-2">{book.item.title}</h1>
+          <button
+            type="button"
+            onClick={() => setShowQRCode((prev) => !prev)}
+            className="mb-6 rounded bg-blue-500 px-2 py-1 text-white hover:bg-blue-600"
+          >
+            {showQRCode ? "下次一定" : "支持一下"}
+          </button>
+
+          {showQRCode && (
+            <div className="mt-4 mb-6 flex justify-center space-x-4">
+              <div className="flex flex-col items-center">
+                <Image
+                  src="/assets/images/qrcode/wechat.jpg"
+                  alt="收款码"
+                  width={200}
+                  height={200}
+                />
+                <span className="mt-2 text-sm">微信</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <Image
+                  src="/assets/images/qrcode/alipay.jpg"
+                  alt="收款码"
+                  width={200}
+                  height={200}
+                />
+                <span className="mt-2 text-sm">支付宝</span>
+              </div>
+            </div>
+          )}
+
           <div className="flex flex-col items-center gap-4">
             <div className="flex flex-col sm:flex-row gap-4">
               <button
@@ -213,7 +251,7 @@ function MediaDetail({ book }: MediaDetailProps) {
                 onClick={() => router.back()}
                 className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
               >
-                返回书架
+                返回
               </button>
               <div className="flex flex-col sm:flex-row gap-2">
                 <button
@@ -228,7 +266,7 @@ function MediaDetail({ book }: MediaDetailProps) {
                   }}
                   className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300"
                 >
-                  下载手机版
+                  下载
                 </button>
                 {book.item.tablet_download_url && (
                   <button

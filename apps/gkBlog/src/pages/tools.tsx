@@ -23,7 +23,8 @@ const READING_APPS = [
 const TOOLS = [
   {
     name: "EPUB 工具",
-    description: "专业的 EPUB 电子书工具，支持格式转换、编辑和优化",
+    description:
+      "包含一些可用的epub工具，用于epub文件的重构、解密、加密、字体混淆、WEBP图片转换。",
     icon: "📚",
     isImage: false,
     link: "/tools/epub",

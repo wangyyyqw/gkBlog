@@ -1,8 +1,4 @@
 /* eslint-disable no-template-curly-in-string */
-import jsonata from "jsonata";
-
-import dayjs from "@/utils/dayjs";
-
 import type { TContentActivity, TContentMeta, TReaction } from "@/types";
 import type { ContentType, ReactionType, ShareType } from "@prisma/client";
 
@@ -10,11 +6,6 @@ import type { ContentType, ReactionType, ShareType } from "@prisma/client";
 // with build-time generated data or API calls
 
 // Mock data for static export
-const mockContentMeta = {
-  views: 0,
-  shares: 0,
-};
-
 const mockReactions = {
   CLAPPING: 0,
   THINKING: 0,

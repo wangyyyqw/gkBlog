@@ -22,13 +22,11 @@ export type BlogContentsProps = {
 
 type TPostPreview = TPostFrontMatter & {
   slug: string;
-  shares: number;
-  views: number;
   cover?: string;
 };
 
 function BlogContents({ posts }: BlogContentsProps) {
-  const { data } = useContentMeta();
+  useContentMeta();
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -36,13 +34,8 @@ function BlogContents({ posts }: BlogContentsProps) {
   const postsPreview: Array<TPostPreview> = [];
 
   posts.forEach(({ slug, frontMatter }) => {
-    const { shares, views } = data[slug]
-      ? data[slug].meta
-      : { shares: 0, views: 0 };
     const preview: TPostPreview = {
       slug,
-      views,
-      shares,
       ...frontMatter,
     };
 

@@ -2,8 +2,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
-import CountUp from "@/components/CountUp";
-import { ChevronRightIcon, InsightIcon, PinIcon } from "@/components/Icons";
+import { ChevronRightIcon, PinIcon } from "@/components/Icons";
 
 import { formatDateRelative, formatLang } from "@/helpers/post";
 
@@ -11,8 +10,6 @@ import type { TPostFrontMatter } from "@/types";
 
 type PostPreviewProps = TPostFrontMatter & {
   slug: string;
-  views: number;
-  shares: number;
   pinned?: boolean;
   cover: string;
 };
@@ -23,8 +20,6 @@ function PostPreview({
   date,
   slug,
   lang,
-  views,
-  shares,
   pinned = false,
   cover,
 }: PostPreviewProps) {
@@ -136,31 +131,7 @@ function PostPreview({
           </p>
         </div>
 
-        <div
-          className={clsx(
-            "flex items-center gap-2 text-xs text-slate-600",
-            "dark:text-slate-400",
-            "transition-all duration-500 ease-in-out w-full group-hover:w-2/3",
-            pinned ? ["mb-4", "sm:mb-1"] : "mb-4"
-          )}
-        >
-          <InsightIcon className={clsx("-mt-0.5 h-4 w-4")} />
-          <span className={clsx("flex gap-1.5")}>
-            <span
-              className={clsx("flex items-center gap-1.5")}
-              title="Number of view(s)"
-            >
-              <CountUp from={0} to={views} /> 看过
-            </span>
-            <span>&middot;</span>
-            <span
-              className={clsx("flex items-center gap-1.5")}
-              title="Number of share(s)"
-            >
-              <CountUp from={0} to={shares} /> 分享
-            </span>
-          </span>
-        </div>
+
         {!pinned && (
           <div
             className={clsx(

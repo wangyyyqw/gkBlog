@@ -32,6 +32,8 @@ export type TPostFrontMatter = TBaseFrontMatter & {
   category: string;
   wordCount?: number;
   cover: string;
+  views?: number;
+  shares?: number;
 };
 
 export type TPostOgImage = Partial<
